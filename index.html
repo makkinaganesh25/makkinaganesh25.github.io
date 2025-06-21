@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ganesh Makkina | Data Engineer Portfolio</title>
+
   <!-- Inter Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <!-- Tailwind CSS -->
@@ -11,20 +12,24 @@
   <script>
     tailwind.config = { theme: { extend: { fontFamily: { inter: ['Inter','sans-serif'] }, colors: { accent: '#2dd4bf', darkbg: '#0f172a' } } } };
   </script>
-  <!-- Three.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- tsParticles for dynamic network background -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
   <style>
-    body { font-family: 'Inter', sans-serif; margin:0; overflow-x:hidden; }
-    #bg-canvas { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+    body { font-family: 'Inter', sans-serif; margin:0; overflow-x:hidden; background-color:#0f172a; }
+    #tsparticles { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
     .fade-in { opacity:0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
     .fade-in.visible { opacity:1; transform: translateY(0); }
   </style>
 </head>
-<body class="bg-darkbg text-gray-100 relative">
-  <!-- 3D ETL Pipeline Background -->
-  <canvas id="bg-canvas"></canvas>
+<body class="relative text-gray-100">
+  <!-- Dynamic Network Background -->
+  <div id="tsparticles"></div>
 
-  <!-- Navigation -->
+  <!-- NAVIGATION -->
   <nav class="fixed top-0 w-full bg-darkbg bg-opacity-90 backdrop-blur z-50">
     <div class="container mx-auto flex items-center justify-between p-4">
       <a href="#hero" class="text-2xl font-bold">GM</a>
@@ -44,7 +49,7 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- HERO SECTION -->
   <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-6">
     <div class="fade-in">
       <h1 class="text-5xl md:text-7xl font-extrabold mb-4">Ganesh Makkina</h1>
@@ -232,93 +237,49 @@
     <p>&copy; <span id="year"></span> Ganesh Makkina. All rights reserved.</p>
   </footer>
 
-  <!-- Three.js ETL Pipeline Script -->
+  <!-- SCRIPTS -->
   <script>
-    // Setup
-    const canvas = document.getElementById('bg-canvas');
-    const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-
-    // Lighting
-    const ambient = new THREE.AmbientLight(0xffffff, 0.4);
-    scene.add(ambient);
-    const dir = new THREE.DirectionalLight(0xffffff, 0.8);
-    dir.position.set(5,10,7);
-    scene.add(dir);
-
-    // Nodes (Extract, Transform, Load)
-    const nodeMaterial = new THREE.MeshStandardMaterial({color:0x2dd4bf});
-    const sphereGeom = new THREE.SphereGeometry(0.4, 32, 32);
-    const positions = [new THREE.Vector3(-5,0,0), new THREE.Vector3(0,0,0), new THREE.Vector3(5,0,0)];
-    positions.forEach(pos => {
-      const sphere = new THREE.Mesh(sphereGeom, nodeMaterial);
-      sphere.position.copy(pos);
-      scene.add(sphere);
+    // Initialize tsParticles
+    tsParticles.load('tsparticles', {
+      fpsLimit: 60,
+      background: { color: { value: '#0f172a' } },
+      particles: {
+        number: { value: 80, density: { enable: true, area: 800 } },
+        color: { value: '#2dd4bf' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.7 },
+        size: { value: { min: 1, max: 4 } },
+        links: { enable: true, distance: 150, color: '#2dd4bf', opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 2, outModes: { default: 'out' } }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: 'grab' },
+          onClick: { enable: true, mode: 'push' }
+        },
+        modes: { grab: { distance: 200, links: { opacity: 0.5 } }, push: { quantity: 4 } }
+      },
+      detectRetina: true
     });
 
-    // Create smooth pipe curves and tubes
-    const curves = [];
-    for(let i=0;i<2;i++){
-      const p1 = positions[i], p2 = positions[i+1];
-      const mid = p1.clone().lerp(p2,0.5).add(new THREE.Vector3(0,2,0));
-      const curve = new THREE.CatmullRomCurve3([p1, mid, p2]);
-      curves.push(curve);
-      const tubeGeom = new THREE.TubeGeometry(curve, 64, 0.1, 8, false);
-      const tubeMat = new THREE.MeshStandardMaterial({color:0x1e293b});
-      const tube = new THREE.Mesh(tubeGeom, tubeMat);
-      scene.add(tube);
-    }
-
-    // Data particles moving along pipelines
-    const particleMat = new THREE.MeshStandardMaterial({color:0xffffff});
-    const particleGeom = new THREE.SphereGeometry(0.1,16,16);
-    const particles = [];
-    curves.forEach((curve, ci) => {
-      for(let i=0;i<10;i++){
-        const mesh = new THREE.Mesh(particleGeom, particleMat);
-        mesh.userData = { curve, t: Math.random() };
-        scene.add(mesh);
-        particles.push(mesh);
-      }
-    });
-
-    // Camera
-    camera.position.set(0,2,12);
-
-    // Animate
-    function animate(){
-      requestAnimationFrame(animate);
-      const delta = 0.002;
-      particles.forEach(p=>{
-        p.userData.t = (p.userData.t + delta) % 1;
-        const pos = p.userData.curve.getPointAt(p.userData.t);
-        p.position.copy(pos);
-      });
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    // Resize handler
-    window.addEventListener('resize', ()=>{
-      camera.aspect=window.innerWidth/window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth,window.innerHeight);
-    });
+    // Lucide icons replacement
+    document.addEventListener('DOMContentLoaded', () => lucide.replace());
 
     // Fade-in on scroll
-    document.querySelectorAll('.fade-in').forEach(el=>{
-      new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')), {threshold:0.1}).observe(el);
+    document.querySelectorAll('.fade-in').forEach(el => {
+      new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')), { threshold: 0.1 }).observe(el);
     });
 
     // Nav toggle
-    document.getElementById('nav-toggle').addEventListener('click',()=>{
+    document.getElementById('nav-toggle').addEventListener('click', () => {
       document.getElementById('nav-menu').classList.toggle('hidden');
     });
+
+    // Set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Handle resize for particles
+    window.addEventListener('resize', () => tsParticles.dom().forEach(p => p.refresh()));
   </script>
 </body>
 </html>
-
-
