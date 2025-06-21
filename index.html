@@ -87,9 +87,25 @@
   <section id="about" class="py-20 container mx-auto px-6 fade-in">
     <h2 class="text-4xl font-bold text-center mb-8">About Me</h2>
     <div class="md:flex md:items-center md:space-x-10">
-      <img src="pic.JPG" alt="Ganesh Makkina" class="w-48 h-48 rounded-full mx-auto md:mx-0 mb-6 md:mb-0 ring-4 ring-accent" />
+      <!-- Updated profile image with gradient border, shadow & hover effect -->
+      <div class="mx-auto md:mx-0 mb-6 md:mb-0">
+        <div
+          class="relative w-52 h-52 rounded-full p-1 bg-gradient-to-tr from-accent to-transparent shadow-lg transition-transform duration-300 hover:scale-105"
+        >
+          <img
+            src="pic.JPG"
+            alt="Ganesh Makkina"
+            class="w-full h-full rounded-full object-cover bg-darkbg"
+          />
+        </div>
+      </div>
+  
       <div class="space-y-4 text-lg">
-        <p>With 2+ years at Quantiphi, I architect data lakes on AWS, build streaming pipelines, and optimize ETL on Databricks & GCP. I hold AWS Certified Data Analytics and an MS in Data Science from Rutgers.</p>
+        <p>
+          With 2+ years at Quantiphi, I architect data lakes on AWS, build streaming
+          pipelines, and optimize ETL on Databricks & GCP. I hold AWS Certified Data
+          Analytics and an MS in Data Science from Rutgers.
+        </p>
         <ul class="grid grid-cols-2 gap-4 list-inside text-sm">
           <li>🔹 Cloud Data Architecture</li>
           <li>🔹 Stream Processing</li>
@@ -99,6 +115,7 @@
       </div>
     </div>
   </section>
+  
 
   <!-- PROJECTS SECTION -->
   <section id="projects" class="py-20 bg-gray-800">
@@ -207,7 +224,7 @@
 
   <!-- EDUCATION & CERTIFICATIONS -->
   <section id="education" class="py-20 bg-gray-800 fade-in">
-    <h2 class="text-4xl font-semibold text-center mb-8">Education & Certifications</h3>
+    <h2 class="text-4xl font-semibold text-center mb-8">Education & Certifications</h2>
     <div class="container mx-auto px-6 grid gap-10 md:grid-cols-2 text-sm">
       <!-- Rutgers -->
       <div class="bg-darkbg p-6 rounded-lg shadow-lg">
@@ -227,7 +244,7 @@
       <div class="md:col-span-2 bg-darkbg p-6 rounded-lg shadow-lg">
         <h3 class="text-2xl font-semibold mb-2">Certifications</h3>
         <ul class="list-disc list-inside">
-          <li>AWS Certified Data Engineer</li>
+          <li>AWS Certified Data Engineer </li>
           <li>Google Professional Data Engineer</li>
         </ul>
       </div>
@@ -244,7 +261,7 @@
         <div><label for="message" class="block mb-1">Message</label><textarea id="message" rows="5" placeholder="Your message..." class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none"></textarea></div>
         <button type="submit" class="w-full px-4 py-3 bg-accent text-darkbg rounded font-semibold hover:brightness-110">Send Message</button>
       </form>
-      <div class"text-center mt-6 space-x-4 text-lg">
+      <div class="text-center mt-6 space-x-4 text-lg">
         <a href="#"><i data-lucide="github"></i></a>
         <a href="#"><i data-lucide="linkedin"></i></a>
         <a href="#"><i data-lucide="twitter"></i></a>
