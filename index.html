@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Your Name] | Portfolio</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
+        },
+      },
+    };
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+  <!-- NAVIGATION -->
+  <nav class="fixed w-full bg-gray-900 bg-opacity-80 z-50">
+    <div class="container mx-auto flex items-center justify-between p-4">
+      <a href="#hero" class="text-2xl font-bold">[Your Logo]</a>
+      <button id="nav-toggle" class="md:hidden focus:outline-none">
+        <span class="bar block w-6 h-0.5 bg-gray-100 mb-1"></span>
+        <span class="bar block w-6 h-0.5 bg-gray-100 mb-1"></span>
+        <span class="bar block w-6 h-0.5 bg-gray-100"></span>
+      </button>
+      <ul id="nav-menu" class="hidden md:flex space-x-6">
+        <li><a href="#hero" class="hover:text-teal-400">Home</a></li>
+        <li><a href="#about" class="hover:text-teal-400">About</a></li>
+        <li><a href="#projects" class="hover:text-teal-400">Projects</a></li>
+        <li><a href="#skills" class="hover:text-teal-400">Skills</a></li>
+        <li><a href="#contact" class="hover:text-teal-400">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="min-h-screen flex items-center justify-center pt-16 fade-in">
+    <div class="text-center px-6">
+      <h1 class="text-5xl md:text-7xl font-extrabold mb-4">[Your Name]</h1>
+      <p class="text-2xl md:text-3xl mb-6">[Your Title / Role]</p>
+      <p class="max-w-xl mx-auto mb-8">A brief, impactful bio goes here. Describe who you are and what you do in one or two sentences.</p>
+      <div class="space-x-4">
+        <a href="#projects" class="px-6 py-3 bg-teal-500 text-gray-900 rounded-lg font-semibold hover:bg-teal-600">View My Work</a>
+        <a href="#contact" class="px-6 py-3 border border-teal-500 text-teal-500 rounded-lg font-semibold hover:bg-teal-600 hover:text-gray-100">Contact Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ME -->
+  <section id="about" class="py-20 container mx-auto px-6 fade-in">
+    <div class="md:flex md:items-center md:space-x-10">
+      <img src="https://via.placeholder.com/300" alt="Headshot" class="w-48 h-48 rounded-full mx-auto md:mx-0 mb-6 md:mb-0" />
+      <div>
+        <h2 class="text-4xl font-bold mb-4">About Me</h2>
+        <p class="mb-4">Describe your passion, skills, and experience. Write a few sentences about your background and what drives you in your work.</p>
+        <p>Feel free to add any highlights like certifications, notable achievements, or interesting facts about your professional journey.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="py-20 bg-gray-800">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12 fade-in">Projects</h2>
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <!-- Repeat this card for each project -->
+        <div class="bg-gray-700 rounded-lg overflow-hidden transform hover:scale-105 transition-transform fade-in">
+          <img src="https://via.placeholder.com/400x200" alt="Project Image" class="w-full h-48 object-cover" />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-2">Project Title</h3>
+            <p class="mb-4">Short project description goes here. Explain what it does and why it's interesting.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-sm bg-teal-500 text-gray-900 px-2 py-1 rounded">React</span>
+              <span class="text-sm bg-teal-500 text-gray-900 px-2 py-1 rounded">Node.js</span>
+              <span class="text-sm bg-teal-500 text-gray-900 px-2 py-1 rounded">Python</span>
+            </div>
+            <div class="flex space-x-4">
+              <a href="#" class="font-semibold hover:text-teal-400">Live Demo</a>
+              <a href="#" class="font-semibold hover:text-teal-400">GitHub Repo</a>
+            </div>
+          </div>
+        </div>
+        <!-- End project card -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="py-20 container mx-auto px-6 fade-in">
+    <h2 class="text-4xl font-bold text-center mb-12">Skills</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 text-center">
+      <!-- Repeat skill item -->
+      <div class="space-y-2">
+        <i data-lucide="code" class="mx-auto" width="48" height="48"></i>
+        <p>JavaScript</p>
+      </div>
+      <div class="space-y-2">
+        <i data-lucide="server" class="mx-auto" width="48" height="48"></i>
+        <p>Node.js</p>
+      </div>
+      <div class="space-y-2">
+        <i data-lucide="database" class="mx-auto" width="48" height="48"></i>
+        <p>SQL</p>
+      </div>
+      <div class="space-y-2">
+        <i data-lucide="cloud" class="mx-auto" width="48" height="48"></i>
+        <p>AWS</p>
+      </div>
+      <!-- End skill item -->
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-20 bg-gray-800">
+    <div class="container mx-auto px-6 max-w-lg fade-in">
+      <h2 class="text-4xl font-bold text-center mb-8">Contact Me</h2>
+      <form class="space-y-4">
+        <div>
+          <label class="block mb-1" for="name">Name</label>
+          <input id="name" type="text" placeholder="Your Name" class="w-full px-4 py-2 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500" />
+        </div>
+        <div>
+          <label class="block mb-1" for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" class="w-full px-4 py-2 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500" />
+        </div>
+        <div>
+          <label class="block mb-1" for="message">Message</label>
+          <textarea id="message" rows="5" placeholder="Your message..." class="w-full px-4 py-2 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
+        </div>
+        <button type="submit" class="w-full px-4 py-3 bg-teal-500 text-gray-900 rounded font-semibold hover:bg-teal-600">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <button id="scrollTopBtn" class="fixed bottom-6 right-6 bg-teal-500 text-gray-900 p-3 rounded-full hidden hover:bg-teal-600">
+    ↑
+  </button>
+
+  <!-- FOOTER -->
+  <footer class="py-6 text-center fade-in">
+    <div class="space-x-4 mb-4">
+      <a href="#"><i data-lucide="github" class="inline-block" width="24" height="24"></i></a>
+      <a href="#"><i data-lucide="linkedin" class="inline-block" width="24" height="24"></i></a>
+      <a href="#"><i data-lucide="twitter" class="inline-block" width="24" height="24"></i></a>
+    </div>
+    <p>&copy; <span id="year"></span> [Your Name]. All rights reserved.</p>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Lucide icon replacement
+    document.addEventListener('DOMContentLoaded', () => lucide.replace());
+
+    // Mobile nav toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    navToggle.addEventListener('click', () => navMenu.classList.toggle('hidden'));
+
+    // Smooth scroll handled by 'scroll-smooth' class on html
+
+    // Scroll to top button
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) scrollBtn.classList.remove('hidden');
+      else scrollBtn.classList.add('hidden');
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Fade-in on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    faders.forEach(el => observer.observe(el));
+
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
