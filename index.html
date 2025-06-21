@@ -14,18 +14,19 @@
   </script>
 
   <!-- tsParticles for dynamic network background -->
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
   <style>
-    body { font-family: 'Inter', sans-serif; margin:0; overflow-x:hidden; background-color:#0f172a; }
-    #tsparticles { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
-    .fade-in { opacity:0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-    .fade-in.visible { opacity:1; transform: translateY(0); }
+    body { font-family:'Inter',sans-serif; margin:0; overflow-x:hidden; background-color:#0f172a; }
+    #tsparticles { position:fixed; inset:0; z-index:-1; }
+    .fade-in { opacity:0; transform:translateY(20px); transition:opacity .6s ease-out, transform .6s ease-out; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
   </style>
 </head>
 <body class="relative text-gray-100">
+
   <!-- Dynamic Network Background -->
   <div id="tsparticles"></div>
 
@@ -33,12 +34,12 @@
   <nav class="fixed top-0 w-full bg-darkbg bg-opacity-90 backdrop-blur z-50">
     <div class="container mx-auto flex items-center justify-between p-4">
       <a href="#hero" class="text-2xl font-bold">GM</a>
-      <button id="nav-toggle" class="md:hidden focus:outline-none">
+      <button id="nav-toggle" aria-label="Toggle navigation" class="md:hidden focus:outline-none">
         <span class="block w-6 h-0.5 bg-gray-100 mb-1"></span>
         <span class="block w-6 h-0.5 bg-gray-100 mb-1"></span>
         <span class="block w-6 h-0.5 bg-gray-100"></span>
       </button>
-      <ul id="nav-menu" class="hidden md:flex space-x-6 text-lg">
+      <ul id="nav-menu" class="hidden md:flex space-x-6 text-lg transition-all duration-300">
         <li><a href="#hero" class="hover:text-accent">Home</a></li>
         <li><a href="#about" class="hover:text-accent">About</a></li>
         <li><a href="#projects" class="hover:text-accent">Projects</a></li>
@@ -51,13 +52,13 @@
 
   <!-- HERO SECTION -->
   <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-6">
-    <div class="fade-in">
+    <div class="fade-in max-w-2xl">
       <h1 class="text-5xl md:text-7xl font-extrabold mb-4">Ganesh Makkina</h1>
       <p class="text-2xl md:text-3xl mb-6 text-accent">Data Engineer & Cloud Architect</p>
-      <p class="max-w-2xl mx-auto mb-8 text-lg">I design and build end-to-end, scalable data platforms that drive insights and automation for enterprise operations.</p>
+      <p class="mb-8 text-lg">Building scalable, automated data pipelines & platforms that unlock insights and drive business growth.</p>
       <div class="space-x-4">
-        <a href="#projects" class="px-6 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:brightness-110">View Work</a>
-        <a href="Ganesh_Makkina_Resume.pdf" download class="px-6 py-3 border border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg">Download Resume</a>
+        <a href="#projects" class="px-6 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:brightness-110 transition">View Work</a>
+        <a href="Ganesh_Makkina_Resume.pdf" download class="px-6 py-3 border border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition">Download Resume</a>
       </div>
     </div>
   </section>
@@ -66,15 +67,14 @@
   <section id="about" class="py-20 container mx-auto px-6 fade-in">
     <h2 class="text-4xl font-bold text-center mb-8">About Me</h2>
     <div class="md:flex md:items-center md:space-x-10">
-      <img src="pic.JPG" alt="Ganesh Makkina" class="w-52 h-52 rounded-full mx-auto md:mx-0 mb-6 md:mb-0 ring-4 ring-accent" />
+      <img src="pic.JPG" alt="Ganesh Makkina" class="w-48 h-48 rounded-full mx-auto md:mx-0 mb-6 md:mb-0 ring-4 ring-accent"/>
       <div class="space-y-4 text-lg">
-        <p>With 2+ years at Quantiphi, I’ve architected data lakes on AWS, built real-time streaming pipelines, and optimized ETL workflows on Databricks & GCP. I hold an AWS Certified Data Analytics certification and recently completed my MS in Data Science at Rutgers University.</p>
-        <p>I specialize in:</p>
-        <ul class="list-disc list-inside pl-4">
-          <li>Cloud Data Architecture: AWS S3, Redshift, GCS, BigQuery</li>
-          <li>Stream Processing: Kafka, Kinesis, Dataflow</li>
-          <li>ETL Orchestration: Airflow, Glue, Dataflow</li>
-          <li>Data Modeling & SQL Optimization</li>
+        <p>With 2+ years at Quantiphi, I architect data lakes on AWS, build streaming pipelines, and optimize ETL on Databricks & GCP. I hold AWS Certified Data Analytics and an MS in Data Science from Rutgers.</p>
+        <ul class="grid grid-cols-2 gap-4 list-inside text-sm">
+          <li>🔹 Cloud Data Architecture</li>
+          <li>🔹 Stream Processing</li>
+          <li>🔹 ETL Orchestration</li>
+          <li>🔹 Data Modeling & SQL</li>
         </ul>
       </div>
     </div>
@@ -84,73 +84,21 @@
   <section id="projects" class="py-20 bg-gray-800">
     <h2 class="text-4xl font-bold text-center mb-12 fade-in">Key Projects</h2>
     <div class="container mx-auto px-6 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-
-      <!-- Enterprise Data Lake -->
-      <div class="card card-3d bg-gray-700 rounded-xl overflow-hidden shadow-lg fade-in">
-        <div class="card-inner">
-          <div class="card-face">
-            <img src="enterprise_migration.png" alt="Data Lake Migration" class="w-full aspect-[3/2] object-contain bg-gray-800" />
-            <div class="p-6 text-sm">
-              <h3 class="text-2xl font-semibold mb-2">Enterprise Data Lake Migration</h3>
-              <p>Migrated Elasticsearch to AWS S3 data lake & Redshift warehouse, boosting query performance by 20% and slashing costs by 30%.</p>
-              <ul class="list-disc list-inside mt-3">
-                <li>Designed Snowflake-like schema in Redshift</li>
-                <li>Built Spark ETL jobs for 50M+ records</li>
-                <li>Orchestrated pipelines via Airflow & CodePipeline</li>
-              </ul>
-              <div class="flex space-x-4 mt-4">
-                <a href="#" class="font-semibold hover:text-accent">Repo</a>
-                <a href="#" class="font-semibold hover:text-accent">Demo</a>
-              </div>
+      <!-- Project Card Template -->
+      <template id="project-card">
+        <div class="card bg-gray-700 rounded-xl overflow-hidden shadow-lg fade-in transform hover:scale-105 transition">
+          <img class="w-full h-48 object-cover" alt="Project screenshot"/>
+          <div class="p-6 text-sm">
+            <h3 class="text-2xl font-semibold mb-2"></h3>
+            <p class="mb-3"></p>
+            <ul class="list-disc list-inside mb-4"></ul>
+            <div class="flex space-x-4">
+              <a class="font-semibold hover:text-accent" target="_blank">Repo</a>
+              <a class="font-semibold hover:text-accent" target="_blank">Demo</a>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- COVID Analytics -->
-      <div class="card card-3d bg-gray-700 rounded-xl overflow-hidden shadow-lg fade-in">
-        <div class="card-inner">
-          <div class="card-face">
-            <img src="covid19.png" alt="COVID-19 Analytics" class="w-full aspect-[3/2] object-contain bg-gray-800" />
-            <div class="p-6 text-sm">
-              <h3 class="text-2xl font-semibold mb-2">COVID-19 Analytics Platform</h3>
-              <p>Engineered ingestion & analytics for 10M+ daily records with AWS Lambda, Glue, QuickSight dashboards to empower public health insights.</p>
-              <ul class="list-disc list-inside mt-3">
-                <li>Real-time Kinesis & Lambda ingestion</li>
-                <li>Spark transformations on Glue</li>
-                <li>Automated CI/CD with CodeBuild & CodePipeline</li>
-              </ul>
-              <div class="flex space-x-4 mt-4">
-                <a href="#" class="font-semibold hover:text-accent">Repo</a>
-                <a href="#" class="font-semibold hover:text-accent">Demo</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CSO Scheduling App -->
-      <div class="card card-3d bg-gray-700 rounded-xl overflow-hidden shadow-lg fade-in">
-        <div class="card-inner">
-          <div class="card-face">
-            <img src="cso.png" alt="CSO Shift Scheduling" class="w-full aspect-[3/2] object-contain bg-gray-800" />
-            <div class="p-6 text-sm">
-              <h3 class="text-2xl font-semibold mb-2">CSO Shift Scheduling App</h3>
-              <p>Built from scratch with React, Node.js, and MySQL—automates shift postings, conflict detection, and notifications for Rutgers CSOs.</p>
-              <ul class="list-disc list-inside mt-3">
-                <li>Drag‑and‑drop shift assignment UI</li>
-                <li>Automatic Google Calendar sync & email alerts</li>
-                <li>Real‑time conflict management on request & accept</li>
-                <li>Vertex AI chatbot integration for SOP guidance</li>
-              </ul>
-              <div class="flex space-x-4 mt-4">
-                <a href="#" class="font-semibold hover:text-accent">Repo</a>
-                <a href="#" class="font-semibold hover:text-accent">Demo</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </template>
     </div>
   </section>
 
@@ -158,30 +106,12 @@
   <section id="skills" class="py-20 container mx-auto px-6 fade-in">
     <h2 class="text-4xl font-bold text-center mb-12">Core Skills</h2>
     <div class="flex flex-wrap justify-center gap-8 text-center text-sm">
-      <div class="space-y-1">
-        <i data-lucide="code" width="48" height="48"></i>
-        <p>Python & Spark</p>
-      </div>
-      <div class="space-y-1">
-        <i data-lucide="database" width="48" height="48"></i>
-        <p>SQL & NoSQL</p>
-      </div>
-      <div class="space-y-1">
-        <i data-lucide="cloud" width="48" height="48"></i>
-        <p>AWS & GCP</p>
-      </div>
-      <div class="space-y-1">
-        <i data-lucide="settings" width="48" height="48"></i>
-        <p>Airflow & Glue</p>
-      </div>
-      <div class="space-y-1">
-        <i data-lucide="user-check" width="48" height="48"></i>
-        <p>Data Modeling</p>
-      </div>
-      <div class="space-y-1">
-        <i data-lucide="bar-chart-2" width="48" height="48"></i>
-        <p>Visualization & BI</p>
-      </div>
+      <div class="space-y-1"><i data-lucide="code" width="48" height="48"></i><p>Python & Spark</p></div>
+      <div class="space-y-1"><i data-lucide="database" width="48" height="48"></i><p>SQL & NoSQL</p></div>
+      <div class="space-y-1"><i data-lucide="cloud" width="48" height="48"></i><p>AWS & GCP</p></div>
+      <div class="space-y-1"><i data-lucide="settings" width="48" height="48"></i><p>Airflow & Glue</p></div>
+      <div class="space-y-1"><i data-lucide="user-check" width="48" height="48"></i><p>Data Modeling</p></div>
+      <div class="space-y-1"><i data-lucide="bar-chart-2" width="48" height="48"></i><p>Visualization & BI</p></div>
     </div>
   </section>
 
@@ -189,27 +119,21 @@
   <section id="education" class="py-20 bg-gray-800 fade-in">
     <h2 class="text-4xl font-bold text-center mb-8">Education & Certifications</h2>
     <div class="container mx-auto px-6 grid gap-10 md:grid-cols-2 text-sm">
-      <!-- Rutgers -->
       <div class="bg-darkbg p-6 rounded-lg shadow-lg">
         <h3 class="text-2xl font-semibold mb-2">Rutgers University</h3>
         <p class="italic">MS in Statistics - Data Science</p>
-        <p class="mb-2">New Brunswick, NJ | Sep 2023 - May 2025</p>
-        <p class="mb-2"><strong>Relevant Coursework:</strong> Regression & Time Series, Probability & Statistics, Advanced Database Management, Financial Data Mining, Data Wrangling</p>
+        <p>New Brunswick, NJ | Sep 2023–May 2025</p>
+        <p class="mt-2"><strong>Coursework:</strong> Regression & Time Series; Probability & Statistics; Advanced DB Mgmt; Financial Data Mining; Data Wrangling</p>
       </div>
-      <!-- Army Institute -->
       <div class="bg-darkbg p-6 rounded-lg shadow-lg">
         <h3 class="text-2xl font-semibold mb-2">Army Institute of Technology</h3>
         <p class="italic">BE in Computer Science</p>
-        <p class="mb-2">Pune, MH | Jul 2017 - Jul 2021</p>
-        <p class="mb-2"><strong>Key Modules:</strong> Data Structures, Algorithms, Operating Systems, Database Systems, Computer Networks</p>
+        <p>Pune, MH | Jul 2017–Jul 2021</p>
+        <p class="mt-2"><strong>Key Modules:</strong> Data Structures; Algorithms; OS; DB Systems; Computer Networks</p>
       </div>
-      <!-- Certifications -->
       <div class="md:col-span-2 bg-darkbg p-6 rounded-lg shadow-lg">
         <h3 class="text-2xl font-semibold mb-2">Certifications</h3>
-        <ul class="list-disc list-inside">
-          <li>AWS Certified Data Analytics - Specialty</li>
-          <li>Google Professional Data Engineer (in progress)</li>
-        </ul>
+        <ul class="list-disc list-inside"><li>AWS Certified Data Analytics – Specialty</li><li>Google Professional Data Engineer (in progress)</li></ul>
       </div>
     </div>
   </section>
@@ -219,16 +143,12 @@
     <h2 class="text-4xl font-bold text-center mb-8">Contact Me</h2>
     <div class="max-w-lg mx-auto">
       <form class="space-y-4 text-sm">
-        <div><label for="name" class="block mb-1">Name</label><input id="name" type="text" placeholder="Your Name" class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none" /></div>
-        <div><label for="email" class="block mb-1">Email</label><input id="email" type="email" placeholder="you@example.com" class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none" /></div>
-        <div><label for="message" class="block mb-1">Message</label><textarea id="message" rows="5" placeholder="Your message..." class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none"></textarea></div>
-        <button type="submit" class="w-full px-4 py-3 bg-accent text-darkbg rounded font-semibold hover:brightness-110">Send Message</button>
+        <div><label for="name" class="block mb-1">Name</label><input id="name" type="text" placeholder="Your Name" class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none"/></div>
+        <div><label for="email" class="block mb-1">Email</label><input id="email" type="email" placeholder="you@example.com" class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none"/></div>
+        <div><label for="message" class="block mb=1">Message</label><textarea id="message" rows="5" placeholder="Your message..." class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none"></textarea></div>
+        <button type="submit" class="w-full px-4 py-3 bg-accent text-darkbg rounded font-semibold hover:brightness-110 transition">Send Message</button>
       </form>
-      <div class="text-center mt-6 space-x-4 text-lg">
-        <a href="#"><i data-lucide="github"></i></a>
-        <a href="#"><i data-lucide="linkedin"></i></a>
-        <a href="#"><i data-lucide="twitter"></i></a>
-      </div>
+      <div class="text-center mt-6 space-x-4 text-lg"><a href="#"><i data-lucide="github"></i></a><a href="#"><i data-lucide="linkedin"></i></a><a href="#"><i data-lucide="twitter"></i></a></div>
     </div>
   </section>
 
@@ -239,47 +159,21 @@
 
   <!-- SCRIPTS -->
   <script>
-    // Initialize tsParticles
-    tsParticles.load('tsparticles', {
-      fpsLimit: 60,
-      background: { color: { value: '#0f172a' } },
-      particles: {
-        number: { value: 80, density: { enable: true, area: 800 } },
-        color: { value: '#2dd4bf' },
-        shape: { type: 'circle' },
-        opacity: { value: 0.7 },
-        size: { value: { min: 1, max: 4 } },
-        links: { enable: true, distance: 150, color: '#2dd4bf', opacity: 0.4, width: 1 },
-        move: { enable: true, speed: 2, outModes: { default: 'out' } }
-      },
-      interactivity: {
-        events: {
-          onHover: { enable: true, mode: 'grab' },
-          onClick: { enable: true, mode: 'push' }
-        },
-        modes: { grab: { distance: 200, links: { opacity: 0.5 } }, push: { quantity: 4 } }
-      },
-      detectRetina: true
+    document.addEventListener('DOMContentLoaded', () => {
+      tsParticles.load('tsparticles', {
+        background:{ color:'#0f172a' }, fpsLimit:60,
+        particles:{ number:{ value:60,density:{ enable:true,area:800 }}, color:{ value:'#2dd4bf'}, shape:{ type:'circle'}, opacity:{ value:0.6}, size:{ value:{ min:2,max:5 }}, links:{ enable:true,distance:120,color:'#2dd4bf',opacity:0.3,width:1}, move:{ enable:true,speed:1,outModes:{ default:'bounce'} } },
+        interactivity:{ events:{ onHover:{ enable:true,mode:'grab'}, onClick:{ enable:true,mode:'push'} }, modes:{ grab:{ distance:200,links:{ opacity:0.5}}, push:{ quantity:3 } } }, detectRetina:true
+      });
+      lucide.replace();
+      document.querySelectorAll('.fade-in').forEach(el => new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')), { threshold:0.1 }).observe(el));
+      document.getElementById('nav-toggle').addEventListener('click', () => document.getElementById('nav-menu').classList.toggle('hidden'));
+      document.getElementById('year').textContent = new Date().getFullYear();
+      const projects=[{title:'Enterprise Data Lake Migration',img:'enterprise_migration.png',desc:'Migrated Elasticsearch to AWS S3 data lake & Redshift, improving query performance by 20% and cutting costs by 30%.',bullets:['Snowflake schema design','Spark ETL on 50M+ records','Airflow & CodePipeline orchestration'],repo:'#',demo:'#'},{title:'COVID-19 Analytics Platform',img:'covid19.png',desc:'Built real-time ingestion & analytics of 10M+ records using AWS Lambda, Glue, and QuickSight.',bullets:['Kinesis & Lambda ingestion','AWS Glue Spark transforms','CodeBuild & CI/CD'],repo:'#',demo:'#'},{title:'CSO Shift Scheduling App',img:'cso.png',desc:'React & Node.js app for automated shift scheduling with Google Calendar sync & email notif.',bullets:['Drag‑drop UI','Calendar & email integration','Vertex AI chatbot'],repo:'#',demo:'#'}];
+      const grid=document.querySelector('#projects .container > .grid');
+      const tpl=document.getElementById('project-card');
+      projects.forEach(p=>{const c=tpl.content.cloneNode(true);c.querySelector('img').src=p.img; c.querySelector('img').alt=p.title;c.querySelector('h3').textContent=p.title;c.querySelector('p').textContent=p.desc; const ul=c.querySelector('ul');p.bullets.forEach(b=>{const li=document.createElement('li');li.textContent=b;ul.appendChild(li);} );const [r,d]=c.querySelectorAll('a');r.href=p.repo;d.href=p.demo;grid.appendChild(c);});
     });
-
-    // Lucide icons replacement
-    document.addEventListener('DOMContentLoaded', () => lucide.replace());
-
-    // Fade-in on scroll
-    document.querySelectorAll('.fade-in').forEach(el => {
-      new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')), { threshold: 0.1 }).observe(el);
-    });
-
-    // Nav toggle
-    document.getElementById('nav-toggle').addEventListener('click', () => {
-      document.getElementById('nav-menu').classList.toggle('hidden');
-    });
-
-    // Set year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Handle resize for particles
-    window.addEventListener('resize', () => tsParticles.dom().forEach(p => p.refresh()));
   </script>
 </body>
 </html>

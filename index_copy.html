@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth perspective-1000">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ganesh Makkina | Data Engineer Portfolio</title>
-  <!-- Google Font -->
+
+  <!-- Inter Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-  <!-- Tailwind CSS CDN -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { inter: ['Inter', 'sans-serif'] },
-          colors: { accent: '#2dd4bf', darkbg: '#0f172a' }
-        }
-      }
-    };
+    tailwind.config = { theme: { extend: { fontFamily: { inter: ['Inter','sans-serif'] }, colors: { accent: '#2dd4bf', darkbg: '#0f172a' } } } };
   </script>
+
+  <!-- tsParticles for dynamic network background -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    .card-3d { transform-style: preserve-3d; perspective: 1000px; }
-    .card-inner { transition: transform 0.6s; transform-style: preserve-3d; }
-    .card:hover .card-inner { transform: rotateY(15deg) rotateX(10deg); }
-    .card-face { backface-visibility: hidden; }
+    body { font-family: 'Inter', sans-serif; margin:0; overflow-x:hidden; background-color:#0f172a; }
+    #tsparticles { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+    .fade-in { opacity:0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-in.visible { opacity:1; transform: translateY(0); }
   </style>
 </head>
-<body class="bg-darkbg text-gray-100">
+<body class="relative text-gray-100">
+  <!-- Dynamic Network Background -->
+  <div id="tsparticles"></div>
+
   <!-- NAVIGATION -->
-  <nav class="fixed w-full bg-darkbg bg-opacity-90 z-50 backdrop-blur">
+  <nav class="fixed top-0 w-full bg-darkbg bg-opacity-90 backdrop-blur z-50">
     <div class="container mx-auto flex items-center justify-between p-4">
       <a href="#hero" class="text-2xl font-bold">GM</a>
       <button id="nav-toggle" class="md:hidden focus:outline-none">
@@ -52,14 +50,14 @@
   </nav>
 
   <!-- HERO SECTION -->
-  <section id="hero" class="min-h-screen flex items-center justify-center pt-16 fade-in">
-    <div class="text-center px-6">
+  <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-6">
+    <div class="fade-in max-w-2xl">
       <h1 class="text-5xl md:text-7xl font-extrabold mb-4">Ganesh Makkina</h1>
       <p class="text-2xl md:text-3xl mb-6 text-accent">Data Engineer & Cloud Architect</p>
-      <p class="max-w-2xl mx-auto mb-8 text-lg">I design and build end-to-end, scalable data platforms that drive insights and automation for enterprise operations.</p>
+      <p class="mb-8 text-lg">Building scalable, automated data pipelines & platforms that unlock insights and drive business growth.</p>
       <div class="space-x-4">
-        <a href="#projects" class="px-6 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:brightness-110">View Work</a>
-        <a href="Ganesh_Makkina_Resume.pdf" download class="px-6 py-3 border border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg">Download Resume</a>
+        <a href="#projects" class="px-6 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:brightness-110 transition">View Work</a>
+        <a href="Ganesh_Makkina_Resume.pdf" download class="px-6 py-3 border border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition">Download Resume</a>
       </div>
     </div>
   </section>
@@ -68,15 +66,14 @@
   <section id="about" class="py-20 container mx-auto px-6 fade-in">
     <h2 class="text-4xl font-bold text-center mb-8">About Me</h2>
     <div class="md:flex md:items-center md:space-x-10">
-      <img src="https://via.placeholder.com/300" alt="Headshot" class="w-52 h-52 rounded-full mx-auto md:mx-0 mb-6 md:mb-0 ring-4 ring-accent" />
+      <img src="pic.JPG" alt="Ganesh Makkina" class="w-48 h-48 rounded-full mx-auto md:mx-0 mb-6 md:mb-0 ring-4 ring-accent" />
       <div class="space-y-4 text-lg">
-        <p>With 2+ years at Quantiphi, I’ve architected data lakes on AWS, built real-time streaming pipelines, and optimized ETL workflows on Databricks & GCP. I hold an AWS Data Engineer certification and I completed my MS in Data Science at Rutgers (MAY 2025).</p>
-        <p>I specialize in:</p>
-        <ul class="list-disc list-inside pl-4">
-          <li>Cloud Data Architecture (AWS S3, Redshift, GCS, BigQuery)</li>
-          <li>Stream Processing (Kafka, Kinesis, Dataflow)</li>
-          <li>ETL Orchestration (Airflow, Glue, Dataflow)</li>
-          <li>Data Modeling & SQL Optimization</li>
+        <p>With 2+ years at Quantiphi, I architect data lakes on AWS, build streaming pipelines, and optimize ETL on Databricks & GCP. I hold AWS Certified Data Analytics and an MS in Data Science from Rutgers.</p>
+        <ul class="grid grid-cols-2 gap-4 list-inside text-sm">
+          <li>🔹 Cloud Data Architecture</li>
+          <li>🔹 Stream Processing</li>
+          <li>🔹 ETL Orchestration</li>
+          <li>🔹 Data Modeling & SQL</li>
         </ul>
       </div>
     </div>
@@ -91,7 +88,7 @@
       <div class="card card-3d bg-gray-700 rounded-xl overflow-hidden shadow-lg fade-in">
         <div class="card-inner">
           <div class="card-face">
-            <img src="https://via.placeholder.com/400x250" alt="Data Lake Migration" class="w-full h-48 object-cover" />
+            <img src="enterprise_migration.png" alt="Data Lake Migration" class="w-full aspect-[3/2] object-contain bg-gray-800" />
             <div class="p-6 text-sm">
               <h3 class="text-2xl font-semibold mb-2">Enterprise Data Lake Migration</h3>
               <p>Migrated Elasticsearch to AWS S3 data lake & Redshift warehouse, boosting query performance by 20% and slashing costs by 30%.</p>
@@ -113,10 +110,10 @@
       <div class="card card-3d bg-gray-700 rounded-xl overflow-hidden shadow-lg fade-in">
         <div class="card-inner">
           <div class="card-face">
-            <img src="https://via.placeholder.com/400x250" alt="COVID-19 Analytics" class="w-full h-48 object-cover" />
+            <img src="covid19.png" alt="COVID-19 Analytics" class="w-full aspect-[3/2] object-contain bg-gray-800" />
             <div class="p-6 text-sm">
               <h3 class="text-2xl font-semibold mb-2">COVID-19 Analytics Platform</h3>
-              <p>Engineered ingest & analytics for 10M+ daily records using AWS Lambda, Glue, and QuickSight dashboards to empower public health insights.</p>
+              <p>Engineered ingestion & analytics for 10M+ daily records with AWS Lambda, Glue, QuickSight dashboards to empower public health insights.</p>
               <ul class="list-disc list-inside mt-3">
                 <li>Real-time Kinesis & Lambda ingestion</li>
                 <li>Spark transformations on Glue</li>
@@ -135,10 +132,10 @@
       <div class="card card-3d bg-gray-700 rounded-xl overflow-hidden shadow-lg fade-in">
         <div class="card-inner">
           <div class="card-face">
-            <img src="https://via.placeholder.com/400x250" alt="CSO Scheduler" class="w-full h-48 object-cover" />
+            <img src="cso.png" alt="CSO Shift Scheduling" class="w-full aspect-[3/2] object-contain bg-gray-800" />
             <div class="p-6 text-sm">
               <h3 class="text-2xl font-semibold mb-2">CSO Shift Scheduling App</h3>
-              <p>Built from scratch with React, Node.js, and MySQL—this platform automates shift postings, conflict detection, and notifications for Rutgers CSOs.</p>
+              <p>Built from scratch with React, Node.js, and MySQL—automates shift postings, conflict detection, and notifications for Rutgers CSOs.</p>
               <ul class="list-disc list-inside mt-3">
                 <li>Drag‑and‑drop shift assignment UI</li>
                 <li>Automatic Google Calendar sync & email alerts</li>
@@ -216,24 +213,14 @@
     </div>
   </section>
 
-
   <!-- CONTACT SECTION -->
   <section id="contact" class="py-20 container mx-auto px-6 fade-in">
     <h2 class="text-4xl font-bold text-center mb-8">Contact Me</h2>
     <div class="max-w-lg mx-auto">
       <form class="space-y-4 text-sm">
-        <div>
-          <label for="name" class="block mb-1">Name</label>
-          <input id="name" type="text" placeholder="Your Name" class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none" />
-        </div>
-        <div>
-          <label for="email" class="block mb-1">Email</label>
-          <input id="email" type="email" placeholder="you@example.com" class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none" />
-        </div>
-        <div>
-          <label for="message" class="block mb-1">Message</label>
-          <textarea id="message" rows="5" placeholder="Your message..." class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none"></textarea>
-        </div>
+        <div><label for="name" class="block mb-1">Name</label><input id="name" type="text" placeholder="Your Name" class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none" /></div>
+        <div><label for="email" class="block mb-1">Email</label><input id="email" type="email" placeholder="you@example.com" class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none" /></div>
+        <div><label for="message" class="block mb-1">Message</label><textarea id="message" rows="5" placeholder="Your message..." class="w-full px-4 py-2 rounded bg-gray-700 focus:ring-accent focus:outline-none"></textarea></div>
         <button type="submit" class="w-full px-4 py-3 bg-accent text-darkbg rounded font-semibold hover:brightness-110">Send Message</button>
       </form>
       <div class="text-center mt-6 space-x-4 text-lg">
@@ -251,23 +238,97 @@
 
   <!-- SCRIPTS -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => { lucide.replace(); });
+    // tsParticles configuration
+    tsParticles.load('tsparticles', {
+      background: { color: { value: '#0f172a' } },
+      fpsLimit: 60,
+      particles: {
+        number: { value: 60, density: { enable: true, area: 800 } },
+        color: { value: '#2dd4bf' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.6 },
+        size: { value: { min: 2, max: 5 } },
+        links: { enable: true, distance: 120, color: '#2dd4bf', opacity: 0.3, width: 1 },
+        move: { enable: true, speed: 1, outModes: { default: 'bounce' } }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: 'grab' },
+          onClick: { enable: true, mode: 'push' }
+        },
+        modes: { grab: { distance: 200, links: { opacity: 0.5 } }, push: { quantity: 3 } }
+      },
+      detectRetina: true
+    });
+
+    // Lucide icons
+    document.addEventListener('DOMContentLoaded', () => lucide.replace());
+
+    // Fade-in on scroll
+    document.querySelectorAll('.fade-in').forEach(el => {
+      new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')), { threshold: 0.1 }).observe(el);
+    });
+
     // Nav toggle
-    const toggle = document.getElementById('nav-toggle'), menu = document.getElementById('nav-menu');
-    toggle.addEventListener('click', () => menu.classList.toggle('hidden'));
-    // Scroll-to-top
-    const scrollBtn = document.createElement('button');
-    scrollBtn.textContent = '↑';
-    scrollBtn.className = 'fixed bottom-6 right-6 bg-accent text-darkbg p-3 rounded-full hidden';
-    document.body.appendChild(scrollBtn);
-    window.addEventListener('scroll', () => scrollBtn.classList.toggle('hidden', window.scrollY < 300));
-    scrollBtn.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
-    // Fade-in observer
-    document.querySelectorAll('.fade-in').forEach(el => new IntersectionObserver(entries => {
-      entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
-    }, {threshold:0.1}).observe(el));
-    // Year
+    document.getElementById('nav-toggle').addEventListener('click', () => {
+      document.getElementById('nav-menu').classList.toggle('hidden');
+    });
+
+    // Set footer year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Dynamically load project cards
+    const projects = [
+      {
+        title: 'Enterprise Data Lake Migration',
+        img: 'enterprise_migration.png',
+        desc: 'Migrated Elasticsearch to AWS S3 data lake & Redshift, improving query performance by 20% and cutting costs by 30%.',
+        bullets: [
+          'Snowflake schema design in Redshift',
+          'Spark ETL on 50M+ records',
+          'Airflow & CodePipeline orchestration'
+        ],
+        repo: '#',
+        demo: '#'
+      },
+      {
+        title: 'COVID-19 Analytics Platform',
+        img: 'covid19.png',
+        desc: 'Built real-time ingestion & analytics of 10M+ records using AWS Lambda, Glue, and QuickSight dashboards.',
+        bullets: [
+          'Kinesis & Lambda ingestion',
+          'AWS Glue Spark transformations',
+          'CodeBuild & CodePipeline CI/CD'
+        ],
+        repo: '#',
+        demo: '#'
+      },
+      {
+        title: 'CSO Shift Scheduling App',
+        img: 'cso.png',
+        desc: 'React & Node.js platform for automated shift scheduling with Google Calendar sync & email notifications.',
+        bullets: [
+          'Drag-and-drop UI',
+          'Calendar & email integration',
+          'Vertex AI chatbot assistance'
+        ],
+        repo: '#',
+        demo: '#'
+      }
+    ];
+    const container = document.querySelector('#projects .container > div');
+    const template = document.getElementById('project-card');
+    projects.forEach(p => {
+      const card = template.content.cloneNode(true);
+      card.querySelector('img').src = p.img;
+      card.querySelector('h3').textContent = p.title;
+      card.querySelector('p').textContent = p.desc;
+      const ul = card.querySelector('ul');
+      p.bullets.forEach(b => { const li = document.createElement('li'); li.textContent = b; ul.appendChild(li); });
+      const [repo, demo] = card.querySelectorAll('a');
+      repo.href = p.repo; demo.href = p.demo;
+      container.appendChild(card);
+    });
   </script>
 </body>
 </html>
