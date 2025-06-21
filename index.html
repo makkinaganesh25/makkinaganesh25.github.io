@@ -5,13 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ganesh Makkina | Data Engineer Portfolio</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = { theme: { extend: { fontFamily: { inter: ['Inter','sans-serif'] }, colors: { accent: '#2dd4bf', darkbg: '#0f172a' } } } };
+    tailwind.config = { theme: { extend: { fontFamily: { inter: ['Inter','sans-serif'] }, colors: { accent: '#2dd4bf', darkbg: '#0f172a', 'slate-light': '#1e293b' } } } };
   </script>
 
+  <!-- tsParticles for dynamic network background -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
   <style>
@@ -47,9 +51,11 @@
   </style>
 </head>
 <body class="relative text-gray-100">
+  <!-- Dynamic Network Background -->
   <div id="tsparticles"></div>
 
-  <nav class="fixed top-0 w-full bg-darkbg bg-opacity-90 backdrop-blur z-50">
+  <!-- NAVIGATION -->
+  <nav class="fixed top-0 w-full bg-darkbg bg-opacity-90 backdrop-blur-sm z-50">
     <div class="container mx-auto flex items-center justify-between p-4">
       <a href="#hero" class="text-2xl font-bold">GM</a>
       <button id="nav-toggle" class="md:hidden focus:outline-none">
@@ -64,23 +70,25 @@
         <li><a href="#contact" class="hover:text-accent transition-colors">Contact</a></li>
       </ul>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden">
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-darkbg bg-opacity-90">
         <ul class="flex flex-col items-center space-y-4 py-4">
-            <li><a href="#hero" class="hover:text-accent">Home</a></li>
-            <li><a href="#about" class="hover:text-accent">About</a></li>
-            <li><a href="#projects" class="hover:text-accent">Projects</a></li>
-            <li><a href="#skills" class="hover:text-accent">Skills</a></li>
-            <li><a href="#education" class="hover:text-accent">Education</a></li>
-            <li><a href="#contact" class="hover:text-accent">Contact</a></li>
+            <li><a href="#hero" class="mobile-nav-link hover:text-accent">Home</a></li>
+            <li><a href="#about" class="mobile-nav-link hover:text-accent">About</a></li>
+            <li><a href="#projects" class="mobile-nav-link hover:text-accent">Projects</a></li>
+            <li><a href="#skills" class="mobile-nav-link hover:text-accent">Skills</a></li>
+            <li><a href="#education" class="mobile-nav-link hover:text-accent">Education</a></li>
+            <li><a href="#contact" class="mobile-nav-link hover:text-accent">Contact</a></li>
         </ul>
     </div>
   </nav>
 
+  <!-- HERO SECTION -->
   <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-6">
     <div class="fade-in max-w-2xl">
       <h1 class="text-5xl md:text-7xl font-extrabold mb-4">Ganesh Makkina</h1>
       <p class="text-2xl md:text-3xl mb-6 text-accent">Data Engineer & Cloud Architect</p>
-      <p class="mb-8 text-lg">Building scalable, automated data pipelines & platforms that unlock insights and drive business growth.</p>
+      <p class="mb-8 text-lg text-gray-300">Building scalable, automated data pipelines & platforms that unlock insights and drive business growth.</p>
       <div class="space-x-4">
         <a href="#projects" class="px-6 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:brightness-110 transition">View Work</a>
         <a href="Ganesh_Makkina_Resume.pdf" download class="px-6 py-3 border border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition">Download Resume</a>
@@ -88,45 +96,69 @@
     </div>
   </section>
 
-  <section id="about" class="py-20 container mx-auto px-6 fade-in">
-    <h2 class="text-4xl font-bold text-center mb-8">About Me</h2>
-    <div class="md:flex md:items-center md:space-x-10">
-      <div class="mx-auto md:mx-0 mb-6 md:mb-0">
-        <div class="relative w-52 h-52 rounded-full p-1 bg-gradient-to-tr from-accent to-transparent shadow-lg transition-transform duration-300 hover:scale-105">
-          <img src="pic.JPG" alt="Ganesh Makkina" class="w-full h-full rounded-full object-cover bg-darkbg" />
-        </div>
+  <!-- ABOUT SECTION - REDESIGNED -->
+  <section id="about" class="py-24 sm:py-32 bg-slate-light/50 backdrop-blur-md">
+    <div class="container mx-auto px-6">
+      <div class="text-center fade-in">
+        <h2 class="text-4xl font-bold mb-4">About Me</h2>
+        <p class="text-lg text-accent">An Introduction</p>
       </div>
-  
-      <div class="space-y-4 text-lg max-w-xl">
-        <p>
-          With 2+ years at Quantiphi, I architect data lakes on AWS, build streaming
-          pipelines, and optimize ETL on Databricks & GCP. I hold AWS Certified Data
-          Analytics and am pursuing an MS in Data Science from Rutgers.
-        </p>
-        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 list-inside text-base">
-          <li class="flex items-center"><i data-lucide="chevrons-right" class="text-accent w-5 h-5 mr-2"></i>Cloud Data Architecture</li>
-          <li class="flex items-center"><i data-lucide="chevrons-right" class="text-accent w-5 h-5 mr-2"></i>Stream Processing</li>
-          <li class="flex items-center"><i data-lucide="chevrons-right" class="text-accent w-5 h-5 mr-2"></i>ETL Orchestration</li>
-          <li class="flex items-center"><i data-lucide="chevrons-right" class="text-accent w-5 h-5 mr-2"></i>Data Modeling & SQL</li>
-        </ul>
+      <div class="mt-16 grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+        <!-- Image & Stats Column -->
+        <div class="lg:col-span-2 fade-in">
+          <div class="flex justify-center">
+            <div class="relative w-64 h-64 rounded-full p-2 bg-gradient-to-tr from-accent to-transparent shadow-lg transition-transform duration-300 hover:scale-105">
+              <img src="pic.JPG" alt="Ganesh Makkina" class="w-full h-full rounded-full object-cover bg-darkbg" />
+            </div>
+          </div>
+          <div class="mt-8 flex justify-center gap-6 text-center">
+            <div class="p-4 rounded-lg">
+              <p class="text-3xl font-bold text-accent">2+</p>
+              <p class="text-sm text-gray-300">Years Experience</p>
+            </div>
+            <div class="p-4 rounded-lg">
+              <p class="text-3xl font-bold text-accent">10+</p>
+              <p class="text-sm text-gray-300">Projects Completed</p>
+            </div>
+            <div class="p-4 rounded-lg">
+              <p class="text-3xl font-bold text-accent">2</p>
+              <p class="text-sm text-gray-300">Pro Certifications</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Content Column -->
+        <div class="lg:col-span-3 space-y-6 text-lg text-gray-300 fade-in">
+          <p>
+            Hello! I’m Ganesh Makkina, a dedicated Data Engineer who builds scalable, cloud-native data platforms. I thrive on turning complex, raw datasets into clear, actionable insights that drive strategic decisions. With hands-on experience across AWS, GCP, and Databricks, I blend technical expertise with a passion for innovation to solve challenging analytics problems.
+          </p>
+          <p>
+            Previously at <strong class="text-gray-100">Quantiphi</strong>, I architected large-scale data lakes on <strong class="text-gray-100">AWS</strong>, built efficient streaming pipelines, and optimized complex ETL workflows on platforms like <strong class="text-gray-100">Databricks</strong> and <strong class="text-gray-100">GCP</strong>. I then completed my Master’s in Data Science at Rutgers University, and continue advancing my expertise in cloud-native analytics and data engineering best practices.
+          </p>
+          <p>
+            I believe in designing data systems that not only meet today’s requirements but are also scalable, maintainable, and cost-efficient to support tomorrow’s growth.
+          </p>
+        </div>
       </div>
     </div>
   </section>
   
-  <section id="projects" class="py-20 bg-slate-900">
+  <!-- PROJECTS SECTION -->
+  <section id="projects" class="py-20 bg-darkbg">
     <h2 class="text-4xl font-bold text-center mb-12 fade-in">Key Projects</h2>
     <div class="container mx-auto px-6 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
 
-      <div class="bg-darkbg rounded-xl overflow-hidden shadow-lg fade-in transition-transform duration-300 hover:-translate-y-2">
+      <!-- Enterprise Data Lake -->
+      <div class="bg-slate-light rounded-xl overflow-hidden shadow-lg fade-in transition-transform duration-300 hover:-translate-y-2">
         <img src="enterprise_migration.png" alt="Data Lake Migration" class="w-full aspect-[3/2] object-contain bg-slate-800 p-2" />
-        <div class="p-6 text-sm">
+        <div class="p-6">
           <h3 class="text-xl font-semibold mb-2">Enterprise Data Lake Migration</h3>
-          <p>Migrated Elasticsearch to AWS S3 data lake & Redshift warehouse, boosting query performance by 20% and slashing costs by 30%.</p>
-          <ul class="list-disc list-inside mt-3 space-y-1">
-            <li>Designed Snowflake-like schema in Redshift</li>
-            <li>Built Spark ETL jobs for 50M+ records</li>
-            <li>Orchestrated pipelines via Airflow & CodePipeline</li>
-          </ul>
+          <p class="text-sm text-gray-300">Migrated Elasticsearch to AWS S3 data lake & Redshift warehouse, boosting query performance by 20% and slashing costs by 30%.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Redshift</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Spark ETL</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Airflow</span>
+          </div>
           <div class="flex space-x-4 mt-4">
             <a href="#" target="_blank" rel="noopener noreferrer" class="font-semibold hover:text-accent">Repo</a>
             <a href="#" target="_blank" rel="noopener noreferrer" class="font-semibold hover:text-accent">Demo</a>
@@ -134,16 +166,17 @@
         </div>
       </div>
 
-      <div class="bg-darkbg rounded-xl overflow-hidden shadow-lg fade-in transition-transform duration-300 hover:-translate-y-2">
+      <!-- COVID Analytics -->
+      <div class="bg-slate-light rounded-xl overflow-hidden shadow-lg fade-in transition-transform duration-300 hover:-translate-y-2">
         <img src="covid19.png" alt="COVID-19 Analytics" class="w-full aspect-[3/2] object-contain bg-slate-800 p-2" />
-        <div class="p-6 text-sm">
+        <div class="p-6">
           <h3 class="text-xl font-semibold mb-2">COVID-19 Analytics Platform</h3>
-          <p>Engineered ingestion & analytics for 10M+ daily records with AWS Lambda, Glue, and QuickSight dashboards to empower public health insights.</p>
-          <ul class="list-disc list-inside mt-3 space-y-1">
-            <li>Real-time Kinesis & Lambda ingestion</li>
-            <li>Spark transformations on Glue</li>
-            <li>Automated CI/CD with CodeBuild & CodePipeline</li>
-          </ul>
+          <p class="text-sm text-gray-300">Engineered ingestion & analytics for 10M+ daily records with AWS Lambda, Glue, and QuickSight dashboards to empower public health insights.</p>
+           <div class="mt-4 flex flex-wrap gap-2">
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">AWS Lambda</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">AWS Glue</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">QuickSight</span>
+          </div>
           <div class="flex space-x-4 mt-4">
             <a href="#" target="_blank" rel="noopener noreferrer" class="font-semibold hover:text-accent">Repo</a>
             <a href="#" target="_blank" rel="noopener noreferrer" class="font-semibold hover:text-accent">Demo</a>
@@ -151,17 +184,17 @@
         </div>
       </div>
 
-      <div class="bg-darkbg rounded-xl overflow-hidden shadow-lg fade-in transition-transform duration-300 hover:-translate-y-2">
+      <!-- CSO Scheduling App -->
+      <div class="bg-slate-light rounded-xl overflow-hidden shadow-lg fade-in transition-transform duration-300 hover:-translate-y-2">
         <img src="cso.png" alt="CSO Shift Scheduling" class="w-full aspect-[3/2] object-contain bg-slate-800 p-2" />
-        <div class="p-6 text-sm">
+        <div class="p-6">
           <h3 class="text-xl font-semibold mb-2">CSO Shift Scheduling App</h3>
-          <p>Built with React, Node.js, and MySQL to automate shift postings, conflict detection, and notifications for Rutgers CSOs.</p>
-          <ul class="list-disc list-inside mt-3 space-y-1">
-            <li>Drag‑and‑drop shift assignment UI</li>
-            <li>Automatic Google Calendar sync & email alerts</li>
-            <li>Real‑time conflict management on request & accept</li>
-            <li>Vertex AI chatbot integration for SOP guidance</li>
-          </ul>
+          <p class="text-sm text-gray-300">Built with React, Node.js, and MySQL to automate shift postings, conflict detection, and notifications for Rutgers CSOs.</p>
+           <div class="mt-4 flex flex-wrap gap-2">
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">React</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Node.js</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Vertex AI</span>
+          </div>
           <div class="flex space-x-4 mt-4">
             <a href="#" target="_blank" rel="noopener noreferrer" class="font-semibold hover:text-accent">Repo</a>
             <a href="#" target="_blank" rel="noopener noreferrer" class="font-semibold hover:text-accent">Demo</a>
@@ -171,6 +204,7 @@
     </div>
   </section>
 
+  <!-- SKILLS SECTION -->
   <section id="skills" class="py-20 container mx-auto px-6 fade-in">
     <h2 class="text-4xl font-bold text-center mb-12">Core Skills</h2>
     <div class="flex flex-wrap justify-center gap-8 text-center text-sm">
@@ -201,22 +235,26 @@
     </div>
   </section>
 
-  <section id="education" class="py-20 bg-slate-900 fade-in">
+  <!-- EDUCATION & CERTIFICATIONS -->
+  <section id="education" class="py-20 bg-darkbg fade-in">
     <h2 class="text-4xl font-semibold text-center mb-8">Education & Certifications</h2>
     <div class="container mx-auto px-6 grid gap-10 md:grid-cols-2 text-sm">
-      <div class="bg-darkbg p-6 rounded-lg shadow-lg">
+      <!-- Rutgers -->
+      <div class="bg-slate-light p-6 rounded-lg shadow-lg">
         <h3 class="text-xl font-semibold mb-2">Rutgers University</h3>
         <p class="italic text-accent">MS in Statistics - Data Science</p>
         <p class="mb-2 text-gray-400">New Brunswick, NJ | Sep 2023 - May 2025</p>
-        <p class="mb-2"><strong>Relevant Coursework:</strong> Regression & Time Series, Probability & Statistics, Advanced Database Management, Financial Data Mining, Data Wrangling</p>
+        <p class="text-gray-300"><strong>Relevant Coursework:</strong> Regression & Time Series, Probability & Statistics, Advanced Database Management, Financial Data Mining, Data Wrangling</p>
       </div>
-      <div class="bg-darkbg p-6 rounded-lg shadow-lg">
+      <!-- Army Institute -->
+      <div class="bg-slate-light p-6 rounded-lg shadow-lg">
         <h3 class="text-xl font-semibold mb-2">Army Institute of Technology</h3>
         <p class="italic text-accent">BE in Computer Science</p>
         <p class="mb-2 text-gray-400">Pune, MH | Jul 2017 - Jul 2021</p>
-        <p class="mb-2"><strong>Key Modules:</strong> Data Structures, Algorithms, Operating Systems, Database Systems, Computer Networks</p>
+        <p class="text-gray-300"><strong>Key Modules:</strong> Data Structures, Algorithms, Operating Systems, Database Systems, Computer Networks</p>
       </div>
-      <div class="md:col-span-2 bg-darkbg p-6 rounded-lg shadow-lg">
+      <!-- Certifications -->
+      <div class="md:col-span-2 bg-slate-light p-6 rounded-lg shadow-lg">
         <h3 class="text-xl font-semibold mb-2">Certifications</h3>
         <ul class="list-disc list-inside text-accent">
           <li><span class="text-gray-100">AWS Certified Data Engineer – Associate</span></li>
@@ -226,10 +264,12 @@
     </div>
   </section>
 
+  <!-- CONTACT SECTION -->
   <section id="contact" class="py-20 container mx-auto px-6 fade-in">
     <h2 class="text-4xl font-bold text-center mb-8">Contact Me</h2>
     <div class="max-w-lg mx-auto">
       <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4 text-sm">
+        <!-- === WEB3FORMS ACCESS KEY === -->
         <input type="hidden" name="access_key" value="95f8e9dd-d29e-4b40-811a-27fefb9c4b3a">
 
         <div>
@@ -254,10 +294,12 @@
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="py-6 text-center text-sm fade-in text-gray-400">
     <p>&copy; <span id="year"></span> Ganesh Makkina. All rights reserved.</p>
   </footer>
 
+  <!-- SCRIPTS -->
   <script>
     // tsParticles configuration
     tsParticles.load('tsparticles', {
@@ -304,10 +346,19 @@
     const mobileMenu = document.getElementById('mobile-menu');
     navToggle.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
-        // Optional: change icon to X on open
         navToggle.innerHTML = mobileMenu.classList.contains('hidden') ? `<i data-lucide="menu" class="w-6 h-6"></i>` : `<i data-lucide="x" class="w-6 h-6"></i>`;
         lucide.createIcons();
     });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            navToggle.innerHTML = `<i data-lucide="menu" class="w-6 h-6"></i>`;
+            lucide.createIcons();
+        });
+    });
+
 
     // Active nav link on scroll
     const sections = document.querySelectorAll('section');
