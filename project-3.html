@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Details | University Operations & Scheduling Platform</title>
+
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
+          colors: { accent: '#2dd4bf', darkbg: '#0f172a', 'slate-light': '#1e293b' }
+        }
+      }
+    };
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      background-image: radial-gradient(#1e293b 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .feature-card:hover i {
+        color: #2dd4bf;
+    }
+  </style>
+</head>
+<body class="text-gray-200 antialiased">
+
+  <!-- HEADER & BACK BUTTON -->
+  <header class="py-6">
+    <div class="container mx-auto px-6 text-center">
+        <a href="index.html" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+            Back to Portfolio
+        </a>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-6 py-12">
+    <!-- PROJECT TITLE -->
+    <section class="text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white">Rutgers Operations & Scheduling Platform</h1>
+        <p class="mt-4 text-lg text-accent">An AI-Augmented Full-Stack Engineering Case Study</p>
+    </section>
+
+    <!-- KEY METRICS -->
+    <section class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div class="bg-slate-light p-6 rounded-lg shadow-lg">
+            <i data-lucide="clock-rewind" class="w-10 h-10 mx-auto text-accent mb-3"></i>
+            <p class="text-3xl font-bold text-white">30+</p>
+            <p class="text-sm text-gray-400">Admin Hours Saved Weekly</p>
+        </div>
+        <div class="bg-slate-light p-6 rounded-lg shadow-lg">
+            <i data-lucide="ban" class="w-10 h-10 mx-auto text-accent mb-3"></i>
+            <p class="text-3xl font-bold text-white">100%</p>
+            <p class="text-sm text-gray-400">Elimination of Double-Bookings</p>
+        </div>
+        <div class="bg-slate-light p-6 rounded-lg shadow-lg">
+            <i data-lucide="bot" class="w-10 h-10 mx-auto text-accent mb-3"></i>
+            <p class="text-3xl font-bold text-white">AI</p>
+            <p class="text-sm text-gray-400">Onboarding Assistant</p>
+        </div>
+        <div class="bg-slate-light p-6 rounded-lg shadow-lg">
+            <i data-lucide="crown" class="w-10 h-10 mx-auto text-accent mb-3"></i>
+            <p class="text-2xl font-bold text-white">Creator</p>
+            <p class="text-sm text-gray-400">My Role</p>
+        </div>
+    </section>
+
+    <!-- THE STORY -->
+    <section class="mt-20 max-w-4xl mx-auto space-y-12">
+        <div>
+            <h2 class="text-3xl font-bold text-white mb-4">The Origin: From Campus Chaos to an Intelligent Platform</h2>
+            <p class="text-lg text-gray-300 leading-relaxed">
+                Working within the Rutgers Public Safety CSO Division, I had a frontline view of a systemic problem: operational chaos fueled by a fragmented ecosystem of manual tools. Shift scheduling lived in volatile Google Sheets, critical communications were lost in informal GroupMe chats, and repetitive questions from new hires consumed countless supervisor hours. This disjointed process led to costly errors and significant administrative overhead. I saw this not as a localized issue, but as a university-wide challenge. I conceived and built this platform from the ground up, not just as a fix, but as a scalable, AI-augmented, enterprise-grade solution to unify and automate operations for any department at Rutgers.
+            </p>
+        </div>
+    </section>
+
+    <!-- PLATFORM CAPABILITIES -->
+    <section class="mt-20">
+        <h2 class="text-3xl font-bold text-white text-center mb-10">Platform Core Capabilities</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="feature-card bg-slate-light p-6 rounded-lg shadow-lg transition-transform hover:-translate-y-1">
+                <i data-lucide="bot" class="w-10 h-10 text-gray-400 mb-4 transition-colors"></i>
+                <h3 class="text-xl font-bold text-white mb-2">AI Onboarding Assistant</h3>
+                <p class="text-gray-400">A Vertex AI-powered chatbot serves as the first point of contact for new staff, answering SOP questions using both documents and live platform data.</p>
+            </div>
+            <div class="feature-card bg-slate-light p-6 rounded-lg shadow-lg transition-transform hover:-translate-y-1">
+                <i data-lucide="calendar-check" class="w-10 h-10 text-gray-400 mb-4 transition-colors"></i>
+                <h3 class="text-xl font-bold text-white mb-2">Intelligent Scheduling & Conflict Engine</h3>
+                <p class="text-gray-400">Real-time conflict checks against work-hour limits, existing assignments, and leave status prevent invalid shift swaps or requests automatically.</p>
+            </div>
+            <div class="feature-card bg-slate-light p-6 rounded-lg shadow-lg transition-transform hover:-translate-y-1">
+                <i data-lucide="shield-alert" class="w-10 h-10 text-gray-400 mb-4 transition-colors"></i>
+                <h3 class="text-xl font-bold text-white mb-2">Supervisor Mandate Engine</h3>
+                <p class="text-gray-400">Empowers supervisors to forcibly assign staff to open shifts with built-in guardrails to ensure compliance with all scheduling rules.</p>
+            </div>
+            <div class="feature-card bg-slate-light p-6 rounded-lg shadow-lg transition-transform hover:-translate-y-1">
+                <i data-lucide="users" class="w-10 h-10 text-gray-400 mb-4 transition-colors"></i>
+                <h3 class="text-xl font-bold text-white mb-2">Granular Role-Based Access (RBAC)</h3>
+                <p class="text-gray-400">Customized dashboards and permissions for every role, ensuring users only see and do what's relevant to them.</p>
+            </div>
+            <div class="feature-card bg-slate-light p-6 rounded-lg shadow-lg transition-transform hover:-translate-y-1">
+                <i data-lucide="file-check-2" class="w-10 h-10 text-gray-400 mb-4 transition-colors"></i>
+                <h3 class="text-xl font-bold text-white mb-2">Automated Leave Management</h3>
+                <p class="text-gray-400">Streamlined digital workflows for leave requests. Upon approval, the system automatically re-opens assigned shifts for coverage.</p>
+            </div>
+            <div class="feature-card bg-slate-light p-6 rounded-lg shadow-lg transition-transform hover:-translate-y-1">
+                <i data-lucide="database-backup" class="w-10 h-10 text-gray-400 mb-4 transition-colors"></i>
+                <h3 class="text-xl font-bold text-white mb-2">Comprehensive Audit Trails</h3>
+                <p class="text-gray-400">Every critical action is logged in an immutable audit trail, ensuring full accountability and reporting integrity.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNICAL ARCHITECTURE -->
+    <section class="mt-20 max-w-4xl mx-auto space-y-12">
+        <div>
+            <h2 class="text-3xl font-bold text-white mb-6">Technical Architecture: A Full-Stack Deep Dive</h2>
+            <div class="space-y-8">
+                <div class="bg-slate-light/50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-accent mb-2">AI Assistant: Hybrid RAG with Vertex AI</h3>
+                    <p class="text-gray-300">The platform's standout feature is a multi-tenant chatbot powered by **Google Vertex AI**. I implemented a hybrid Retrieval-Augmented Generation (RAG) approach. For **unstructured data**, each department has a dedicated Vertex AI Search datastore, indexed with their specific SOPs, policies, and training PDFs from Google Cloud Storage. For **structured data**, I used **Vertex AI Functions** to make secure, real-time API calls to our Node.js backend. This allows the chatbot to answer questions like, *"What are the procedures for event security?"* by searching documents, and also answer personalized questions like, *"Am I scheduled to work this weekend?"* by querying the live database.</p>
+                </div>
+                <div class="bg-slate-light/50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-accent mb-2">Frontend: Responsive & Performant</h3>
+                    <p class="text-gray-300">The user interface is a dynamic single-page application built with **React.js**. I leveraged **React Context** for efficient and predictable global state management (handling user authentication, notifications, and role-specific UI). The styling is achieved via a custom, utility-first CSS approach for a clean, maintainable, and highly responsive design.</p>
+                </div>
+                <div class="bg-slate-light/50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-accent mb-2">Backend: Robust & Scalable</h3>
+                    <p class="text-gray-300">A comprehensive suite of RESTful APIs, built on **Node.js** with the **Express.js** framework, powers the entire platform. Authentication is handled with secure **JSON Web Tokens (JWT)**, and the architecture is primed for a seamless future integration with Rutgers NetID SSO.</p>
+                </div>
+                 <div class="bg-slate-light/50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-accent mb-2">Database: Engineered for Integrity</h3>
+                    <p class="text-gray-300">The backbone of the application is a meticulously designed **MySQL** relational database. As shown in the complex ER diagram, the schema is highly normalized to ensure data integrity, prevent anomalies, and enable powerful, efficient querying. It's built not just for current needs but to scale with the university's demands.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE VISION -->
+    <section class="mt-20 max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-6">The Vision: A Unified Operations Hub for Rutgers</h2>
+        <p class="text-lg text-gray-300 leading-relaxed">This project was never just about solving one department's scheduling problem. It was a proof-of-concept for a university-wide transformation. The successful pilot led to a formal proposal to Rutgers leadership, outlining a phased roadmap to extend the platform to the Business School and beyond. The vision is to create a single, centralized "Rutgers Operations Hub" that handles academic scheduling, faculty assignments, resource booking, and student worker management—eliminating redundant software and saving the university an estimated **$100,000+ annually** in licensing fees while providing a tool perfectly tailored to its unique needs.</p>
+    </section>
+
+     <!-- TECH STACK -->
+    <section class="mt-20">
+        <h2 class="text-3xl font-bold text-white text-center mb-10">Technology Stack</h2>
+        <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-8">
+            <div class="text-center p-4"><i data-lucide="atom" class="w-10 h-10 mx-auto text-gray-400"></i><p>React.js</p></div>
+            <div class="text-center p-4"><i data-lucide="braces" class="w-10 h-10 mx-auto text-gray-400"></i><p>Node.js</p></div>
+            <div class="text-center p-4"><i data-lucide="shuffle" class="w-10 h-10 mx-auto text-gray-400"></i><p>Express.js</p></div>
+            <div class="text-center p-4"><i data-lucide="database" class="w-10 h-10 mx-auto text-gray-400"></i><p>MySQL</p></div>
+            <div class="text-center p-4"><i data-lucide="brain-circuit" class="w-10 h-10 mx-auto text-gray-400"></i><p>Vertex AI</p></div>
+            <div class="text-center p-4"><i data-lucide="key-round" class="w-10 h-10 mx-auto text-gray-400"></i><p>JWT</p></div>
+            <div class="text-center p-4"><i data-lucide="google" class="w-10 h-10 mx-auto text-gray-400"></i><p>Google Cloud Platform</p></div>
+            <div class="text-center p-4"><i data-lucide="container" class="w-10 h-10 mx-auto text-gray-400"></i><p>Docker</p></div>
+        </div>
+    </section>
+
+  </main>
+  
+  <footer class="py-10 text-center">
+     <a href="index.html" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+            Back to Portfolio
+     </a>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>

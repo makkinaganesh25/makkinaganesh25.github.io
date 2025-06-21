@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Details | Enterprise Data Lake Migration</title>
+
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
+          colors: { accent: '#2dd4bf', darkbg: '#0f172a', 'slate-light': '#1e293b' }
+        }
+      }
+    };
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      background-image: radial-gradient(#1e293b 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .flow-arrow {
+        font-size: 2rem;
+        color: #3b4b64;
+    }
+  </style>
+</head>
+<body class="text-gray-200 antialiased">
+
+  <!-- HEADER & BACK BUTTON -->
+  <header class="py-6">
+    <div class="container mx-auto px-6 text-center">
+        <a href="index.html" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+            Back to Portfolio
+        </a>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-6 py-12">
+    <!-- PROJECT TITLE -->
+    <section class="text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white">Enterprise Data Lake Migration & Modernization</h1>
+        <p class="mt-4 text-lg text-accent">A Senior Engineer's Case Study</p>
+    </section>
+
+    <!-- KEY METRICS -->
+    <section class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div class="bg-slate-light p-6 rounded-lg shadow-lg">
+            <i data-lucide="trending-down" class="w-10 h-10 mx-auto text-accent mb-3"></i>
+            <p class="text-3xl font-bold text-white">30%</p>
+            <p class="text-sm text-gray-400">Cost Reduction (OpEx)</p>
+        </div>
+        <div class="bg-slate-light p-6 rounded-lg shadow-lg">
+            <i data-lucide="trending-up" class="w-10 h-10 mx-auto text-accent mb-3"></i>
+            <p class="text-3xl font-bold text-white">20%</p>
+            <p class="text-sm text-gray-400">Query Performance Boost</p>
+        </div>
+        <div class="bg-slate-light p-6 rounded-lg shadow-lg">
+            <i data-lucide="database-zap" class="w-10 h-10 mx-auto text-accent mb-3"></i>
+            <p class="text-3xl font-bold text-white">50M+</p>
+            <p class="text-sm text-gray-400">Records Migrated</p>
+        </div>
+        <div class="bg-slate-light p-6 rounded-lg shadow-lg">
+            <i data-lucide="user-check" class="w-10 h-10 mx-auto text-accent mb-3"></i>
+            <p class="text-2xl font-bold text-white">Lead</p>
+            <p class="text-sm text-gray-400">My Role</p>
+        </div>
+    </section>
+
+    <!-- THE STORY -->
+    <section class="mt-20 max-w-4xl mx-auto space-y-12">
+        <div>
+            <h2 class="text-3xl font-bold text-white mb-4">The Catalyst: Overcoming Technical Debt</h2>
+            <p class="text-lg text-gray-300 leading-relaxed">
+                We were confronted with a classic case of technical debt. The client's legacy infrastructure, centered on a massive Elasticsearch cluster, was initially a quick solution but had become an operational bottleneck. As data volumes scaled past millions of daily records, query latency became untenable for business-critical analytics, and the spiraling operational expenditure (OpEx) was unsustainable. The core issue: we were using a search index as an analytical database, a tool ill-suited for the complex, large-scale aggregations the business now demanded. A strategic overhaul was not just necessary; it was critical for survival and future growth.
+            </p>
+        </div>
+
+        <div>
+            <h2 class="text-3xl font-bold text-white mb-4">Architectural Vision: A Decoupled Lakehouse</h2>
+            <p class="text-lg text-gray-300 leading-relaxed">
+                My vision was to implement a modern, decoupled "Lakehouse" architecture on AWS. This paradigm blends the low-cost scalability of a data lake with the performance and transactional features of a data warehouse. Key principles were: separation of storage (S3) and compute (Databricks/Redshift), and a multi-layered data strategy (Bronze, Silver, Gold zones) to ensure data quality, governance, and analytical readiness. This wasn't just a migration; it was a fundamental shift towards a future-proof, data-as-a-service platform.
+            </p>
+        </div>
+    </section>
+
+    <!-- ARCHITECTURE DIAGRAM -->
+    <section class="mt-20">
+        <h2 class="text-3xl font-bold text-white text-center mb-10">Architectural Flow</h2>
+        <div class="bg-slate-light p-8 rounded-lg shadow-2xl">
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-4 text-center">
+                <div class="flex flex-col items-center">
+                    <i data-lucide="server" class="w-16 h-16 text-accent"></i>
+                    <p class="mt-2 font-semibold">Data Sources</p>
+                    <p class="text-xs text-gray-400">(Real-time Events)</p>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flex flex-col items-center">
+                    <i data-lucide="webhook" class="w-16 h-16 text-accent"></i>
+                    <p class="mt-2 font-semibold">Ingestion & Staging</p>
+                    <p class="text-xs text-gray-400">(Kinesis + Lambda -> S3 Bronze)</p>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                 <div class="flex flex-col items-center">
+                    <i data-lucide="gem" class="w-16 h-16 text-accent"></i>
+                    <p class="mt-2 font-semibold">Transformation</p>
+                    <p class="text-xs text-gray-400">(Databricks + Delta Lake)</p>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flex flex-col items-center">
+                    <i data-lucide="database" class="w-16 h-16 text-accent"></i>
+                    <p class="mt-2 font-semibold">Data Warehouse</p>
+                    <p class="text-xs text-gray-400">(S3 Gold -> Redshift)</p>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flex flex-col items-center">
+                    <i data-lucide="area-chart" class="w-16 h-16 text-accent"></i>
+                    <p class="mt-2 font-semibold">Analytics</p>
+                    <p class="text-xs text-gray-400">(BI Dashboards)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNICAL DEEP DIVE -->
+    <section class="mt-20 max-w-4xl mx-auto space-y-12">
+        <div>
+            <h2 class="text-3xl font-bold text-white mb-6">Technical Deep Dive: The Execution</h2>
+            <div class="space-y-8">
+                <div class="bg-slate-light/50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-accent mb-2">1. Ingestion: The "Bronze" Raw Zone</h3>
+                    <p class="text-gray-300">Real-time data streams were ingested via **Kinesis Data Streams** for high durability. A chain of **Lambda** functions subscribed to these streams for stateless, real-time enrichment (e.g., adding metadata, basic schema validation) before persisting the raw, unaltered events into our S3 "Bronze Zone." This gave us a pristine, replayable source of truth.</p>
+                </div>
+                <div class="bg-slate-light/50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-accent mb-2">2. Transformation: "Silver" & "Gold" with Delta Lake</h3>
+                    <p class="text-gray-300">This was the heart of the operation. Using **Databricks (Spark/Scala)**, we processed data from Bronze to Silver by cleansing, deduplicating, and conforming data types. Crucially, we implemented **Delta Lake** as the storage format for our Silver zone. This brought ACID transactions to our data lake, preventing data corruption and allowing for reliable "upserts." From Silver, we ran further aggregation jobs to create our "Gold Zone"—a set of denormalized, business-centric tables highly optimized for analytical queries.</p>
+                </div>
+                 <div class="bg-slate-light/50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-accent mb-2">3. Serving Layer: High-Concurrency Analytics with Redshift</h3>
+                    <p class="text-gray-300">While Databricks is great for ad-hoc analysis, our BI tools required a high-concurrency, low-latency serving layer. We chose **Amazon Redshift** for its columnar, MPP architecture. Data was efficiently loaded from the S3 Gold zone into Redshift using the `COPY` command. I engineered complex SQL logic with CTEs and materialized views within Redshift to pre-aggregate key metrics, delivering the **20% query performance boost** for our end-users.</p>
+                </div>
+                <div class="bg-slate-light/50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-accent mb-2">4. Orchestration & DevOps: Automation is Key</h3>
+                    <p class="text-gray-300">To automate this complex dependency graph, I designed and deployed idempotent DAGs in **Managed Airflow (MWAA)**. These DAGs managed the entire workflow, from sensing data arrival in S3 to triggering Databricks jobs and executing Redshift loads. Our CI/CD pipeline, built with **AWS CodePipeline**, automated the deployment of not just our Spark code but also our infrastructure-as-code templates, ensuring a stable and repeatable process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MY CONTRIBUTIONS -->
+    <section class="mt-20 max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-6">My Key Contributions</h2>
+        <ul class="space-y-3 text-lg text-gray-300">
+            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Led the design of the multi-layered data lake architecture (Bronze/Silver/Gold) and advocated for the adoption of Delta Lake to ensure data reliability.</span></li>
+            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Authored the core Scala/Spark transformation jobs in Databricks, which processed over 50 million historical records and handled daily incremental loads.</span></li>
+            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Engineered and optimized the final serving layer in Redshift, including schema design and performance tuning of analytical queries.</span></li>
+            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Built and maintained the end-to-end orchestration using idempotent Airflow DAGs, reducing manual intervention by over 90%.</span></li>
+        </ul>
+    </section>
+
+     <!-- TECH STACK -->
+    <section class="mt-20">
+        <h2 class="text-3xl font-bold text-white text-center mb-10">Technology Stack</h2>
+        <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-8">
+            <div class="text-center p-4"><i data-lucide="cloud" class="w-10 h-10 mx-auto text-gray-400"></i><p>AWS</p></div>
+            <div class="text-center p-4"><i data-lucide="box" class="w-10 h-10 mx-auto text-gray-400"></i><p>S3</p></div>
+            <div class="text-center p-4"><i data-lucide="database" class="w-10 h-10 mx-auto text-gray-400"></i><p>Redshift</p></div>
+            <div class="text-center p-4"><i data-lucide="gem" class="w-10 h-10 mx-auto text-gray-400"></i><p>Databricks</p></div>
+            <div class="text-center p-4"><i data-lucide="webhook" class="w-10 h-10 mx-auto text-gray-400"></i><p>Kinesis</p></div>
+            <div class="text-center p-4"><i data-lucide="wind" class="w-10 h-10 mx-auto text-gray-400"></i><p>Airflow</p></div>
+            <div class="text-center p-4"><i data-lucide="braces" class="w-10 h-10 mx-auto text-gray-400"></i><p>Scala</p></div>
+            <div class="text-center p-4"><i data-lucide="pilcrow" class="w-10 h-10 mx-auto text-gray-400"></i><p>Python</p></div>
+            <div class="text-center p-4"><i data-lucide="codesandbox" class="w-10 h-10 mx-auto text-gray-400"></i><p>SQL</p></div>
+        </div>
+    </section>
+
+  </main>
+  
+  <footer class="py-10 text-center">
+     <a href="index.html" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+            Back to Portfolio
+     </a>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>

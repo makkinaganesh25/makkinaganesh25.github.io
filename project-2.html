@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Details | COVID-19 Analytics Platform</title>
+
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
+          colors: { accent: '#2dd4bf', darkbg: '#0f172a', 'slate-light': '#1e293b' }
+        }
+      }
+    };
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      background-image: radial-gradient(#1e293b 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .flow-arrow {
+        font-size: 2rem;
+        color: #3b4b64;
+    }
+  </style>
+</head>
+<body class="text-gray-200 antialiased">
+
+  <!-- HEADER & BACK BUTTON -->
+  <header class="py-6">
+    <div class="container mx-auto px-6 text-center">
+        <a href="index.html" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+            Back to Portfolio
+        </a>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-6 py-12">
+    <!-- PROJECT TITLE -->
+    <section class="text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white">Scalable COVID-19 Data Ingestion & Analytics Platform</h1>
+        <p class="mt-4 text-lg text-accent">A High-Velocity Data Engineering Case Study</p>
+    </section>
+
+    <!-- KEY METRICS -->
+    <section class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div class="bg-slate-light p-6 rounded-lg shadow-lg">
+            <i data-lucide="activity" class="w-10 h-10 mx-auto text-accent mb-3"></i>
+            <p class="text-3xl font-bold text-white">10M+</p>
+            <p class="text-sm text-gray-400">Records Processed Daily</p>
+        </div>
+        <div class="bg-slate-light p-6 rounded-lg shadow-lg">
+            <i data-lucide="clock" class="w-10 h-10 mx-auto text-accent mb-3"></i>
+            <p class="text-3xl font-bold text-white">30%</p>
+            <p class="text-sm text-gray-400">Faster Data Preparation</p>
+        </div>
+        <div class="bg-slate-light p-6 rounded-lg shadow-lg">
+            <i data-lucide="file-check-2" class="w-10 h-10 mx-auto text-accent mb-3"></i>
+            <p class="text-3xl font-bold text-white">Real-time</p>
+            <p class="text-sm text-gray-400">Data Availability</p>
+        </div>
+        <div class="bg-slate-light p-6 rounded-lg shadow-lg">
+            <i data-lucide="shield-check" class="w-10 h-10 mx-auto text-accent mb-3"></i>
+            <p class="text-2xl font-bold text-white">Lead</p>
+            <p class="text-sm text-gray-400">My Role</p>
+        </div>
+    </section>
+
+    <!-- THE STORY -->
+    <section class="mt-20 max-w-4xl mx-auto space-y-12">
+        <div>
+            <h2 class="text-3xl font-bold text-white mb-4">The Challenge: Data Chaos in a Global Crisis</h2>
+            <p class="text-lg text-gray-300 leading-relaxed">
+                During the height of the COVID-19 pandemic, our healthcare client faced an unprecedented data challenge. They needed to ingest, process, and analyze rapidly changing data from dozens of disparate public health APIs and datasets. The data was inconsistent, schemas changed without notice, and the volume was immense—over 10 million new records daily. Their existing manual processes were completely overwhelmed, leading to days-long delays in analysis. The mission was clear: build a fully automated, scalable, and resilient data platform to provide timely, actionable insights for critical public health decisions.
+            </p>
+        </div>
+
+        <div>
+            <h2 class="text-3xl font-bold text-white mb-4">Architectural Strategy: An Event-Driven, Serverless-First Pipeline</h2>
+            <p class="text-lg text-gray-300 leading-relaxed">
+                I designed a serverless-first, event-driven architecture to maximize scalability and minimize operational overhead. The core principle was to build a reactive system where data arrival itself would trigger the downstream processing steps. This approach allowed us to handle unpredictable bursts in data volume without manual intervention. We leveraged a combination of schedulers and event triggers to create a pipeline that was both robust for batch processing and agile enough for real-time updates, ensuring decision-makers always had the most current data at their fingertips.
+            </p>
+        </div>
+    </section>
+
+    <!-- ARCHITECTURE DIAGRAM -->
+    <section class="mt-20">
+        <h2 class="text-3xl font-bold text-white text-center mb-10">Data Platform Architecture</h2>
+        <div class="bg-slate-light p-8 rounded-lg shadow-2xl">
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-4 text-center">
+                <div class="flex flex-col items-center">
+                    <i data-lucide="cloud-cog" class="w-16 h-16 text-accent"></i>
+                    <p class="mt-2 font-semibold">External APIs</p>
+                    <p class="text-xs text-gray-400">(Public Health Data)</p>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flex flex-col items-center">
+                    <i data-lucide="binary" class="w-16 h-16 text-accent"></i>
+                    <p class="mt-2 font-semibold">Serverless Extraction</p>
+                    <p class="text-xs text-gray-400">(Lambda + EventBridge)</p>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                 <div class="flex flex-col items-center">
+                    <i data-lucide="sparkles" class="w-16 h-16 text-accent"></i>
+                    <p class="mt-2 font-semibold">Large-Scale ETL</p>
+                    <p class="text-xs text-gray-400">(AWS Glue + Python/Spark)</p>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flex flex-col items-center">
+                    <i data-lucide="library" class="w-16 h-16 text-accent"></i>
+                    <p class="mt-2 font-semibold">Query & Analysis</p>
+                    <p class="text-xs text-gray-400">(Databricks SQL + Hive)</p>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flex flex-col items-center">
+                    <i data-lucide="pie-chart" class="w-16 h-16 text-accent"></i>
+                    <p class="mt-2 font-semibold">Visualization</p>
+                    <p class="text-xs text-gray-400">(AWS QuickSight)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNICAL DEEP DIVE -->
+    <section class="mt-20 max-w-4xl mx-auto space-y-12">
+        <div>
+            <h2 class="text-3xl font-bold text-white mb-6">Technical Implementation Details</h2>
+            <div class="space-y-8">
+                <div class="bg-slate-light/50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-accent mb-2">1. Automated API Extraction Layer</h3>
+                    <p class="text-gray-300">To handle the numerous, unreliable APIs, I built a resilient extraction layer using **AWS Lambda** functions triggered by **Amazon EventBridge (CloudWatch Events)** schedulers. Each function was responsible for a specific API, encapsulating its unique logic, authentication, and error handling. Data was landed in its raw JSON or CSV format directly into an S3 "ingestion" bucket, providing a fault-tolerant and auditable entry point into our system.</p>
+                </div>
+                <div class="bg-slate-light/50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-accent mb-2">2. Scalable Transformation with Glue and Spark</h3>
+                    <p class="text-gray-300">The core transformation logic was built using **AWS Glue** for its serverless Spark environment. I authored complex **Python/PySpark** jobs to read the raw, multi-format data from S3, apply schema-on-read, perform extensive cleaning (handling nulls, standardizing date formats), and join disparate datasets. By leveraging Spark's distributed processing, we could process the entire 10M+ daily record volume efficiently, achieving a **30% reduction in data preparation time** compared to previous methods.</p>
+                </div>
+                 <div class="bg-slate-light/50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-accent mb-2">3. Unified Analytics with Databricks SQL & Hive Metastore</h3>
+                    <p class="text-gray-300">To enable rapid ad-hoc querying and analytics for data scientists, we configured **Databricks SQL** on top of our curated S3 data lake. We used **AWS Glue Data Catalog as a Hive-compatible metastore**, which provided a unified, SQL-addressable view over all our cleansed datasets. This allowed analysts to write standard SQL against petabytes of data without needing to manage the underlying infrastructure.</p>
+                </div>
+                <div class="bg-slate-light/50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-accent mb-2">4. Orchestration and Real-time Visualization</h3>
+                    <p class="text-gray-300">The entire multi-step workflow was orchestrated using **Managed Airflow (MWAA)**. For real-time updates, a parallel path was established using **Kinesis** to stream critical events directly to **AWS QuickSight**. I developed interactive dashboards in QuickSight, featuring geospatial maps, trend lines, and KPI trackers, which provided stakeholders with immediate, actionable insights into COVID-19 trends.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MY CONTRIBUTIONS -->
+    <section class="mt-20 max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-6">My Key Contributions</h2>
+        <ul class="space-y-3 text-lg text-gray-300">
+            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Designed the end-to-end serverless data pipeline architecture, from ingestion to analytics.</span></li>
+            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Developed the core PySpark transformation scripts within AWS Glue, which handled the cleansing and integration of over 10 million daily records.</span></li>
+            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Set up the unified analytics environment using Databricks SQL on top of the AWS Glue Data Catalog.</span></li>
+            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Led the development of the final AWS QuickSight dashboards, creating compelling visualizations that were used by stakeholders for critical decision-making.</span></li>
+            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Implemented a full CI/CD pipeline using AWS CodePipeline and CodeBuild for automated deployment and monitoring.</span></li>
+        </ul>
+    </section>
+
+     <!-- TECH STACK -->
+    <section class="mt-20">
+        <h2 class="text-3xl font-bold text-white text-center mb-10">Technology Stack</h2>
+        <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-8">
+            <div class="text-center p-4"><i data-lucide="cloud" class="w-10 h-10 mx-auto text-gray-400"></i><p>AWS</p></div>
+            <div class="text-center p-4"><i data-lucide="binary" class="w-10 h-10 mx-auto text-gray-400"></i><p>Lambda</p></div>
+            <div class="text-center p-4"><i data-lucide="sparkles" class="w-10 h-10 mx-auto text-gray-400"></i><p>AWS Glue</p></div>
+            <div class="text-center p-4"><i data-lucide="gem" class="w-10 h-10 mx-auto text-gray-400"></i><p>Databricks SQL</p></div>
+            <div class="text-center p-4"><i data-lucide="pie-chart" class="w-10 h-10 mx-auto text-gray-400"></i><p>QuickSight</p></div>
+            <div class="text-center p-4"><i data-lucide="wind" class="w-10 h-10 mx-auto text-gray-400"></i><p>Airflow</p></div>
+            <div class="text-center p-4"><i data-lucide="pilcrow" class="w-10 h-10 mx-auto text-gray-400"></i><p>Python/PySpark</p></div>
+            <div class="text-center p-4"><i data-lucide="folder-git-2" class="w-10 h-10 mx-auto text-gray-400"></i><p>CodePipeline</p></div>
+        </div>
+    </section>
+
+  </main>
+  
+  <footer class="py-10 text-center">
+     <a href="index.html" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+            Back to Portfolio
+     </a>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>
