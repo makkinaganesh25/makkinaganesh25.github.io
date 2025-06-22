@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ganesh Makkina | Data Engineer Portfolio 2.0</title>
+
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { 
+      theme: { 
+        extend: { 
+          fontFamily: { inter: ['Inter','sans-serif'] }, 
+          colors: { 
+            accent: '#2dd4bf', // Teal accent
+            'accent-light': '#5eead4',
+            darkbg: '#020617',    // Even darker navy
+            'slate-light': '#0f172a', // The old darkbg, now a lighter slate
+            'slate-mid': '#1e293b',
+            'slate-dark': '#0b1120',
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-glow': 'pulse-glow 4s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            'pulse-glow': {
+              '0%, 100%': { boxShadow: '0 0 20px -5px #2dd4bf' },
+              '50%': { boxShadow: '0 0 35px 0px #2dd4bf' },
+            }
+          }
+        } 
+      } 
+    };
+  </script>
+
+  <!-- Three.js for 3D Hero Animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* Global Styles & Futuristic Feel */
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      overflow-x: hidden;
+      background-color: var(--darkbg);
+      background-image: radial-gradient(circle at 1px 1px, #1e293b 1px, #020617 0);
+      background-size: 24px 24px;
+      color: #e2e8f0; /* Default text color slate-200 */
+    }
+
+    /* Mouse Follow Spotlight Effect */
+    #spotlight {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.08) 0%, rgba(45, 212, 191, 0) 60%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: all 0.1s ease-out;
+      z-index: 0;
+    }
+    
+    /* Custom Scrollbar for a modern look */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2dd4bf; }
+
+    /* Glassmorphism Effect for cards and nav */
+    .glass-effect {
+      background: rgba(15, 23, 42, 0.5); /* bg-slate-light with opacity */
+      backdrop-filter: blur(12px);
+      --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --tw-shadow-colored: 0 0 #0000;
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+      border: 1px solid rgba(30, 41, 59, 0.5); /* border-slate-mid with opacity */
+    }
+
+    /* Active Nav Link Style */
+    nav ul li a.active-link {
+      color: #2dd4bf; /* accent color */
+      background-color: rgba(45, 212, 191, 0.1);
+      font-weight: 600;
+    }
+
+    /* Project Modal Styling */
+    #project-modal {
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .modal-content {
+        transition: transform 0.3s ease;
+    }
+
+    /* Fade-in Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-darkbg text-slate-300">
+  <div id="spotlight"></div>
+
+  <!-- Main Layout: Sidebar + Content -->
+  <div class="lg:grid lg:grid-cols-[350px_1fr] min-h-screen">
+    
+    <!-- LEFT SIDEBAR / HEADER -->
+    <header class="fixed top-0 left-0 h-full w-[350px] z-20 p-10 flex-col justify-between hidden lg:flex">
+      <div class="flex flex-col gap-12">
+        <div>
+          <a href="#hero" class="text-4xl font-bold text-white">Ganesh Makkina</a>
+          <p class="text-lg mt-3 text-slate-300">Data Engineer & Cloud Architect</p>
+          <p class="mt-4 max-w-xs text-slate-400">I build intelligent data platforms that transform raw data into strategic assets.</p>
+        </div>
+        <nav>
+          <ul class="space-y-2 text-lg">
+            <li><a href="#about" class="block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300"></span>About</a></li>
+            <li><a href="#projects" class="block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300"></span>Projects</a></li>
+            <li><a href="#skills" class="block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300"></span>Skills</a></li>
+            <li><a href="#education" class="block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300"></span>Education</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="https://github.com/makkinaganesh25" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="text-slate-400 hover:text-accent transition-colors"><i data-lucide="github" class="w-7 h-7"></i></a>
+        <a href="https://www.linkedin.com/in/ganesh-makkina/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-slate-400 hover:text-accent transition-colors"><i data-lucide="linkedin" class="w-7 h-7"></i></a>
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="text-slate-400 hover:text-accent transition-colors"><i data-lucide="twitter" class="w-7 h-7"></i></a>
+      </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION -->
+    <nav class="lg:hidden fixed top-0 w-full bg-darkbg/80 backdrop-blur-md z-50">
+        <div class="container mx-auto flex items-center justify-between p-4">
+            <a href="#hero" class="text-2xl font-bold text-white">GM</a>
+            <button id="nav-toggle" class="focus:outline-none">
+                <i data-lucide="menu" class="w-6 h-6 text-white"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden bg-darkbg">
+            <ul class="flex flex-col items-center space-y-4 py-4 text-lg">
+                <li><a href="#hero" class="mobile-nav-link p-2">Home</a></li>
+                <li><a href="#about" class="mobile-nav-link p-2">About</a></li>
+                <li><a href="#projects" class="mobile-nav-link p-2">Projects</a></li>
+                <li><a href="#skills" class="mobile-nav-link p-2">Skills</a></li>
+                <li><a href="#education" class="mobile-nav-link p-2">Education</a></li>
+                <li><a href="#contact" class="mobile-nav-link p-2">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- MAIN CONTENT AREA -->
+    <main class="lg:col-start-2">
+      <!-- HERO SECTION -->
+      <section id="hero" class="min-h-screen flex flex-col justify-center px-6 lg:px-0">
+          <div class="lg:hidden text-center mb-12 fade-in">
+              <h1 class="text-5xl md:text-7xl font-extrabold text-white">Ganesh Makkina</h1>
+              <p class="text-2xl md:text-3xl mt-4 text-accent">Data Engineer & Cloud Architect</p>
+          </div>
+          <div id="hero-3d-container" class="w-full h-[50vh] lg:h-[70vh] cursor-grab active:cursor-grabbing fade-in"></div>
+          <div class="mt-8 text-center space-x-4 fade-in">
+              <a href="#contact" class="px-6 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:bg-accent-light transition">Get In Touch</a>
+              <a href="Ganesh_Makkina_Resume.pdf" download class="px-6 py-3 border border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition">Download Resume</a>
+          </div>
+      </section>
+
+      <!-- ABOUT SECTION -->
+      <section id="about" class="py-24 sm:py-32 px-6 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+            <div class="lg:col-span-2 space-y-6 text-lg text-slate-300 fade-in">
+                <h2 class="text-3xl font-bold text-white mb-4">About Me</h2>
+                <p>Hello! I’m Ganesh Makkina, a dedicated Data Engineer who builds scalable, cloud-native data platforms. I thrive on turning complex, raw datasets into clear, actionable insights that drive strategic decisions. With hands-on experience across <strong class="text-accent-light">AWS</strong>, <strong class="text-accent-light">GCP</strong>, and <strong class="text-accent-light">Databricks</strong>, I blend technical expertise with a passion for innovation to solve challenging analytics problems.</p>
+                <p>Previously at <strong class="text-white">Quantiphi</strong>, I architected large-scale data lakes, built efficient streaming pipelines, and optimized complex ETL workflows. My academic foundation in Data Science from <strong class="text-white">Rutgers University</strong> underpins my practical skills, allowing me to design systems that are not only powerful but also maintainable, scalable, and cost-efficient for the future.</p>
+            </div>
+            <div class="lg:col-span-1 fade-in">
+              <div class="glass-effect rounded-2xl p-6">
+                <div class="flex justify-center mb-6">
+                    <img src="pic.JPG" alt="Ganesh Makkina" class="w-32 h-32 rounded-full object-cover border-4 border-slate-mid shadow-lg" />
+                </div>
+                <div class="text-center space-y-4">
+                    <div>
+                        <p class="stat-value text-4xl font-bold text-accent" data-target="2">0</p>
+                        <p class="text-sm text-slate-400">Years Experience</p>
+                    </div>
+                    <div>
+                        <p class="stat-value text-4xl font-bold text-accent" data-target="10">0</p>
+                        <p class="text-sm text-slate-400">Projects Completed</p>
+                    </div>
+                    <div>
+                        <p class="stat-value text-4xl font-bold text-accent" data-target="2">0</p>
+                        <p class="text-sm text-slate-400">Pro Certifications</p>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS SECTION -->
+      <section id="projects" class="py-20 px-6 lg:px-12">
+        <h2 class="text-3xl font-bold text-white mb-12 fade-in">Key Projects</h2>
+        <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2">
+          <!-- Projects will be dynamically populated here -->
+        </div>
+      </section>
+
+      <!-- SKILLS SECTION REFINED -->
+      <section id="skills" class="py-24 px-6 lg:px-12">
+        <h2 class="text-3xl font-bold text-white mb-16 text-center fade-in">Core Competencies</h2>
+        <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 fade-in">
+          <!-- Skill cards will be dynamically populated here -->
+        </div>
+      </section>
+
+      <!-- EDUCATION SECTION -->
+      <section id="education" class="py-20 px-6 lg:px-12">
+        <h2 class="text-3xl font-bold text-white mb-12 fade-in">Education & Certifications</h2>
+        <div class="space-y-8 fade-in">
+          <!-- Education items will be dynamically populated -->
+        </div>
+      </section>
+      
+      <!-- CONTACT SECTION -->
+      <section id="contact" class="py-20 px-6 lg:px-12">
+        <div class="max-w-xl mx-auto text-center fade-in">
+            <h2 class="text-3xl font-bold text-white">Let's Build the Future of Data</h2>
+            <p class="mt-4 text-lg text-slate-400">Have a project, an idea, or just want to connect? I'd love to hear from you.</p>
+        </div>
+        <form action="https://api.web3forms.com/submit" method="POST" class="mt-12 max-w-xl mx-auto space-y-6 fade-in">
+            <input type="hidden" name="access_key" value="95f8e9dd-d29e-4b40-811a-27fefb9c4b3a">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input name="name" type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg bg-slate-light border border-slate-mid focus:ring-accent focus:outline-none focus:ring-2 transition" required />
+                <input name="email" type="email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg bg-slate-light border border-slate-mid focus:ring-accent focus:outline-none focus:ring-2 transition" required />
+            </div>
+            <textarea name="message" rows="5" placeholder="Your message..." class="w-full px-4 py-3 rounded-lg bg-slate-light border border-slate-mid focus:ring-accent focus:outline-none focus:ring-2 transition" required></textarea>
+            <button type="submit" class="w-full px-4 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:bg-accent-light transition-all">Send Message</button>
+        </form>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="py-10 text-center text-sm text-slate-500 fade-in">
+        <p>Designed & Built by Ganesh Makkina &copy; <span id="year"></span></p>
+        <p class="mt-1">Inspired by the future of data engineering.</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- PROJECT MODAL -->
+  <div id="project-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 invisible">
+    <div class="modal-content w-full max-w-4xl max-h-[90vh] glass-effect rounded-2xl overflow-hidden transform scale-95">
+        <div class="flex justify-between items-center p-4 border-b border-slate-mid">
+            <h3 id="modal-title" class="text-2xl font-bold text-white">Project Title</h3>
+            <button id="modal-close" class="text-slate-400 hover:text-accent">&times;</button>
+        </div>
+        <div class="p-6 md:p-8 overflow-y-auto max-h-[calc(90vh-65px)]">
+            <img id="modal-image" src="" alt="Project Image" class="w-full h-auto max-h-80 object-contain rounded-lg mb-6 bg-slate-dark p-2" />
+            <div id="modal-tags" class="flex flex-wrap gap-2 mb-4"></div>
+            <div id="modal-description" class="text-slate-300 space-y-4"></div>
+        </div>
+    </div>
+  </div>
+
+
+  <script>
+    // --- DATA ---
+    const projectsData = [
+      {
+        title: "Enterprise Data Lake Migration",
+        image: "enterprise_migration.png",
+        tags: ["Redshift", "Spark ETL", "Airflow", "AWS S3"],
+        short_description: "Migrated Elasticsearch to AWS S3 data lake & Redshift warehouse, boosting query performance by 20% and slashing costs by 30%.",
+        description: `
+          <p>Successfully migrated a legacy Elasticsearch-based data store to a modern, scalable AWS data lake architecture. This involved designing and implementing a robust ingestion pipeline to land data in S3, followed by complex Spark ETL jobs orchestrated with Airflow to transform and load data into a Redshift data warehouse.</p>
+          <p><strong>Key Achievements:</strong></p>
+          <ul class="list-disc list-inside ml-4 space-y-2">
+            <li>Reduced data query and retrieval times by over 20%, enabling faster business intelligence and analytics.</li>
+            <li>Cut operational and storage costs by 30% by leveraging cost-effective S3 storage and optimized Redshift clusters.</li>
+            <li>Established a single source of truth, improving data consistency and reliability across the enterprise.</li>
+          </ul>
+        `,
+        schema_link: null
+      },
+      {
+        title: "COVID-19 Analytics Platform",
+        image: "covid19.png",
+        tags: ["AWS Lambda", "AWS Glue", "QuickSight", "Serverless"],
+        short_description: "Engineered ingestion & analytics for 10M+ daily records with AWS Lambda, Glue, and QuickSight dashboards to empower public health insights.",
+        description: `
+          <p>Engineered a serverless, real-time data ingestion and analytics platform on AWS to process over 10 million COVID-19 related records daily. The architecture utilized AWS Lambda for event-driven data ingestion, AWS Glue for serverless ETL transformations, and Amazon S3 for durable storage.</p>
+          <p><strong>Key Achievements:</strong></p>
+          <ul class="list-disc list-inside ml-4 space-y-2">
+            <li>Provided public health officials with near real-time, interactive dashboards built with Amazon QuickSight for critical decision-making.</li>
+            <li>Designed a highly scalable and resilient pipeline capable of handling massive spikes in data volume without manual intervention.</li>
+            <li>Automated the entire data lifecycle, from ingestion to visualization, minimizing operational overhead.</li>
+          </ul>
+        `,
+        schema_link: null
+      },
+      {
+        title: "CSO Shift Scheduling App",
+        image: "cso.png",
+        tags: ["React", "Node.js", "MySQL", "Vertex AI"],
+        short_description: "Built with React, Node.js, and MySQL to automate shift postings, conflict detection, and notifications for Rutgers CSOs.",
+        description: `
+          <p>Developed a full-stack web application to streamline and automate the shift scheduling process for Rutgers University's Community Service Officers (CSOs). The application features a user-friendly React frontend and a robust Node.js backend connected to a MySQL database.</p>
+          <p><strong>Key Achievements:</strong></p>
+          <ul class="list-disc list-inside ml-4 space-y-2">
+            <li>Automated shift postings, sign-ups, and conflict detection, saving significant administrative hours.</li>
+            <li>Implemented a notification system for shift changes and reminders, improving operational efficiency and communication.</li>
+            <li>Designed and normalized the database schema to ensure data integrity and efficient querying.</li>
+          </ul>
+        `,
+        schema_link: "er_diagram.pdf"
+      }
+    ];
+
+    const skillsData = [
+        { name: "Python & PySpark", icon: "code-2", text: "Core language for scripting, automation, and large-scale data processing with Spark." },
+        { name: "SQL & NoSQL", icon: "database", text: "Expert in relational (PostgreSQL, MySQL) and non-relational (MongoDB, DynamoDB) databases." },
+        { name: "AWS & GCP", icon: "cloud", text: "Architecting and deploying data solutions on AWS (S3, Redshift, Glue) and GCP (BigQuery, Dataflow)." },
+        { name: "Orchestration", icon: "git-branch-plus", text: "Building, scheduling, and monitoring complex data workflows with Airflow and AWS Glue." },
+        { name: "Data Modeling", icon: "network", text: "Designing efficient, scalable, and reliable data models for warehouses and data lakes." },
+        { name: "Streaming Data", icon: "zap", text: "Processing real-time data streams with Kafka, Kinesis, and Spark Streaming." },
+        { name: "CI/CD & DevOps", icon: "terminal-square", text: "Automating deployment and testing of data pipelines using tools like Git, Docker, and Jenkins." },
+        { name: "BI & Visualization", icon: "bar-chart-3", text: "Creating insightful dashboards and reports with tools like QuickSight, Tableau, and Looker." },
+    ];
+
+    const educationData = [
+        {
+            school: "Rutgers University",
+            degree: "MS in Statistics - Data Science",
+            location: "New Brunswick, NJ | Sep 2023 - May 2025",
+            courses: "Regression & Time Series, Probability & Statistics, Advanced Database Management, Financial Data Mining, Data Wrangling"
+        },
+        {
+            school: "Army Institute of Technology",
+            degree: "BE in Computer Science",
+            location: "Pune, MH | Jul 2017 - Jul 2021",
+            courses: "Data Structures, Algorithms, Operating Systems, Database Systems, Computer Networks"
+        },
+    ];
+
+    const certificationsData = [
+      "AWS Certified Data Engineer – Associate",
+      "Google Professional Data Engineer"
+    ];
+
+    // --- INITIALIZATION ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Phase 1: Core setup, no content dependency
+        lucide.createIcons();
+        initHero3D();
+        initMouseSpotlight();
+        initMobileNav();
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Phase 2: Populate DOM with dynamic content
+        populateProjects();
+        populateSkills();
+        populateEducation();
+        
+        // Phase 3: Initialize scripts that depend on the full DOM
+        initScrollAnimations();
+        initActiveNavLinkOnScroll();
+        initProjectModal();
+    });
+
+    // --- HERO 3D ANIMATION ---
+    function initHero3D() {
+        const container = document.getElementById('hero-3d-container');
+        if (!container) return;
+
+        let scene, camera, renderer, points, controls;
+
+        // Scene
+        scene = new THREE.Scene();
+
+        // Camera
+        camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.z = 15;
+
+        // Renderer
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+        
+        // Controls
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.enablePan = false;
+        controls.enableZoom = false;
+        controls.minPolarAngle = Math.PI / 3;
+        controls.maxPolarAngle = Math.PI * 2 / 3;
+
+        // Particles
+        const geometry = new THREE.BufferGeometry();
+        const count = 5000;
+        const positions = new Float32Array(count * 3);
+        for(let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 30;
+        }
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const material = new THREE.PointsMaterial({
+            size: 0.05,
+            color: new THREE.Color('#2dd4bf'),
+            transparent: true,
+            opacity: 0.7
+        });
+        points = new THREE.Points(geometry, material);
+        scene.add(points);
+
+        // Animation Loop
+        const clock = new THREE.Clock();
+        const animate = () => {
+            const elapsedTime = clock.getElapsedTime();
+            points.rotation.y = elapsedTime * 0.1;
+            controls.update();
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        };
+        animate();
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        });
+    }
+
+    // --- INTERACTIVE ELEMENTS ---
+
+    function initMouseSpotlight() {
+        const spotlight = document.getElementById('spotlight');
+        if (!spotlight) return;
+        window.addEventListener('mousemove', (e) => {
+            spotlight.style.left = e.pageX + 'px';
+            spotlight.style.top = e.pageY + 'px';
+        });
+    }
+
+    function initMobileNav() {
+        const navToggle = document.getElementById('nav-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(!navToggle || !mobileMenu) return;
+        
+        navToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            navToggle.innerHTML = mobileMenu.classList.contains('hidden') ? `<i data-lucide="menu" class="w-6 h-6 text-white"></i>` : `<i data-lucide="x" class="w-6 h-6 text-white"></i>`;
+            lucide.createIcons();
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                navToggle.innerHTML = `<i data-lucide="menu" class="w-6 h-6 text-white"></i>`;
+                lucide.createIcons();
+            });
+        });
+    }
+
+    // --- CONTENT POPULATION ---
+
+    function populateProjects() {
+      const container = document.querySelector('#projects .grid');
+      if (!container) return;
+      container.innerHTML = projectsData.map((project, index) => `
+        <div class="project-card group glass-effect rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-2 fade-in" data-index="${index}">
+            <div class="relative w-full aspect-[3/2] overflow-hidden">
+                <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/1536x1024/0f172a/2dd4bf?text=Image+Not+Found';">
+            </div>
+            <div class="p-6 flex flex-col">
+              <h3 class="text-xl font-bold text-white mb-2">${project.title}</h3>
+              <p class="text-slate-400 mb-4 text-sm leading-relaxed flex-grow">${project.short_description}</p>
+              <div class="flex flex-wrap gap-2 my-4">
+                ${project.tags.map(tag => `<span class="text-xs bg-accent/20 text-accent px-3 py-1 rounded-full font-medium">${tag}</span>`).join('')}
+              </div>
+              <div class="flex items-center gap-4 mt-auto">
+                <a href="#" class="view-case-study-btn inline-block text-accent font-semibold">
+                  View Case Study <span class="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
+                </a>
+                ${project.schema_link ? `<a href="${project.schema_link}" target="_blank" rel="noopener noreferrer" class="inline-block text-slate-400 font-semibold hover:text-accent transition-colors">View Schema</a>` : ''}
+              </div>
+            </div>
+        </div>
+      `).join('');
+    }
+    
+    function initProjectModal() {
+        const modal = document.getElementById('project-modal');
+        const closeBtn = document.getElementById('modal-close');
+        
+        if (!modal || !closeBtn) return;
+        
+        // Use event delegation for dynamically added buttons
+        document.body.addEventListener('click', e => {
+            if (e.target.matches('.view-case-study-btn, .view-case-study-btn *')) {
+                e.preventDefault();
+                const btn = e.target.closest('.view-case-study-btn');
+                const card = btn.closest('.project-card');
+                const index = card.dataset.index;
+                const project = projectsData[index];
+                
+                document.getElementById('modal-title').textContent = project.title;
+                document.getElementById('modal-image').src = project.image;
+                document.getElementById('modal-image').alt = project.title;
+                document.getElementById('modal-description').innerHTML = project.description;
+                
+                const tagsContainer = document.getElementById('modal-tags');
+                tagsContainer.innerHTML = project.tags.map(tag => `<span class="text-xs bg-accent/20 text-accent px-3 py-1 rounded-full">${tag}</span>`).join('');
+                
+                modal.classList.remove('opacity-0', 'invisible');
+                modal.querySelector('.modal-content').classList.remove('scale-95');
+            }
+        });
+
+        const closeModal = () => {
+            modal.classList.add('opacity-0', 'invisible');
+            modal.querySelector('.modal-content').classList.add('scale-95');
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
+
+    function populateSkills() {
+        const container = document.getElementById('skills-grid');
+        if (!container) return;
+
+        container.innerHTML = skillsData.map(skill => `
+            <div class="group glass-effect p-6 rounded-2xl text-center transition-all duration-300 hover:-translate-y-2 hover:!bg-slate-mid/60 border border-transparent hover:!border-accent">
+                <div class="flex justify-center mb-4">
+                    <div class="w-20 h-20 bg-slate-light rounded-full flex items-center justify-center border-2 border-slate-mid group-hover:border-accent transition-colors duration-300">
+                        <i data-lucide="${skill.icon}" class="w-9 h-9 text-accent"></i>
+                    </div>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">${skill.name}</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">${skill.text}</p>
+            </div>
+        `).join('');
+        lucide.createIcons();
+    }
+
+    function populateEducation() {
+        const container = document.querySelector('#education .space-y-8');
+        if (!container) return;
+
+        const educationHtml = educationData.map(edu => `
+            <div class="grid md:grid-cols-4 gap-2 glass-effect p-6 rounded-xl">
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-bold text-white">${edu.school}</h3>
+                    <p class="text-sm text-slate-400 mt-1">${edu.location}</p>
+                </div>
+                <div class="md:col-span-3">
+                    <h4 class="font-semibold text-accent">${edu.degree}</h4>
+                    <p class="mt-2 text-sm text-slate-300"><strong>Relevant Coursework:</strong> ${edu.courses}</p>
+                </div>
+            </div>
+        `).join('');
+
+        const certsHtml = `
+            <div class="grid md:grid-cols-4 gap-2 glass-effect p-6 rounded-xl">
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-bold text-white">Certifications</h3>
+                </div>
+                <div class="md:col-span-3">
+                    <ul class="space-y-2">
+                        ${certificationsData.map(cert => `
+                            <li class="flex items-center">
+                                <i data-lucide="award" class="w-5 h-5 mr-3 text-accent"></i>
+                                <span class="text-white font-semibold">${cert}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            </div>
+        `;
+        container.innerHTML = educationHtml + certsHtml;
+        lucide.createIcons();
+    }
+    
+    // --- SCROLL-BASED ANIMATIONS ---
+
+    function initScrollAnimations() {
+        // Fade in elements
+        const fadeInObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    fadeInObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => fadeInObserver.observe(el));
+        
+        // Animate stats
+        const statObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = +el.dataset.target;
+                    let current = 0;
+                    const increment = target / 100;
+                    const interval = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            el.textContent = target + '+';
+                            clearInterval(interval);
+                        } else {
+                            el.textContent = Math.ceil(current);
+                        }
+                    }, 20);
+                    statObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.8 });
+        document.querySelectorAll('.stat-value').forEach(el => statObserver.observe(el));
+    }
+
+    function initActiveNavLinkOnScroll() {
+        const sections = document.querySelectorAll('main section[id]');
+        const navLinks = document.querySelectorAll('header nav a');
+        
+        if(navLinks.length === 0) return;
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(a => {
+                        const indicator = a.querySelector('.nav-indicator');
+                        a.classList.remove('active-link');
+                        if (indicator) {
+                            indicator.classList.remove('w-16', 'bg-white');
+                            indicator.classList.add('w-8', 'bg-slate-600');
+                        }
+                        
+                        if (a.getAttribute('href') === `#${id}`) {
+                           a.classList.add('active-link');
+                           if(indicator) {
+                                indicator.classList.remove('w-8', 'bg-slate-600');
+                                indicator.classList.add('w-16', 'bg-white');
+                           }
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    }
+
+  </script>
+</body>
+</html>
