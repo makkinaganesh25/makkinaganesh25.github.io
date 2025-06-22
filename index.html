@@ -23,12 +23,16 @@
           },
            animation: {
             'fade-in-up': 'fade-in-up 1s ease-out forwards',
+            'fade-in': 'fade-in 0.5s ease-out forwards',
+            'fade-out': 'fade-out 0.5s ease-out forwards',
           },
           keyframes: {
             'fade-in-up': {
               '0%': { opacity: '0', transform: 'translateY(20px)' },
               '100%': { opacity: '1', transform: 'translateY(0)' },
             },
+            'fade-in': { from: { opacity: '0' }, to: { opacity: '1' } },
+            'fade-out': { from: { opacity: '1' }, to: { opacity: '0' } },
           }
         } 
       } 
@@ -136,11 +140,19 @@
       transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
-    #project-modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
-    .modal-content { transition: transform 0.3s ease; }
+    
     #sidebar nav ul li a.active-link .nav-indicator {
       width: 4rem !important;
       background-color: #fff !important;
+    }
+
+    #case-study-view {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background-color: #020617;
+        overflow-y: auto;
+        animation: fade-in 0.5s ease-out forwards;
     }
     
     @media (max-width: 1023px) {
@@ -211,7 +223,7 @@
               <div class="lg:col-span-1 fade-in">
                 <div class="glass-effect rounded-2xl p-6">
                   <div class="flex justify-center mb-6">
-                      <img src="pic.jpg" alt="Ganesh Makkina" class="w-32 h-32 rounded-full object-cover border-4 border-slate-mid shadow-lg" />
+                      <img src="pic.JPG" alt="Ganesh Makkina" class="w-32 h-32 rounded-full object-cover border-4 border-slate-mid shadow-lg" />
                   </div>
                   <div class="text-center space-y-4">
                       <div>
@@ -263,19 +275,7 @@
         </footer>
     </main>
 
-    <div id="project-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4 opacity-0 invisible">
-      <div class="modal-content w-full max-w-4xl max-h-[90vh] glass-effect rounded-2xl overflow-hidden transform scale-95">
-          <div class="flex justify-between items-center p-4 border-b border-slate-mid">
-              <h3 id="modal-title" class="text-2xl font-bold text-white">Project Title</h3>
-              <button id="modal-close" class="text-slate-400 hover:text-accent text-4xl leading-none">&times;</button>
-          </div>
-          <div class="p-6 md:p-8 overflow-y-auto max-h-[calc(90vh-65px)]">
-              <img id="modal-image" src="" alt="Project Image" class="w-full h-auto max-h-80 object-contain rounded-lg mb-6 bg-slate-dark p-2" onerror="this.onerror=null;this.src='https://placehold.co/1536x1024/0f172a/2dd4bf?text=Image+Not+Found';" />
-              <div id="modal-tags" class="flex flex-wrap gap-2 mb-4"></div>
-              <div id="modal-description" class="text-slate-300 space-y-4"></div>
-          </div>
-      </div>
-    </div>
+    <div id="case-study-view" class="hidden"></div>
   </div>
 
 
@@ -286,71 +286,80 @@
         title: "Enterprise Data Lake Migration",
         image: "enterprise_migration.png",
         tags: ["Redshift", "Spark ETL", "Airflow", "AWS S3"],
-        short_description: "Migrated Elasticsearch to AWS S3 data lake & Redshift warehouse, boosting query performance by 20% and slashing costs by 30%.",
-        full_description: `
-          <div class="space-y-12">
-            <section class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div class="bg-slate-light p-4 rounded-lg"><p class="text-2xl font-bold text-white">30%</p><p class="text-xs text-gray-400">Cost Reduction</p></div>
-                <div class="bg-slate-light p-4 rounded-lg"><p class="text-2xl font-bold text-white">20%</p><p class="text-xs text-gray-400">Perf. Boost</p></div>
-                <div class="bg-slate-light p-4 rounded-lg"><p class="text-2xl font-bold text-white">50M+</p><p class="text-xs text-gray-400">Records Migrated</p></div>
-                <div class="bg-slate-light p-4 rounded-lg"><p class="text-2xl font-bold text-white">Lead</p><p class="text-xs text-gray-400">My Role</p></div>
-            </section>
-            <section>
-                <h3 class="text-xl font-bold text-white mb-4">The Catalyst: Overcoming Technical Debt</h3>
-                <p class="text-base text-gray-300 leading-relaxed">
-                    The client's legacy Elasticsearch cluster had become an operational bottleneck. As data volumes scaled, query latency became untenable and costs were spiraling. The core issue was using a search index as an analytical database. A strategic overhaul was critical.
-                </p>
-            </section>
-            <section>
-                <h3 class="text-xl font-bold text-white mb-4">Architectural Vision: A Decoupled Lakehouse</h3>
-                <p class="text-base text-gray-300 leading-relaxed">
-                   My vision was a modern, decoupled "Lakehouse" architecture on AWS, blending the scalability of a data lake (S3) with the performance of a data warehouse (Redshift). This involved a multi-layered data strategy (Bronze, Silver, Gold) to ensure data quality and governance.
-                </p>
-            </section>
-            <section>
-                <h3 class="text-xl font-bold text-white mb-6">Architectural Flow</h3>
-                <div class="bg-slate-light p-6 rounded-lg shadow-2xl">
-                    <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 text-center">
-                        <div class="flex flex-col items-center"><i data-lucide="server" class="w-10 h-10 text-accent"></i><p class="mt-2 font-semibold text-xs">Data Sources</p></div>
-                        <i data-lucide="arrow-right" class="text-slate-500 hidden md:block"></i>
-                        <div class="flex flex-col items-center"><i data-lucide="webhook" class="w-10 h-10 text-accent"></i><p class="mt-2 font-semibold text-xs">Ingestion (Kinesis)</p></div>
-                        <i data-lucide="arrow-right" class="text-slate-500 hidden md:block"></i>
-                        <div class="flex flex-col items-center"><i data-lucide="gem" class="w-10 h-10 text-accent"></i><p class="mt-2 font-semibold text-xs">Transformation (Databricks)</p></div>
-                         <i data-lucide="arrow-right" class="text-slate-500 hidden md:block"></i>
-                        <div class="flex flex-col items-center"><i data-lucide="database" class="w-10 h-10 text-accent"></i><p class="mt-2 font-semibold text-xs">Serving (Redshift)</p></div>
-                         <i data-lucide="arrow-right" class="text-slate-500 hidden md:block"></i>
-                        <div class="flex flex-col items-center"><i data-lucide="area-chart" class="w-10 h-10 text-accent"></i><p class="mt-2 font-semibold text-xs">Analytics</p></div>
+        short_description: "Migrated a legacy system to a modern AWS Lakehouse, boosting query performance by 20% and slashing operational costs by 30%.",
+        case_study_html: `
+            <header class="py-6 container mx-auto px-6 flex justify-start">
+                <button id="case-study-close" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+                    <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+                    Back to Portfolio
+                </button>
+            </header>
+            <main class="container mx-auto px-6 py-12">
+                <section class="text-center">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-white">Enterprise Data Lake Migration & Modernization</h1>
+                    <p class="mt-4 text-lg text-accent">A Senior Engineer's Case Study</p>
+                </section>
+                <section class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="bg-slate-light p-6 rounded-lg shadow-lg"><p class="text-3xl font-bold text-white">30%</p><p class="text-sm text-gray-400">Cost Reduction (OpEx)</p></div>
+                    <div class="bg-slate-light p-6 rounded-lg shadow-lg"><p class="text-3xl font-bold text-white">20%</p><p class="text-sm text-gray-400">Query Performance Boost</p></div>
+                    <div class="bg-slate-light p-6 rounded-lg shadow-lg"><p class="text-3xl font-bold text-white">50M+</p><p class="text-sm text-gray-400">Records Migrated</p></div>
+                    <div class="bg-slate-light p-6 rounded-lg shadow-lg"><p class="text-2xl font-bold text-white">Lead</p><p class="text-sm text-gray-400">My Role</p></div>
+                </section>
+                <section class="mt-20 max-w-4xl mx-auto space-y-12">
+                    <div>
+                        <h2 class="text-3xl font-bold text-white mb-4">The Catalyst: Overcoming Technical Debt</h2>
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            The client's legacy Elasticsearch cluster had become an operational bottleneck. As data volumes scaled, query latency became untenable and costs were spiraling. The core issue was using a search index as an analytical database, a tool ill-suited for the complex aggregations the business now demanded. A strategic overhaul was not just necessary; it was critical for survival.
+                        </p>
                     </div>
-                </div>
-            </section>
-             <section>
-                <h3 class="text-xl font-bold text-white mb-4">Technical Deep Dive</h3>
-                <div class="space-y-4">
-                    <div class="bg-slate-light/50 p-4 rounded-lg">
-                        <h4 class="font-bold text-base text-accent mb-1">1. Ingestion & Transformation</h4>
-                        <p class="text-sm text-gray-300">Used Kinesis for real-time ingestion to S3 (Bronze). Databricks (Spark/Scala) jobs then cleansed and transformed data, using Delta Lake (Silver) for ACID transactions. Further aggregations created a denormalized "Gold Zone" optimized for analytics.</p>
+                    <div>
+                        <h2 class="text-3xl font-bold text-white mb-4">Architectural Vision: A Decoupled Lakehouse</h2>
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            My vision was a modern, decoupled "Lakehouse" architecture on AWS, blending the low-cost scalability of a data lake (S3) with the performance of a data warehouse (Redshift). This involved a multi-layered data strategy (Bronze, Silver, Gold) to ensure data quality, governance, and analytical readiness.
+                        </p>
                     </div>
-                     <div class="bg-slate-light/50 p-4 rounded-lg">
-                        <h4 class="font-bold text-base text-accent mb-1">2. Serving Layer & Orchestration</h4>
-                        <p class="text-sm text-gray-300">Loaded Gold data into Redshift for low-latency BI queries. I designed idempotent Airflow DAGs to automate the entire workflow, from data arrival sensing to final load, reducing manual intervention by over 90%.</p>
+                </section>
+                <section class="mt-20">
+                    <h2 class="text-3xl font-bold text-white text-center mb-10">Architectural Flow</h2>
+                    <div class="bg-slate-light p-8 rounded-lg shadow-2xl">
+                        <div class="flex flex-col md:flex-row items-center justify-around space-y-6 md:space-y-0 text-center">
+                            <div class="flex flex-col items-center"><i data-lucide="server" class="w-16 h-16 text-accent"></i><p class="mt-2 font-semibold">Data Sources</p></div>
+                            <div class="text-slate-500 text-4xl">&rarr;</div>
+                            <div class="flex flex-col items-center"><i data-lucide="webhook" class="w-16 h-16 text-accent"></i><p class="mt-2 font-semibold">Ingestion & Staging</p></div>
+                            <div class="text-slate-500 text-4xl">&rarr;</div>
+                            <div class="flex flex-col items-center"><i data-lucide="gem" class="w-16 h-16 text-accent"></i><p class="mt-2 font-semibold">Transformation</p></div>
+                            <div class="text-slate-500 text-4xl">&rarr;</div>
+                            <div class="flex flex-col items-center"><i data-lucide="database" class="w-16 h-16 text-accent"></i><p class="mt-2 font-semibold">Data Warehouse</p></div>
+                            <div class="text-slate-500 text-4xl">&rarr;</div>
+                            <div class="flex flex-col items-center"><i data-lucide="area-chart" class="w-16 h-16 text-accent"></i><p class="mt-2 font-semibold">Analytics</p></div>
+                        </div>
                     </div>
-                </div>
-            </section>
-        </div>`
+                </section>
+                <section class="mt-20 max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-white mb-6">My Key Contributions</h2>
+                    <ul class="space-y-3 text-lg text-gray-300">
+                        <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Led the design of the multi-layered data lake architecture (Bronze/Silver/Gold).</span></li>
+                        <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Authored the core Scala/Spark transformation jobs in Databricks.</span></li>
+                        <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Engineered and optimized the final serving layer in Redshift.</span></li>
+                        <li class="flex items-start"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-accent flex-shrink-0 mt-1"></i><span>Built and maintained the end-to-end orchestration using idempotent Airflow DAGs.</span></li>
+                    </ul>
+                </section>
+            </main>
+        `
       },
       {
         title: "COVID-19 Analytics Platform",
         image: "covid19.png",
         tags: ["AWS Lambda", "AWS Glue", "QuickSight", "Serverless"],
         short_description: "Engineered ingestion & analytics for 10M+ daily records with AWS Lambda, Glue, and QuickSight dashboards to empower public health insights.",
-        full_description: `<p>This project involved creating a fully serverless, real-time data ingestion and analytics platform on AWS to process over 10 million COVID-19 related records daily. The architecture provided public health officials with critical, near real-time interactive dashboards for decision-making.</p><p><strong>Key Achievements:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li>Designed a highly scalable and resilient pipeline capable of handling massive spikes in data volume without manual intervention.</li><li>Automated the entire data lifecycle, from ingestion via Lambda to ETL with Glue and visualization in QuickSight.</li><li>The solution was critical in providing timely data to frontline health organizations during the pandemic.</li></ul>`
+        case_study_html: `<p>This project involved creating a fully serverless, real-time data ingestion and analytics platform on AWS to process over 10 million COVID-19 related records daily. The architecture provided public health officials with critical, near real-time interactive dashboards for decision-making.</p><p><strong>Key Achievements:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li>Designed a highly scalable and resilient pipeline capable of handling massive spikes in data volume without manual intervention.</li><li>Automated the entire data lifecycle, from ingestion via Lambda to ETL with Glue and visualization in QuickSight.</li><li>The solution was critical in providing timely data to frontline health organizations during the pandemic.</li></ul>`
       },
       {
         title: "CSO Shift Scheduling App",
         image: "cso.png",
         tags: ["React", "Node.js", "MySQL", "Full-Stack"],
         short_description: "Built with React, Node.js, and MySQL to automate shift postings, conflict detection, and notifications for Rutgers CSOs.",
-        full_description: `<p>Developed a full-stack web application to streamline and automate the shift scheduling process for Rutgers University's Community Service Officers (CSOs). The application features a user-friendly React frontend and a robust Node.js backend connected to a MySQL database.</p><p><strong>Key Achievements:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li>Automated shift postings, sign-ups, and conflict detection, saving significant administrative hours.</li><li>Implemented a notification system for shift changes and reminders, improving operational efficiency and communication.</li><li>Designed and normalized the database schema to ensure data integrity and efficient querying.</li></ul>`
+        case_study_html: `<p>Developed a full-stack web application to streamline and automate the shift scheduling process for Rutgers University's Community Service Officers (CSOs). The application features a user-friendly React frontend and a robust Node.js backend connected to a MySQL database.</p><p><strong>Key Achievements:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li>Automated shift postings, sign-ups, and conflict detection, saving significant administrative hours.</li><li>Implemented a notification system for shift changes and reminders, improving operational efficiency and communication.</li><li>Designed and normalized the database schema to ensure data integrity and efficient querying.</li></ul>`
       }
     ];
     const skillsData = [
@@ -384,7 +393,7 @@
         populateEducation();
         initScrollAnimations();
         initActiveNavLinkOnScroll();
-        initProjectModal();
+        initCaseStudyView();
     });
 
     // --- CORE LOGIC ---
@@ -494,34 +503,34 @@
       container.innerHTML = projectsData.map((project, index) => `<div class="project-card group glass-effect rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-2 fade-in" data-index="${index}"><div class="relative w-full aspect-video overflow-hidden"><img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"></div><div class="p-6 flex flex-col"><h3 class="text-xl font-bold text-white mb-2">${project.title}</h3><p class="text-slate-400 mb-4 text-sm leading-relaxed flex-grow">${project.short_description}</p><div class="flex flex-wrap gap-2 my-4">${project.tags.map(tag => `<span class="text-xs bg-accent/20 text-accent px-3 py-1 rounded-full font-medium">${tag}</span>`).join('')}</div><div class="flex items-center gap-4 mt-auto"><button class="view-case-study-btn inline-block text-accent font-semibold">View Case Study <span class="inline-block transition-transform group-hover:translate-x-1">&rarr;</span></button></div></div></div>`).join('');
     }
     
-    function initProjectModal() {
-        const modal = document.getElementById('project-modal');
-        const closeBtn = document.getElementById('modal-close');
-        if (!modal || !closeBtn) return;
+    function initCaseStudyView() {
+        const caseStudyView = document.getElementById('case-study-view');
+        const mainContainer = document.getElementById('page-container');
+
         document.body.addEventListener('click', e => {
-            const caseStudyBtn = e.target.closest('.view-case-study-btn');
-            if (caseStudyBtn) {
+            if (e.target.closest('.view-case-study-btn')) {
                 e.preventDefault();
-                const card = caseStudyBtn.closest('.project-card');
+                const card = e.target.closest('.project-card');
                 const index = card.dataset.index;
                 const project = projectsData[index];
-                document.getElementById('modal-title').textContent = project.title;
-                document.getElementById('modal-image').src = project.image;
-                document.getElementById('modal-image').alt = project.title;
-                document.getElementById('modal-description').innerHTML = project.full_description;
-                document.getElementById('modal-tags').innerHTML = project.tags.map(tag => `<span class="text-xs bg-accent/20 text-accent px-3 py-1 rounded-full">${tag}</span>`).join('');
-                modal.classList.remove('opacity-0', 'invisible');
-                modal.querySelector('.modal-content').classList.remove('scale-95');
-                lucide.createIcons(); // Re-render icons inside the modal
+                
+                caseStudyView.innerHTML = project.case_study_html;
+                caseStudyView.classList.remove('hidden');
+                mainContainer.style.display = 'none';
+                lucide.createIcons();
+                window.scrollTo(0, 0);
             }
-        });
-        const closeModal = () => {
-            modal.classList.add('opacity-0', 'invisible');
-            modal.querySelector('.modal-content').classList.add('scale-95');
-        };
-        closeBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
+            
+            if (e.target.closest('#case-study-close')) {
+                 e.preventDefault();
+                 caseStudyView.classList.add('hidden');
+                 mainContainer.style.display = 'block';
+                 caseStudyView.innerHTML = ''; // Clear content
+                 const projectsSection = document.getElementById('projects');
+                 if(projectsSection) {
+                     projectsSection.scrollIntoView({ behavior: 'smooth' });
+                 }
+            }
         });
     }
 
@@ -599,4 +608,4 @@
     }
   </script>
 </body>
-</ht
+</html>
