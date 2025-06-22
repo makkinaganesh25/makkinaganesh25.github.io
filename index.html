@@ -217,7 +217,7 @@
       <!-- PROJECTS SECTION -->
       <section id="projects" class="py-20 px-6 lg:px-12">
         <h2 class="text-3xl font-bold text-white mb-12 fade-in">Key Projects</h2>
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
+        <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2">
           <!-- Projects will be dynamically populated here -->
         </div>
       </section>
@@ -286,6 +286,7 @@
         title: "Enterprise Data Lake Migration",
         image: "enterprise_migration.png",
         tags: ["Redshift", "Spark ETL", "Airflow", "AWS S3"],
+        short_description: "Migrated Elasticsearch to AWS S3 data lake & Redshift warehouse, boosting query performance by 20% and slashing costs by 30%.",
         description: `
           <p>Successfully migrated a legacy Elasticsearch-based data store to a modern, scalable AWS data lake architecture. This involved designing and implementing a robust ingestion pipeline to land data in S3, followed by complex Spark ETL jobs orchestrated with Airflow to transform and load data into a Redshift data warehouse.</p>
           <p><strong>Key Achievements:</strong></p>
@@ -294,12 +295,14 @@
             <li>Cut operational and storage costs by 30% by leveraging cost-effective S3 storage and optimized Redshift clusters.</li>
             <li>Established a single source of truth, improving data consistency and reliability across the enterprise.</li>
           </ul>
-        `
+        `,
+        schema_link: null
       },
       {
         title: "COVID-19 Analytics Platform",
         image: "covid19.png",
         tags: ["AWS Lambda", "AWS Glue", "QuickSight", "Serverless"],
+        short_description: "Engineered ingestion & analytics for 10M+ daily records with AWS Lambda, Glue, and QuickSight dashboards to empower public health insights.",
         description: `
           <p>Engineered a serverless, real-time data ingestion and analytics platform on AWS to process over 10 million COVID-19 related records daily. The architecture utilized AWS Lambda for event-driven data ingestion, AWS Glue for serverless ETL transformations, and Amazon S3 for durable storage.</p>
           <p><strong>Key Achievements:</strong></p>
@@ -308,21 +311,24 @@
             <li>Designed a highly scalable and resilient pipeline capable of handling massive spikes in data volume without manual intervention.</li>
             <li>Automated the entire data lifecycle, from ingestion to visualization, minimizing operational overhead.</li>
           </ul>
-        `
+        `,
+        schema_link: null
       },
       {
         title: "CSO Shift Scheduling App",
         image: "cso.png",
-        tags: ["React", "Node.js", "MySQL", "Full-Stack"],
+        tags: ["React", "Node.js", "MySQL", "Vertex AI"],
+        short_description: "Built with React, Node.js, and MySQL to automate shift postings, conflict detection, and notifications for Rutgers CSOs.",
         description: `
           <p>Developed a full-stack web application to streamline and automate the shift scheduling process for Rutgers University's Community Service Officers (CSOs). The application features a user-friendly React frontend and a robust Node.js backend connected to a MySQL database.</p>
           <p><strong>Key Achievements:</strong></p>
           <ul class="list-disc list-inside ml-4 space-y-2">
             <li>Automated shift postings, sign-ups, and conflict detection, saving significant administrative hours.</li>
             <li>Implemented a notification system for shift changes and reminders, improving operational efficiency and communication.</li>
-            <li>Designed and normalized the database schema (ER Diagram available) to ensure data integrity and efficient querying. <a href="er_diagram.pdf" target="_blank" class="text-accent hover:underline">View Schema</a></li>
+            <li>Designed and normalized the database schema to ensure data integrity and efficient querying.</li>
           </ul>
-        `
+        `,
+        schema_link: "er_diagram.pdf"
       }
     ];
 
@@ -359,17 +365,22 @@
 
     // --- INITIALIZATION ---
     document.addEventListener('DOMContentLoaded', () => {
+        // Phase 1: Core setup, no content dependency
         lucide.createIcons();
         initHero3D();
         initMouseSpotlight();
-        initScrollAnimations();
         initMobileNav();
-        initActiveNavLinkOnScroll();
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Phase 2: Populate DOM with dynamic content
         populateProjects();
-        initProjectModal();
         populateSkills();
         populateEducation();
-        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Phase 3: Initialize scripts that depend on the full DOM
+        initScrollAnimations();
+        initActiveNavLinkOnScroll();
+        initProjectModal();
     });
 
     // --- HERO 3D ANIMATION ---
@@ -474,17 +485,23 @@
       const container = document.querySelector('#projects .grid');
       if (!container) return;
       container.innerHTML = projectsData.map((project, index) => `
-        <div class="project-card group relative grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 items-start p-4 rounded-lg glass-effect transition-all duration-300 hover:!bg-slate-mid/70 fade-in" data-index="${index}">
-          <div class="relative w-full aspect-video md:aspect-auto h-full rounded-md overflow-hidden shadow-md">
-            <img src="${project.image}" alt="${project.title}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-          </div>
-          <div>
-            <h3 class="text-xl font-bold text-white mb-2">${project.title}</h3>
-            <div class="flex flex-wrap gap-2 mt-3">
-              ${project.tags.map(tag => `<span class="text-xs bg-accent/20 text-accent px-3 py-1 rounded-full">${tag}</span>`).join('')}
+        <div class="project-card group glass-effect rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-2 fade-in" data-index="${index}">
+            <div class="relative w-full aspect-[3/2] overflow-hidden">
+                <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/1536x1024/0f172a/2dd4bf?text=Image+Not+Found';">
             </div>
-             <a href="#" class="view-case-study-btn mt-4 inline-block text-accent font-semibold">View Case Study <span class="inline-block transition-transform group-hover:translate-x-1">&rarr;</span></a>
-          </div>
+            <div class="p-6 flex flex-col">
+              <h3 class="text-xl font-bold text-white mb-2">${project.title}</h3>
+              <p class="text-slate-400 mb-4 text-sm leading-relaxed flex-grow">${project.short_description}</p>
+              <div class="flex flex-wrap gap-2 my-4">
+                ${project.tags.map(tag => `<span class="text-xs bg-accent/20 text-accent px-3 py-1 rounded-full font-medium">${tag}</span>`).join('')}
+              </div>
+              <div class="flex items-center gap-4 mt-auto">
+                <a href="#" class="view-case-study-btn inline-block text-accent font-semibold">
+                  View Case Study <span class="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
+                </a>
+                ${project.schema_link ? `<a href="${project.schema_link}" target="_blank" rel="noopener noreferrer" class="inline-block text-slate-400 font-semibold hover:text-accent transition-colors">View Schema</a>` : ''}
+              </div>
+            </div>
         </div>
       `).join('');
     }
@@ -492,13 +509,14 @@
     function initProjectModal() {
         const modal = document.getElementById('project-modal');
         const closeBtn = document.getElementById('modal-close');
-        const projectCards = document.querySelectorAll('.view-case-study-btn');
-
-        if (!modal || !closeBtn || projectCards.length === 0) return;
-
-        projectCards.forEach(btn => {
-            btn.addEventListener('click', (e) => {
+        
+        if (!modal || !closeBtn) return;
+        
+        // Use event delegation for dynamically added buttons
+        document.body.addEventListener('click', e => {
+            if (e.target.matches('.view-case-study-btn, .view-case-study-btn *')) {
                 e.preventDefault();
+                const btn = e.target.closest('.view-case-study-btn');
                 const card = btn.closest('.project-card');
                 const index = card.dataset.index;
                 const project = projectsData[index];
@@ -513,7 +531,7 @@
                 
                 modal.classList.remove('opacity-0', 'invisible');
                 modal.querySelector('.modal-content').classList.remove('scale-95');
-            });
+            }
         });
 
         const closeModal = () => {
