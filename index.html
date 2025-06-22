@@ -74,9 +74,14 @@
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #2dd4bf; }
     
+    #page-wrapper {
+        position: relative;
+    }
+    
     #page-container {
         position: relative;
         z-index: 10;
+        transition: opacity 0.3s ease-in-out;
     }
     
     #hero-center {
@@ -114,7 +119,7 @@
         margin-left: 0;
         padding-top: 100vh;
         transition: margin-left 0.5s ease;
-        background-color: #020617; /* Ensures content background is solid */
+        background-color: #020617;
     }
     
     body.scrolled #hero-center {
@@ -152,7 +157,7 @@
         z-index: 200;
         background-color: #020617;
         overflow-y: auto;
-        animation: fade-in 0.5s ease-out forwards;
+        animation: fade-in 0.3s ease-out forwards;
     }
     
     @media (max-width: 1023px) {
@@ -172,110 +177,112 @@
   </style>
 </head>
 <body>
-  <div id="spotlight"></div>
-  <canvas id="hero-canvas"></canvas>
-  
-  <div id="page-container">
-    <section id="hero-center">
-        <h1 class="text-5xl md:text-7xl font-extrabold text-white">Ganesh Makkina</h1>
-        <p class="mt-4 text-xl md:text-2xl text-accent-light">Data Engineer & Cloud Architect</p>
-        <p class="mt-6 max-w-2xl text-lg text-slate-400">Building scalable, automated data pipelines & platforms that unlock insights and drive business growth.</p>
-        <div class="buttons mt-10 flex flex-wrap justify-center gap-4">
-            <a href="#projects" class="px-8 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:bg-accent-light transition-colors duration-300">View Work</a>
-            <a href="Ganesh_Makkina_Resume.pdf" download class="px-8 py-3 border-2 border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition-all duration-300">Download Resume</a>
-        </div>
-    </section>
-
-    <header id="sidebar">
-        <div class="flex h-full flex-col justify-between">
-            <div class="flex flex-col gap-12">
-              <div>
-                <h1 class="text-5xl font-bold text-white">Ganesh Makkina</h1>
-                <p class="text-xl mt-3 text-slate-300">Data Engineer & Cloud Architect</p>
-                <p class="mt-4 max-w-xs text-slate-400">I build intelligent data platforms that transform raw data into strategic assets.</p>
-              </div>
-              <nav>
-                <ul class="space-y-2 text-lg">
-                    <li><a href="#about" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>About</a></li>
-                    <li><a href="#projects" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Projects</a></li>
-                    <li><a href="#skills" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Skills</a></li>
-                    <li><a href="#education" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Education</a></li>
-                    <li><a href="#contact" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Contact</a></li>
-                </ul>
-              </nav>
+  <div id="page-wrapper">
+      <div id="spotlight"></div>
+      <canvas id="hero-canvas"></canvas>
+      
+      <div id="page-container">
+        <section id="hero-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white">Ganesh Makkina</h1>
+            <p class="mt-4 text-xl md:text-2xl text-accent-light">Data Engineer & Cloud Architect</p>
+            <p class="mt-6 max-w-2xl text-lg text-slate-400">Building scalable, automated data pipelines & platforms that unlock insights and drive business growth.</p>
+            <div class="buttons mt-10 flex flex-wrap justify-center gap-4">
+                <a href="#projects" class="px-8 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:bg-accent-light transition-colors duration-300">View Work</a>
+                <a href="Ganesh_Makkina_Resume.pdf" download class="px-8 py-3 border-2 border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition-all duration-300">Download Resume</a>
             </div>
-            <div class="flex items-center space-x-6">
-              <a href="https://github.com/makkinaganesh25" target="_blank" rel="noopener noreferrer"><i data-lucide="github" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
-              <a href="https://www.linkedin.com/in/ganesh-makkina/" target="_blank" rel="noopener noreferrer"><i data-lucide="linkedin" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
-              <a href="#" target="_blank" rel="noopener noreferrer"><i data-lucide="twitter" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
-            </div>
-        </div>
-    </header>
+        </section>
 
-    <main id="main-content">
-        <section id="about" class="pt-24 sm:pt-32 px-6 lg:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
-              <div class="lg:col-span-2 space-y-6 text-lg text-slate-300 fade-in">
-                  <h2 class="text-3xl font-bold text-white mb-4">About Me</h2>
-                  <p>Hello! I’m Ganesh Makkina, a dedicated Data Engineer who builds scalable, cloud-native data platforms. I thrive on turning complex, raw datasets into clear, actionable insights that drive strategic decisions. With hands-on experience across <strong class="text-accent-light">AWS</strong>, <strong class="text-accent-light">GCP</strong>, and <strong class="text-accent-light">Databricks</strong>, I blend technical expertise with a passion for innovation to solve challenging analytics problems.</p>
-                  <p>Previously at <strong class="text-white">Quantiphi</strong>, I architected large-scale data lakes, built efficient streaming pipelines, and optimized complex ETL workflows. My academic foundation in Data Science from <strong class="text-white">Rutgers University</strong> underpins my practical skills, allowing me to design systems that are not only powerful but also maintainable, scalable, and cost-efficient for the future.</p>
-              </div>
-              <div class="lg:col-span-1 fade-in">
-                <div class="glass-effect rounded-2xl p-6">
-                  <div class="flex justify-center mb-6">
-                      <img src="pic.JPG" alt="Ganesh Makkina" class="w-32 h-32 rounded-full object-cover border-4 border-slate-mid shadow-lg" />
+        <header id="sidebar">
+            <div class="flex h-full flex-col justify-between">
+                <div class="flex flex-col gap-12">
+                  <div>
+                    <h1 class="text-5xl font-bold text-white">Ganesh Makkina</h1>
+                    <p class="text-xl mt-3 text-slate-300">Data Engineer & Cloud Architect</p>
+                    <p class="mt-4 max-w-xs text-slate-400">I build intelligent data platforms that transform raw data into strategic assets.</p>
                   </div>
-                  <div class="text-center space-y-4">
-                      <div>
-                          <p class="stat-value text-4xl font-bold text-accent" data-target="2">0</p>
-                          <p class="text-sm text-slate-400">Years Experience</p>
+                  <nav>
+                    <ul class="space-y-2 text-lg">
+                        <li><a href="#about" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>About</a></li>
+                        <li><a href="#projects" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Projects</a></li>
+                        <li><a href="#skills" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Skills</a></li>
+                        <li><a href="#education" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Education</a></li>
+                        <li><a href="#contact" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Contact</a></li>
+                    </ul>
+                  </nav>
+                </div>
+                <div class="flex items-center space-x-6">
+                  <a href="https://github.com/makkinaganesh25" target="_blank" rel="noopener noreferrer"><i data-lucide="github" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
+                  <a href="https://www.linkedin.com/in/ganesh-makkina/" target="_blank" rel="noopener noreferrer"><i data-lucide="linkedin" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i data-lucide="twitter" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
+                </div>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <section id="about" class="pt-24 sm:pt-32 px-6 lg:px-12">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+                  <div class="lg:col-span-2 space-y-6 text-lg text-slate-300 fade-in">
+                      <h2 class="text-3xl font-bold text-white mb-4">About Me</h2>
+                      <p>Hello! I’m Ganesh Makkina, a dedicated Data Engineer who builds scalable, cloud-native data platforms. I thrive on turning complex, raw datasets into clear, actionable insights that drive strategic decisions. With hands-on experience across <strong class="text-accent-light">AWS</strong>, <strong class="text-accent-light">GCP</strong>, and <strong class="text-accent-light">Databricks</strong>, I blend technical expertise with a passion for innovation to solve challenging analytics problems.</p>
+                      <p>Previously at <strong class="text-white">Quantiphi</strong>, I architected large-scale data lakes, built efficient streaming pipelines, and optimized complex ETL workflows. My academic foundation in Data Science from <strong class="text-white">Rutgers University</strong> underpins my practical skills, allowing me to design systems that are not only powerful but also maintainable, scalable, and cost-efficient for the future.</p>
+                  </div>
+                  <div class="lg:col-span-1 fade-in">
+                    <div class="glass-effect rounded-2xl p-6">
+                      <div class="flex justify-center mb-6">
+                          <img src="pic.jpg" alt="Ganesh Makkina" class="w-32 h-32 rounded-full object-cover border-4 border-slate-mid shadow-lg" />
                       </div>
-                      <div>
-                          <p class="stat-value text-4xl font-bold text-accent" data-target="10">0</p>
-                          <p class="text-sm text-slate-400">Projects Completed</p>
+                      <div class="text-center space-y-4">
+                          <div>
+                              <p class="stat-value text-4xl font-bold text-accent" data-target="2">0</p>
+                              <p class="text-sm text-slate-400">Years Experience</p>
+                          </div>
+                          <div>
+                              <p class="stat-value text-4xl font-bold text-accent" data-target="10">0</p>
+                              <p class="text-sm text-slate-400">Projects Completed</p>
+                          </div>
+                          <div>
+                              <p class="stat-value text-4xl font-bold text-accent" data-target="2">0</p>
+                              <p class="text-sm text-slate-400">Pro Certifications</p>
+                          </div>
                       </div>
-                      <div>
-                          <p class="stat-value text-4xl font-bold text-accent" data-target="2">0</p>
-                          <p class="text-sm text-slate-400">Pro Certifications</p>
-                      </div>
+                    </div>
                   </div>
                 </div>
+            </section>
+            <section id="projects" class="py-20 px-6 lg:px-12">
+              <h2 class="text-3xl font-bold text-white mb-12 fade-in">Key Projects</h2>
+              <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2"></div>
+            </section>
+            <section id="skills" class="py-24 px-6 lg:px-12">
+              <h2 class="text-3xl font-bold text-white mb-16 text-center fade-in">Core Competencies</h2>
+              <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 fade-in"></div>
+            </section>
+            <section id="education" class="py-20 px-6 lg:px-12">
+              <h2 class="text-3xl font-bold text-white mb-12 fade-in">Education & Certifications</h2>
+              <div class="space-y-8 fade-in"></div>
+            </section>
+            <section id="contact" class="py-20 px-6 lg:px-12">
+              <div class="max-w-xl mx-auto text-center fade-in">
+                  <h2 class="text-3xl font-bold text-white">Let's Build the Future of Data</h2>
+                  <p class="mt-4 text-lg text-slate-400">Have a project, an idea, or just want to connect? I'd love to hear from you.</p>
               </div>
-            </div>
-        </section>
-        <section id="projects" class="py-20 px-6 lg:px-12">
-          <h2 class="text-3xl font-bold text-white mb-12 fade-in">Key Projects</h2>
-          <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2"></div>
-        </section>
-        <section id="skills" class="py-24 px-6 lg:px-12">
-          <h2 class="text-3xl font-bold text-white mb-16 text-center fade-in">Core Competencies</h2>
-          <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 fade-in"></div>
-        </section>
-        <section id="education" class="py-20 px-6 lg:px-12">
-          <h2 class="text-3xl font-bold text-white mb-12 fade-in">Education & Certifications</h2>
-          <div class="space-y-8 fade-in"></div>
-        </section>
-        <section id="contact" class="py-20 px-6 lg:px-12">
-          <div class="max-w-xl mx-auto text-center fade-in">
-              <h2 class="text-3xl font-bold text-white">Let's Build the Future of Data</h2>
-              <p class="mt-4 text-lg text-slate-400">Have a project, an idea, or just want to connect? I'd love to hear from you.</p>
-          </div>
-          <form action="https://api.web3forms.com/submit" method="POST" class="mt-12 max-w-xl mx-auto space-y-6 fade-in">
-              <input type="hidden" name="access_key" value="95f8e9dd-d29e-4b40-811a-27fefb9c4b3a">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <input name="name" type="text" placeholder="Your Name" required class="w-full px-4 py-3 rounded-lg bg-slate-light border border-slate-mid focus:ring-accent focus:outline-none focus:ring-2 transition" />
-                  <input name="email" type="email" placeholder="Your Email" required class="w-full px-4 py-3 rounded-lg bg-slate-light border border-slate-mid focus:ring-accent focus:outline-none focus:ring-2 transition" />
-              </div>
-              <textarea name="message" rows="5" placeholder="Your message..." required class="w-full px-4 py-3 rounded-lg bg-slate-light border border-slate-mid focus:ring-accent focus:outline-none focus:ring-2 transition"></textarea>
-              <button type="submit" class="w-full px-4 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:bg-accent-light transition-all">Send Message</button>
-          </form>
-        </section>
-        <footer class="py-10 text-center text-sm text-slate-500 fade-in">
-          <p>Designed & Built by Ganesh Makkina &copy; <span id="year"></span></p>
-        </footer>
-    </main>
+              <form action="https://api.web3forms.com/submit" method="POST" class="mt-12 max-w-xl mx-auto space-y-6 fade-in">
+                  <input type="hidden" name="access_key" value="95f8e9dd-d29e-4b40-811a-27fefb9c4b3a">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <input name="name" type="text" placeholder="Your Name" required class="w-full px-4 py-3 rounded-lg bg-slate-light border border-slate-mid focus:ring-accent focus:outline-none focus:ring-2 transition" />
+                      <input name="email" type="email" placeholder="Your Email" required class="w-full px-4 py-3 rounded-lg bg-slate-light border border-slate-mid focus:ring-accent focus:outline-none focus:ring-2 transition" />
+                  </div>
+                  <textarea name="message" rows="5" placeholder="Your message..." required class="w-full px-4 py-3 rounded-lg bg-slate-light border border-slate-mid focus:ring-accent focus:outline-none focus:ring-2 transition"></textarea>
+                  <button type="submit" class="w-full px-4 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:bg-accent-light transition-all">Send Message</button>
+              </form>
+            </section>
+            <footer class="py-10 text-center text-sm text-slate-500 fade-in">
+              <p>Designed & Built by Ganesh Makkina &copy; <span id="year"></span></p>
+            </footer>
+        </main>
+      </div>
 
-    <div id="case-study-view" class="hidden"></div>
+      <div id="case-study-view" class="hidden"></div>
   </div>
 
 
@@ -352,14 +359,15 @@
         image: "covid19.png",
         tags: ["AWS Lambda", "AWS Glue", "QuickSight", "Serverless"],
         short_description: "Engineered ingestion & analytics for 10M+ daily records with AWS Lambda, Glue, and QuickSight dashboards to empower public health insights.",
-        case_study_html: `<p>This project involved creating a fully serverless, real-time data ingestion and analytics platform on AWS to process over 10 million COVID-19 related records daily. The architecture provided public health officials with critical, near real-time interactive dashboards for decision-making.</p><p><strong>Key Achievements:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li>Designed a highly scalable and resilient pipeline capable of handling massive spikes in data volume without manual intervention.</li><li>Automated the entire data lifecycle, from ingestion via Lambda to ETL with Glue and visualization in QuickSight.</li><li>The solution was critical in providing timely data to frontline health organizations during the pandemic.</li></ul>`
+        case_study_html: `<header class="py-6 container mx-auto px-6 flex justify-start"><button id="case-study-close" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300"><i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>Back to Portfolio</button></header><main class="container mx-auto px-6 py-12"><section class="text-center"><h1 class="text-4xl md:text-5xl font-extrabold text-white">COVID-19 Analytics Platform</h1></section><section class="mt-12"><p>This project involved creating a fully serverless, real-time data ingestion and analytics platform on AWS to process over 10 million COVID-19 related records daily. The architecture provided public health officials with critical, near real-time interactive dashboards for decision-making.</p><p class="mt-8"><strong>Key Achievements:</strong></p><ul class="list-disc list-inside ml-4 space-y-2 mt-4"><li>Designed a highly scalable and resilient pipeline capable of handling massive spikes in data volume without manual intervention.</li><li>Automated the entire data lifecycle, from ingestion via Lambda to ETL with Glue and visualization in QuickSight.</li><li>The solution was critical in providing timely data to frontline health organizations during the pandemic.</li></ul></section></main>`
       },
       {
         title: "CSO Shift Scheduling App",
         image: "cso.png",
         tags: ["React", "Node.js", "MySQL", "Full-Stack"],
         short_description: "Built with React, Node.js, and MySQL to automate shift postings, conflict detection, and notifications for Rutgers CSOs.",
-        case_study_html: `<p>Developed a full-stack web application to streamline and automate the shift scheduling process for Rutgers University's Community Service Officers (CSOs). The application features a user-friendly React frontend and a robust Node.js backend connected to a MySQL database.</p><p><strong>Key Achievements:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li>Automated shift postings, sign-ups, and conflict detection, saving significant administrative hours.</li><li>Implemented a notification system for shift changes and reminders, improving operational efficiency and communication.</li><li>Designed and normalized the database schema to ensure data integrity and efficient querying.</li></ul>`
+        schema_link: "er_diagram.pdf",
+        case_study_html: `<header class="py-6 container mx-auto px-6 flex justify-start"><button id="case-study-close" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300"><i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>Back to Portfolio</button></header><main class="container mx-auto px-6 py-12"><section class="text-center"><h1 class="text-4xl md:text-5xl font-extrabold text-white">CSO Shift Scheduling App</h1></section><section class="mt-12"><p>Developed a full-stack web application to streamline and automate the shift scheduling process for Rutgers University's Community Service Officers (CSOs). The application features a user-friendly React frontend and a robust Node.js backend connected to a MySQL database.</p><p class="mt-8"><strong>Key Achievements:</strong></p><ul class="list-disc list-inside ml-4 space-y-2 mt-4"><li>Automated shift postings, sign-ups, and conflict detection, saving significant administrative hours.</li><li>Implemented a notification system for shift changes and reminders, improving operational efficiency and communication.</li><li>Designed and normalized the database schema to ensure data integrity and efficient querying.</li></ul></section></main>`
       }
     ];
     const skillsData = [
@@ -500,12 +508,30 @@
     function populateProjects() {
       const container = document.querySelector('#projects .grid');
       if (!container) return;
-      container.innerHTML = projectsData.map((project, index) => `<div class="project-card group glass-effect rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-2 fade-in" data-index="${index}"><div class="relative w-full aspect-video overflow-hidden"><img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"></div><div class="p-6 flex flex-col"><h3 class="text-xl font-bold text-white mb-2">${project.title}</h3><p class="text-slate-400 mb-4 text-sm leading-relaxed flex-grow">${project.short_description}</p><div class="flex flex-wrap gap-2 my-4">${project.tags.map(tag => `<span class="text-xs bg-accent/20 text-accent px-3 py-1 rounded-full font-medium">${tag}</span>`).join('')}</div><div class="flex items-center gap-4 mt-auto"><button class="view-case-study-btn inline-block text-accent font-semibold">View Case Study <span class="inline-block transition-transform group-hover:translate-x-1">&rarr;</span></button></div></div></div>`).join('');
+      container.innerHTML = projectsData.map((project, index) => `
+        <div class="project-card group glass-effect rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-2 fade-in" data-index="${index}">
+            <div class="relative w-full aspect-video overflow-hidden">
+                <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+            </div>
+            <div class="p-6 flex flex-col">
+                <h3 class="text-xl font-bold text-white mb-2">${project.title}</h3>
+                <p class="text-slate-400 mb-4 text-sm leading-relaxed flex-grow">${project.short_description}</p>
+                <div class="flex flex-wrap gap-2 my-4">
+                    ${project.tags.map(tag => `<span class="text-xs bg-accent/20 text-accent px-3 py-1 rounded-full font-medium">${tag}</span>`).join('')}
+                </div>
+                <div class="flex items-center gap-4 mt-auto">
+                    <button class="view-case-study-btn inline-block text-accent font-semibold">
+                        View Case Study <span class="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
+                    </button>
+                    ${project.schema_link ? `<a href="${project.schema_link}" target="_blank" rel="noopener noreferrer" class="inline-block text-slate-400 font-semibold hover:text-accent transition-colors">View Schema</a>` : ''}
+                </div>
+            </div>
+        </div>`).join('');
     }
     
     function initCaseStudyView() {
         const caseStudyView = document.getElementById('case-study-view');
-        const mainContainer = document.getElementById('page-container');
+        const mainPage = document.getElementById('page-wrapper');
 
         document.body.addEventListener('click', e => {
             if (e.target.closest('.view-case-study-btn')) {
@@ -516,7 +542,7 @@
                 
                 caseStudyView.innerHTML = project.case_study_html;
                 caseStudyView.classList.remove('hidden');
-                mainContainer.style.display = 'none';
+                mainPage.style.display = 'none';
                 lucide.createIcons();
                 window.scrollTo(0, 0);
             }
@@ -524,11 +550,11 @@
             if (e.target.closest('#case-study-close')) {
                  e.preventDefault();
                  caseStudyView.classList.add('hidden');
-                 mainContainer.style.display = 'block';
-                 caseStudyView.innerHTML = ''; // Clear content
+                 mainPage.style.display = 'block';
+                 caseStudyView.innerHTML = ''; 
                  const projectsSection = document.getElementById('projects');
                  if(projectsSection) {
-                     projectsSection.scrollIntoView({ behavior: 'smooth' });
+                     projectsSection.scrollIntoView({ behavior: 'auto' });
                  }
             }
         });
