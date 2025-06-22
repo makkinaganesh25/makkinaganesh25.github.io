@@ -75,63 +75,53 @@
         z-index: 10;
     }
     
-    /* Default Mobile Layout */
     #hero-center {
-        position: relative;
-        min-height: 100vh;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        z-index: 10;
+        z-index: 20;
+        transition: opacity 0.5s ease-out;
         padding: 1rem;
     }
+    #hero-center > * { animation: fade-in-up 1s ease-out forwards; }
+    #hero-center h1 { animation-delay: 0.1s; }
+    #hero-center p:nth-of-type(1) { animation-delay: 0.3s; }
+    #hero-center p:nth-of-type(2) { animation-delay: 0.5s; }
+    #hero-center .buttons { animation-delay: 0.7s; }
+
     #sidebar {
-        display: none; /* Hidden on mobile */
-    }
-    #main-content {
-        background-color: #020617;
+        position: fixed;
+        top: 0; left: 0;
+        height: 100vh;
+        width: 400px;
+        z-index: 15;
+        padding: 2.5rem;
+        opacity: 0;
+        transition: opacity 0.5s ease-in;
     }
 
-    /* Desktop Layout Overrides (lg screens and up) */
-    @media (min-width: 1024px) {
-        #hero-center {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: 20;
-            transition: opacity 0.5s ease-out;
-        }
-        #sidebar {
-            display: flex; /* Shown on desktop */
-            position: fixed;
-            top: 0; left: 0;
-            height: 100vh;
-            width: 400px;
-            z-index: 15;
-            padding: 2.5rem;
-            opacity: 0;
-            transition: opacity 0.5s ease-in;
-        }
-        #main-content {
-            margin-left: 0;
-            padding-top: 100vh;
-            transition: margin-left 0.5s ease;
-        }
-        body.scrolled #hero-center {
-            opacity: 0;
-            pointer-events: none;
-        }
-        body.scrolled #sidebar {
-            opacity: 1;
-        }
-        body.scrolled #main-content {
-            margin-left: 400px;
-        }
-        #sidebar nav ul li a.active-link .nav-indicator {
-          width: 4rem !important;
-          background-color: #fff !important;
-        }
+    #main-content {
+        position: relative;
+        z-index: 10;
+        margin-left: 0;
+        padding-top: 100vh;
+        transition: margin-left 0.5s ease;
+        background-color: #020617;
+    }
+    
+    body.scrolled #hero-center {
+        opacity: 0;
+        pointer-events: none;
+    }
+    body.scrolled #sidebar {
+        opacity: 1;
+    }
+    body.scrolled #main-content {
+        margin-left: 400px;
     }
 
     .glass-effect {
@@ -146,6 +136,26 @@
       transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
+    
+    #sidebar nav ul li a.active-link .nav-indicator {
+      width: 4rem !important;
+      background-color: #fff !important;
+    }
+    
+    @media (max-width: 1023px) {
+        body.scrolled #main-content, #main-content {
+            margin-left: 0;
+            padding-top: 0;
+        }
+        body.scrolled #sidebar, #sidebar {
+            display: none;
+        }
+        #hero-center {
+            position: relative;
+            min-height: 100vh;
+            z-index: 10;
+        }
+    }
   </style>
 </head>
 <body>
@@ -163,27 +173,29 @@
         </div>
     </section>
 
-    <header id="sidebar" class="flex-col justify-between">
-        <div class="flex flex-col gap-12">
-            <div>
-            <h1 class="text-5xl font-bold text-white">Ganesh Makkina</h1>
-            <p class="text-xl mt-3 text-slate-300">Data Engineer & Cloud Architect</p>
-            <p class="mt-4 max-w-xs text-slate-400">I build intelligent data platforms that transform raw data into strategic assets.</p>
+    <header id="sidebar">
+        <div class="flex h-full flex-col justify-between">
+            <div class="flex flex-col gap-12">
+              <div>
+                <h1 class="text-5xl font-bold text-white">Ganesh Makkina</h1>
+                <p class="text-xl mt-3 text-slate-300">Data Engineer & Cloud Architect</p>
+                <p class="mt-4 max-w-xs text-slate-400">I build intelligent data platforms that transform raw data into strategic assets.</p>
+              </div>
+              <nav>
+                <ul class="space-y-2 text-lg">
+                    <li><a href="#about" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>About</a></li>
+                    <li><a href="#projects" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Projects</a></li>
+                    <li><a href="#skills" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Skills</a></li>
+                    <li><a href="#education" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Education</a></li>
+                    <li><a href="#contact" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Contact</a></li>
+                </ul>
+              </nav>
             </div>
-            <nav>
-            <ul class="space-y-2 text-lg">
-                <li><a href="#about" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>About</a></li>
-                <li><a href="#projects" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Projects</a></li>
-                <li><a href="#skills" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Skills</a></li>
-                <li><a href="#education" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Education</a></li>
-                <li><a href="#contact" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Contact</a></li>
-            </ul>
-            </nav>
-        </div>
-        <div class="flex items-center space-x-6">
-            <a href="https://github.com/makkinaganesh25" target="_blank" rel="noopener noreferrer"><i data-lucide="github" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
-            <a href="https://www.linkedin.com/in/ganesh-makkina/" target="_blank" rel="noopener noreferrer"><i data-lucide="linkedin" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
-            <a href="#" target="_blank" rel="noopener noreferrer"><i data-lucide="twitter" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
+            <div class="flex items-center space-x-6">
+              <a href="https://github.com/makkinaganesh25" target="_blank" rel="noopener noreferrer"><i data-lucide="github" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
+              <a href="https://www.linkedin.com/in/ganesh-makkina/" target="_blank" rel="noopener noreferrer"><i data-lucide="linkedin" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
+              <a href="#" target="_blank" rel="noopener noreferrer"><i data-lucide="twitter" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
+            </div>
         </div>
     </header>
 
@@ -198,7 +210,7 @@
               <div class="lg:col-span-1 fade-in">
                 <div class="glass-effect rounded-2xl p-6">
                   <div class="flex justify-center mb-6">
-                      <img src="pic.jpg" alt="Ganesh Makkina" class="w-32 h-32 rounded-full object-cover border-4 border-slate-mid shadow-lg" />
+                      <img src="pic.JPG" alt="Ganesh Makkina" class="w-32 h-32 rounded-full object-cover border-4 border-slate-mid shadow-lg" />
                   </div>
                   <div class="text-center space-y-4">
                       <div>
@@ -253,6 +265,7 @@
 
 
   <script>
+    // --- DATA ---
     const projectsData = [
       {
         title: "Enterprise Data Lake Migration",
@@ -296,6 +309,7 @@
       "Google Professional Data Engineer"
     ];
 
+    // --- INITIALIZATION ---
     document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
         initHero3D();
@@ -309,23 +323,21 @@
         initActiveNavLinkOnScroll();
     });
 
+    // --- CORE LOGIC ---
     function initScrollTransition() {
         const handleScroll = () => {
-            if (window.matchMedia('(min-width: 1024px)').matches) {
-                const scrollY = window.scrollY;
-                const threshold = window.innerHeight * 0.1;
-                if (scrollY > threshold) {
-                    document.body.classList.add('scrolled');
-                } else {
-                    document.body.classList.remove('scrolled');
-                }
-            } else {
-                document.body.classList.remove('scrolled');
+            if (window.matchMedia('(max-width: 1023px)').matches) {
+                if (!document.body.classList.contains('scrolled')) document.body.classList.add('scrolled');
+                return;
             }
+            const scrollY = window.scrollY;
+            const threshold = window.innerHeight * 0.1;
+            if (scrollY > threshold) document.body.classList.add('scrolled');
+            else document.body.classList.remove('scrolled');
         };
+        if (window.matchMedia('(max-width: 1023px)').matches) document.body.classList.add('scrolled');
         window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('resize', handleScroll);
-        handleScroll(); // Initial check
     }
 
     function initHero3D() {
@@ -402,6 +414,7 @@
         animate();
     }
     
+    // --- HELPER FUNCTIONS ---
     function initMouseSpotlight() {
         const spotlight = document.getElementById('spotlight');
         if (!spotlight) return;
