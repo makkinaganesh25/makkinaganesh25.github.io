@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ganesh Makkina | Data Engineer Portfolio</title>
 
+  <!-- Inter Font & Fira Code for a technical feel -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -27,7 +29,9 @@
     };
   </script>
 
+  <!-- tsParticles for dynamic network background -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
   <style>
@@ -36,7 +40,7 @@
       font-family: 'Inter', sans-serif;
       margin: 0;
       overflow-x: hidden;
-      background-color: #0f172a;
+      background-color: #0f172a; /* Fallback for the body */
     }
     #tsparticles {
       position: fixed;
@@ -56,6 +60,7 @@
       opacity: 1;
       transform: translateY(0);
     }
+    /* Staggered animation for list items */
     .stagger-in > * {
       opacity: 0;
       transform: translateY(20px);
@@ -64,10 +69,11 @@
     nav ul li a.active-link { color: #2dd4bf; }
 
     /* === NEW: THE DATA PIPELINE VISUAL === */
+    /* This creates the vertical line on the left for large screens */
     .pipeline-container {
         position: absolute;
         top: 0;
-        left: 2rem;
+        left: 2rem; /* Positioned from the left edge */
         width: 1px;
         height: 100%;
         display: none; /* Hidden on small screens */
@@ -85,8 +91,8 @@
         fill: #1e293b; /* slate-800 */
     }
     .pipeline-node.active {
-        fill: #2dd4bf; /* accent */
-        r: 8px;
+        fill: #2dd4bf; /* accent color */
+        r: 8px; /* Enlarge the active node */
     }
 
     /* === NEW: PROJECT MODAL === */
@@ -95,7 +101,7 @@
         top: 0; left: 0; right: 0; bottom: 0;
         background: rgba(15, 23, 42, 0.8);
         backdrop-filter: blur(8px);
-        display: none;
+        display: none; /* Hidden by default */
         align-items: center;
         justify-content: center;
         z-index: 100;
@@ -116,18 +122,21 @@
         transition: transform 0.3s ease-in-out;
     }
     .project-modal.visible .modal-content { transform: scale(1); }
-
   </style>
 </head>
 <body class="relative text-gray-100 bg-darkbg">
+  <!-- NEW: Data Pipeline SVG visual for large screens -->
   <div class="pipeline-container" aria-hidden="true">
     <svg width="100%" height="100%" preserveAspectRatio="none">
         <path id="pipeline-line" class="pipeline-path" d="M0 200 v20000" />
-        </svg>
+        <!-- Nodes will be added dynamically by JavaScript to mark sections -->
+    </svg>
   </div>
 
+  <!-- Dynamic particle background -->
   <div id="tsparticles"></div>
 
+  <!-- NAVIGATION: Themed for the data pipeline journey -->
   <nav class="fixed top-0 w-full bg-darkbg/80 backdrop-blur-lg z-50 border-b border-slate-light/50">
     <div class="container mx-auto flex items-center justify-between p-4">
       <a href="#hero" class="text-2xl font-bold font-mono tracking-tighter">[GM]</a>
@@ -140,12 +149,20 @@
         <li><a href="Ganesh_Makkina_Resume.pdf" download class="ml-4 px-4 py-2 border border-accent text-accent rounded-md font-semibold text-sm hover:bg-accent hover:text-darkbg transition">Resume</a></li>
       </ul>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-darkbg bg-opacity-90"><ul class="flex flex-col items-center space-y-4 py-4">
-            <li><a href="#about" class="mobile-nav-link hover:text-accent">Architect</a></li><li><a href="#projects" class="mobile-nav-link hover:text-accent">Warehouse</a></li><li><a href="#skills" class="mobile-nav-link hover:text-accent">Transform</a></li><li><a href="#contact" class="mobile-nav-link hover:text-accent">Insights</a></li>
-        </ul></div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-darkbg bg-opacity-90">
+        <ul class="flex flex-col items-center space-y-4 py-4">
+            <li><a href="#about" class="mobile-nav-link hover:text-accent">Architect</a></li>
+            <li><a href="#projects" class="mobile-nav-link hover:text-accent">Warehouse</a></li>
+            <li><a href="#skills" class="mobile-nav-link hover:text-accent">Transform</a></li>
+            <li><a href="#contact" class="mobile-nav-link hover:text-accent">Insights</a></li>
+        </ul>
+    </div>
   </nav>
 
+  <!-- Main content container -->
   <main class="container mx-auto px-6 relative z-10">
+    <!-- HERO: Data Ingestion stage -->
     <section id="hero" class="min-h-screen flex flex-col items-start justify-center text-left relative">
       <div class="max-w-3xl fade-in">
         <p class="text-lg md:text-xl text-accent font-mono mb-4">// INGEST</p>
@@ -156,49 +173,37 @@
       </div>
     </section>
 
+    <!-- ABOUT: Architect stage - WITH PROFILE PICTURE REINTEGRATED -->
     <section id="about" class="py-24 sm:py-32">
+       <div class="text-center fade-in mb-16">
+            <h2 class="text-4xl font-bold mb-2 font-mono">1. The Architect</h2>
+            <p class="text-lg text-slate-text max-w-3xl mx-auto">The blueprint for turning raw data into actionable intelligence begins here.</p>
+        </div>
       <div class="grid lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-7 fade-in text-lg text-slate-text space-y-6">
-            <h2 class="text-4xl font-bold text-gray-100 mb-2 font-mono">1. The Architect</h2>
+         <!-- Profile Picture Column -->
+        <div class="lg:col-span-4 fade-in">
+          <div class="flex justify-center">
+            <div class="relative w-64 h-64 rounded-full p-2 bg-gradient-to-tr from-accent to-transparent shadow-lg transition-transform duration-300 hover:scale-105">
+              <img src="pic.JPG" alt="Ganesh Makkina" class="w-full h-full rounded-full object-cover bg-darkbg" onerror="this.onerror=null;this.src='https://placehold.co/256x256/0f172a/94a3b8?text=GM';">
+            </div>
+          </div>
+        </div>
+        <!-- Text Content Column -->
+        <div class="lg:col-span-8 fade-in text-lg text-slate-text space-y-6">
             <p>Hello! I’m Ganesh Makkina, a Data Engineer who thrives on architecting robust, scalable data ecosystems. My core philosophy is that a data platform should be more than just functional—it must be maintainable, cost-efficient, and agile enough to evolve with business needs.</p>
             <p>At <strong class="text-gray-100">Quantiphi</strong>, I engineered large-scale data lakes on <strong class="text-gray-100">AWS</strong> and optimized complex ETL workflows on <strong class="text-gray-100">Databricks</strong> and <strong class="text-gray-100">GCP</strong>, turning high-volume raw data into clean, actionable intelligence. My recent Master's in Data Science from Rutgers has further deepened my expertise in statistical modeling and advanced data management.</p>
-            <p>I design for the future, ensuring that every pipeline I build is a resilient foundation for the insights of tomorrow.</p>
-        </div>
-        <div class="lg:col-span-5 fade-in">
-            <div class="p-6 bg-slate-light border border-slate-light/50 rounded-xl shadow-lg space-y-4">
-                <h3 class="text-xl font-bold text-accent">Professional Snapshot</h3>
-                <div class="flex items-center space-x-4">
-                    <i data-lucide="briefcase" class="w-8 h-8 text-accent/70"></i>
-                    <div>
-                        <p class="font-bold text-gray-100">2+ Years Experience</p>
-                        <p class="text-sm text-slate-text">Enterprise Data Engineering</p>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <i data-lucide="graduation-cap" class="w-8 h-8 text-accent/70"></i>
-                    <div>
-                        <p class="font-bold text-gray-100">M.S. in Data Science</p>
-                        <p class="text-sm text-slate-text">Rutgers University</p>
-                    </div>
-                </div>
-                 <div class="flex items-center space-x-4">
-                    <i data-lucide="award" class="w-8 h-8 text-accent/70"></i>
-                    <div>
-                        <p class="font-bold text-gray-100">Pro Cloud Certified</p>
-                        <p class="text-sm text-slate-text">AWS Data Engineer & GCP Data Engineer</p>
-                    </div>
-                </div>
-            </div>
         </div>
       </div>
     </section>
 
+    <!-- SKILLS: Transformation stage -->
     <section id="skills" class="py-24 sm:py-32">
         <div class="text-center fade-in">
             <h2 class="text-4xl font-bold mb-4 font-mono">2. The Transformation Engine</h2>
             <p class="text-lg text-slate-text max-w-3xl mx-auto">My toolkit for refining, enriching, and modeling data. These are the core technologies I use to build high-performance data transformation workflows.</p>
         </div>
         <div class="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 stagger-in">
+            <!-- Skill Items -->
             <div class="flex flex-col items-center text-center p-4 bg-slate-light/50 rounded-lg hover:bg-slate-light transition-all duration-300 transform hover:-translate-y-2">
                 <i data-lucide="codepen" class="w-12 h-12 text-accent mb-3"></i>
                 <h3 class="font-bold text-lg text-gray-100">Python & Spark</h3>
@@ -227,49 +232,71 @@
         </div>
     </section>
 
+    <!-- PROJECTS: Warehouse stage - WITH ORIGINAL IMAGES AND TAGS -->
     <section id="projects" class="py-24 sm:py-32">
         <div class="text-center fade-in">
             <h2 class="text-4xl font-bold mb-4 font-mono">3. The Data Warehouse</h2>
             <p class="text-lg text-slate-text max-w-3xl mx-auto">A collection of curated data assets. Each project represents an end-to-end solution, delivering tangible value from complex datasets.</p>
         </div>
         <div class="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-3 stagger-in">
-            <div class="bg-slate-light rounded-xl overflow-hidden shadow-lg border border-slate-light/50 transition-all duration-300 hover:border-accent hover:-translate-y-2">
-                <img src="https://i.imgur.com/8a11g1h.png" alt="Data Lake Migration" class="w-full h-48 object-cover"/>
-                <div class="p-6">
-                    <p class="text-sm text-accent font-mono">CASE STUDY 01</p>
-                    <h3 class="text-xl font-semibold my-2">Enterprise Data Lake Migration</h3>
-                    <p class="text-sm text-slate-text mb-4">Migrated Elasticsearch data to an S3/Redshift architecture, cutting costs by 30% and boosting query performance by 20%.</p>
-                    <button class="project-modal-trigger w-full px-5 py-2 bg-accent/20 text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition" data-project-id="proj1">
-                      Query Details <i data-lucide="arrow-right" class="inline-block w-4 h-4 ml-1"></i>
-                    </button>
+            <!-- Project Card 1 -->
+            <div class="bg-slate-light rounded-xl overflow-hidden shadow-lg border border-transparent transition-all duration-300 hover:border-accent hover:-translate-y-2 flex flex-col">
+                <img src="enterprise_migration.png" alt="Data Lake Migration" class="w-full aspect-video object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x338/1e293b/2dd4bf?text=Data+Lake';">
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-semibold mb-2">Enterprise Data Lake Migration</h3>
+                    <p class="text-sm text-slate-text mb-4">Migrated Elasticsearch to an S3/Redshift architecture, cutting costs by 30% & boosting query performance by 20%.</p>
+                     <div class="mt-auto">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Redshift</span>
+                            <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Spark ETL</span>
+                            <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Airflow</span>
+                        </div>
+                        <button class="project-modal-trigger w-full px-5 py-2 border border-accent/50 text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition" data-project-id="proj1">
+                          View Case Study <i data-lucide="arrow-right" class="inline-block w-4 h-4 ml-1"></i>
+                        </button>
+                     </div>
                 </div>
             </div>
-            <div class="bg-slate-light rounded-xl overflow-hidden shadow-lg border border-slate-light/50 transition-all duration-300 hover:border-accent hover:-translate-y-2">
-                <img src="https://i.imgur.com/uR2z2eL.png" alt="COVID-19 Analytics" class="w-full h-48 object-cover"/>
-                <div class="p-6">
-                    <p class="text-sm text-accent font-mono">CASE STUDY 02</p>
-                    <h3 class="text-xl font-semibold my-2">COVID-19 Analytics Platform</h3>
-                    <p class="text-sm text-slate-text mb-4">Engineered a serverless pipeline (Lambda, Glue) for 10M+ daily records, powering public health dashboards in QuickSight.</p>
-                     <button class="project-modal-trigger w-full px-5 py-2 bg-accent/20 text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition" data-project-id="proj2">
-                      Query Details <i data-lucide="arrow-right" class="inline-block w-4 h-4 ml-1"></i>
-                    </button>
+            <!-- Project Card 2 -->
+             <div class="bg-slate-light rounded-xl overflow-hidden shadow-lg border border-transparent transition-all duration-300 hover:border-accent hover:-translate-y-2 flex flex-col">
+                <img src="covid19.png" alt="COVID-19 Analytics" class="w-full aspect-video object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x338/1e293b/2dd4bf?text=Analytics';">
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-semibold mb-2">COVID-19 Analytics Platform</h3>
+                    <p class="text-sm text-slate-text mb-4">Engineered a serverless pipeline for 10M+ daily records, powering public health dashboards in QuickSight.</p>
+                     <div class="mt-auto">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                             <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">AWS Lambda</span>
+                             <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">AWS Glue</span>
+                             <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">QuickSight</span>
+                        </div>
+                        <button class="project-modal-trigger w-full px-5 py-2 border border-accent/50 text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition" data-project-id="proj2">
+                          View Case Study <i data-lucide="arrow-right" class="inline-block w-4 h-4 ml-1"></i>
+                        </button>
+                     </div>
                 </div>
             </div>
-            <div class="bg-slate-light rounded-xl overflow-hidden shadow-lg border border-slate-light/50 transition-all duration-300 hover:border-accent hover:-translate-y-2">
-                <img src="https://i.imgur.com/Qj1tO1j.png" alt="CSO Scheduling App" class="w-full h-48 object-cover"/>
-                <div class="p-6">
-                    <p class="text-sm text-accent font-mono">CASE STUDY 03</p>
-                    <h3 class="text-xl font-semibold my-2">CSO Shift Scheduling App</h3>
-                    <p class="text-sm text-slate-text mb-4">Full-stack application (React, Node.js, MySQL) automating shift scheduling and conflict detection for Rutgers CSOs.</p>
-                    <button class="project-modal-trigger w-full px-5 py-2 bg-accent/20 text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition" data-project-id="proj3">
-                      Query Details <i data-lucide="arrow-right" class="inline-block w-4 h-4 ml-1"></i>
-                    </button>
+            <!-- Project Card 3 -->
+             <div class="bg-slate-light rounded-xl overflow-hidden shadow-lg border border-transparent transition-all duration-300 hover:border-accent hover:-translate-y-2 flex flex-col">
+                <img src="cso.png" alt="CSO Scheduling App" class="w-full aspect-video object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x338/1e293b/2dd4bf?text=Scheduling+App';">
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-semibold mb-2">CSO Shift Scheduling App</h3>
+                    <p class="text-sm text-slate-text mb-4">Full-stack application automating shift scheduling and conflict detection for Rutgers CSOs.</p>
+                     <div class="mt-auto">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">React</span>
+                              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Node.js</span>
+                              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Vertex AI</span>
+                        </div>
+                        <button class="project-modal-trigger w-full px-5 py-2 border border-accent/50 text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition" data-project-id="proj3">
+                          View Case Study <i data-lucide="arrow-right" class="inline-block w-4 h-4 ml-1"></i>
+                        </button>
+                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-
+    <!-- CONTACT: Insights stage -->
     <section id="contact" class="py-24 sm:py-32">
         <div class="text-center fade-in">
             <h2 class="text-4xl font-bold mb-4 font-mono">4. Get Insights</h2>
@@ -304,24 +331,27 @@
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="py-8 text-center text-sm fade-in text-slate-text border-t border-slate-light/20 container mx-auto">
     <p>Designed & Built by Ganesh Makkina</p>
     <p class="font-mono mt-2">&copy; <span id="year"></span> | All rights reserved.</p>
   </footer>
 
-  <div id="project-modal" class="project-modal">
+  <!-- NEW: Project Modal Structure -->
+    <div id="project-modal" class="project-modal">
         <div id="modal-content" class="modal-content">
-            </div>
+            <!-- Content will be injected by JavaScript -->
+        </div>
     </div>
 
 
+  <!-- SCRIPTS -->
   <script>
     // === PROJECT DATA ===
-    // Centralized data for project modals. This is much cleaner.
+    // Centralized data for project modals. This is much cleaner and easier to maintain.
     const projectDetails = {
       proj1: {
         title: "Enterprise Data Lake Migration",
-        image: "https://i.imgur.com/8a11g1h.png",
         tags: ["AWS", "Redshift", "S3", "Spark ETL", "Airflow"],
         description: "This project involved a large-scale migration of enterprise data from a costly Elasticsearch cluster to a modern, scalable AWS data lake architecture. The goal was to reduce operational overhead, cut costs, and improve analytical query performance.",
         pipeline: [
@@ -334,7 +364,6 @@
       },
       proj2: {
         title: "COVID-19 Analytics Platform",
-        image: "https://i.imgur.com/uR2z2eL.png",
         tags: ["AWS Lambda", "AWS Glue", "QuickSight", "Serverless"],
         description: "To provide timely public health insights, I engineered a fully serverless data pipeline to process over 10 million daily COVID-19 data records from various public sources.",
         pipeline: [
@@ -347,12 +376,11 @@
       },
        proj3: {
         title: "CSO Shift Scheduling App",
-        image: "https://i.imgur.com/Qj1tO1j.png",
         tags: ["React", "Node.js", "MySQL", "Full-Stack", "Vertex AI"],
         description: "Developed a full-stack web application to modernize and automate the process of shift scheduling for Community Service Officers (CSOs) at Rutgers University.",
         pipeline: [
           { stage: "Architecture", detail: "Designed a three-tier architecture with a React frontend, Node.js (Express) backend API, and a MySQL database." },
-          { stage: "Database", detail: "Created a normalized relational database schema (ER Diagram available) to manage users, shifts, availability, and scheduling conflicts efficiently." },
+          { stage: "Database", detail: "Created a normalized relational database schema to manage users, shifts, availability, and scheduling conflicts efficiently." },
           { stage: "Backend", detail: "Built RESTful API endpoints for all CRUD operations, user authentication, and business logic for automated conflict detection." },
           { stage: "Frontend", detail: "Developed an intuitive user interface with React for CSOs to view, claim, and manage their shifts, including real-time notifications." },
           { stage: "AI Integration", detail: "Leveraged Vertex AI for a predictive feature to forecast peak demand periods, helping administrators allocate resources more effectively." },
@@ -363,7 +391,8 @@
 
 
     document.addEventListener('DOMContentLoaded', () => {
-        // --- tsParticles Config ---
+        // --- tsParticles Configuration ---
+        // This creates the animated particle background
         tsParticles.load('tsparticles', {
             background: { color: { value: 'transparent' } },
             fpsLimit: 60,
@@ -383,10 +412,11 @@
             detectRetina: true
         });
 
-        // --- Lucide Icons ---
+        // --- Initialize Lucide Icons ---
         lucide.createIcons();
 
         // --- Intersection Observer for Animations ---
+        // This handles the fade-in and stagger-in effects on scroll
         const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
@@ -396,7 +426,6 @@
                         const children = entry.target.querySelectorAll(':scope > *');
                         children.forEach((child, index) => {
                             child.style.transitionDelay = `${index * 100}ms`;
-                            child.classList.add('visible');
                         });
                     }
                     obs.unobserve(entry.target);
@@ -405,7 +434,7 @@
         }, observerOptions);
         document.querySelectorAll('.fade-in, .stagger-in').forEach(el => observer.observe(el));
 
-        // --- Mobile Navigation ---
+        // --- Mobile Navigation Logic ---
         const navToggle = document.getElementById('nav-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         navToggle.addEventListener('click', () => {
@@ -414,15 +443,20 @@
             lucide.createIcons();
         });
         document.querySelectorAll('.mobile-nav-link').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                navToggle.innerHTML = `<i data-lucide="menu" class="w-6 h-6"></i>`;
+                lucide.createIcons();
+            });
         });
 
-        // --- Active Nav Link & Pipeline Highlighting ---
+        // --- Active Nav Link & Pipeline Highlighting on Scroll ---
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('nav ul a');
         const pipelineContainer = document.querySelector('.pipeline-container');
         const pipelineNodes = new Map();
 
+        // Dynamically create a node for each section on the pipeline visual
         if (pipelineContainer) {
             const svg = pipelineContainer.querySelector('svg');
             sections.forEach(sec => {
@@ -445,11 +479,13 @@
                 if (pageYOffset >= sectionTop - 100) { current = section.getAttribute('id'); }
             });
 
+            // Highlight the active nav link
             navLinks.forEach(a => {
                 a.classList.remove('text-accent', 'font-semibold');
                 if (a.getAttribute('href') === `#${current}`) { a.classList.add('text-accent', 'font-semibold'); }
             });
             
+            // Activate the correct node on the pipeline visual
             pipelineNodes.forEach((node, id) => {
                 node.classList.toggle('active', id === current);
             });
@@ -465,12 +501,11 @@
                 const data = projectDetails[projectId];
                 if (!data) return;
 
+                // Inject project data into the modal
                 modalContent.innerHTML = `
-                    <div class="p-6 md:p-8">
-                        <div class="flex justify-between items-start">
-                             <h2 class="text-2xl md:text-3xl font-bold mb-4">${data.title}</h2>
-                             <button id="close-modal" class="text-slate-text hover:text-accent">&times;</button>
-                        </div>
+                    <div class="p-6 md:p-8 relative">
+                        <button id="close-modal" class="absolute top-4 right-4 text-slate-text hover:text-accent p-2 z-10">&times;</button>
+                        <h2 class="text-2xl md:text-3xl font-bold mb-4 pr-8">${data.title}</h2>
                         <div class="flex flex-wrap gap-2 mb-6">
                             ${data.tags.map(tag => `<span class="text-xs font-mono bg-accent/20 text-accent px-2 py-1 rounded-full">${tag}</span>`).join('')}
                         </div>
@@ -479,7 +514,7 @@
                         <div class="space-y-4">
                         ${data.pipeline.map(item => `
                             <div class="flex items-start space-x-4">
-                                <div><i data-lucide="chevron-right-circle" class="w-5 h-5 text-accent mt-1"></i></div>
+                                <div><i data-lucide="chevron-right-circle" class="w-5 h-5 text-accent shrink-0 mt-1"></i></div>
                                 <div>
                                     <h4 class="font-bold text-gray-100">${item.stage}</h4>
                                     <p class="text-sm text-slate-text">${item.detail}</p>
@@ -491,8 +526,9 @@
                 `;
                 lucide.createIcons(); // Re-render icons inside the modal
                 
+                // Open the modal with a smooth animation
                 modal.classList.add('open');
-                setTimeout(() => modal.classList.add('visible'), 10); // For transition
+                setTimeout(() => modal.classList.add('visible'), 10);
                 document.body.style.overflow = 'hidden'; // Prevent background scrolling
 
                 document.getElementById('close-modal').addEventListener('click', closeModal);
@@ -504,9 +540,10 @@
             setTimeout(() => {
                 modal.classList.remove('open');
                 document.body.style.overflow = 'auto';
-            }, 300);
+            }, 300); // Wait for transition to finish
         }
 
+        // Close modal on background click or Escape key press
         modal.addEventListener('click', (e) => {
             if (e.target === modal) { closeModal(); }
         });
