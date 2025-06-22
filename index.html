@@ -3,19 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ganesh Makkina | Data Engineer Portfolio</title>
+  <title>Ganesh Makkina | Data Engineer Portfolio 5.0</title>
 
-  <!-- Inter Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <!-- Tailwind CSS -->
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = { theme: { extend: { fontFamily: { inter: ['Inter','sans-serif'] }, colors: { accent: '#2dd4bf', darkbg: '#0f172a', 'slate-light': '#1e293b' } } } };
+    tailwind.config = { 
+      theme: { 
+        extend: { 
+          fontFamily: { inter: ['Inter','sans-serif'] }, 
+          colors: { 
+            accent: '#2dd4bf', 
+            'accent-light': '#5eead4',
+            darkbg: '#020617',
+            'slate-light': '#0f172a', 
+            'slate-mid': '#1e293b',
+            'slate-dark': '#0b1120',
+          },
+           animation: {
+            'fade-in-up': 'fade-in-up 1s ease-out forwards',
+          },
+          keyframes: {
+            'fade-in-up': {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          }
+        } 
+      } 
+    };
   </script>
 
-  <!-- tsParticles for dynamic network background -->
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
-  <!-- Lucide Icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
   <style>
@@ -23,364 +43,513 @@
       font-family: 'Inter', sans-serif;
       margin: 0;
       overflow-x: hidden;
-      /* Enhanced gradient background */
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-      background-attachment: fixed;
+      background-color: #020617;
+      color: #e2e8f0;
     }
-    #tsparticles {
+    #hero-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+    #spotlight {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.08) 0%, rgba(45, 212, 191, 0) 60%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: all 0.1s ease-out;
+      z-index: 1;
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2dd4bf; }
+    
+    #page-container {
+        position: relative;
+        z-index: 10;
+    }
+    
+    #hero-center {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        z-index: 20;
+        transition: opacity 0.5s ease-out;
+        padding: 1rem;
+    }
+    #hero-center > * { animation: fade-in-up 1s ease-out forwards; }
+    #hero-center h1 { animation-delay: 0.1s; }
+    #hero-center p:nth-of-type(1) { animation-delay: 0.3s; }
+    #hero-center p:nth-of-type(2) { animation-delay: 0.5s; }
+    #hero-center .buttons { animation-delay: 0.7s; }
+
+    #sidebar {
+        position: fixed;
+        top: 0; left: 0;
+        height: 100vh;
+        width: 400px;
+        z-index: 15;
+        padding: 2.5rem;
+        opacity: 0;
+        transition: opacity 0.5s ease-in;
+    }
+
+    #main-content {
+        position: relative;
+        z-index: 10;
+        margin-left: 0;
+        padding-top: 100vh;
+        transition: margin-left 0.5s ease;
+        background-color: #020617; /* Ensures content background is solid */
+    }
+    
+    body.scrolled #hero-center {
+        opacity: 0;
+        pointer-events: none;
+    }
+    body.scrolled #sidebar {
+        opacity: 1;
+    }
+    body.scrolled #main-content {
+        margin-left: 400px;
+    }
+
+    .glass-effect {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(30, 41, 59, 0.5);
     }
     .fade-in {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    #project-modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
+    .modal-content { transition: transform 0.3s ease; }
+    #sidebar nav ul li a.active-link .nav-indicator {
+      width: 4rem !important;
+      background-color: #fff !important;
     }
-    /* Style for active nav link */
-    nav ul li a.active-link {
-        color: #2dd4bf; /* Your accent color */
+    
+    @media (max-width: 1023px) {
+        body.scrolled #main-content, #main-content {
+            margin-left: 0;
+            padding-top: 0;
+        }
+        body.scrolled #sidebar, #sidebar {
+            display: none;
+        }
+        #hero-center {
+            position: relative;
+            min-height: 100vh;
+            z-index: 10;
+        }
     }
   </style>
 </head>
-<body class="relative text-gray-100">
-  <!-- Dynamic Network Background -->
-  <div id="tsparticles"></div>
-
-  <!-- NAVIGATION -->
-  <nav class="fixed top-0 w-full bg-darkbg bg-opacity-90 backdrop-blur-sm z-50">
-    <div class="container mx-auto flex items-center justify-between p-4">
-      <a href="#hero" class="text-2xl font-bold">GM</a>
-      <button id="nav-toggle" class="md:hidden focus:outline-none">
-        <i data-lucide="menu" class="w-6 h-6"></i>
-      </button>
-      <ul id="nav-menu" class="hidden md:flex space-x-6 text-lg">
-        <li><a href="#hero" class="hover:text-accent transition-colors">Home</a></li>
-        <li><a href="#about" class="hover:text-accent transition-colors">About</a></li>
-        <li><a href="#projects" class="hover:text-accent transition-colors">Projects</a></li>
-        <li><a href="#skills" class="hover:text-accent transition-colors">Skills</a></li>
-        <li><a href="#education" class="hover:text-accent transition-colors">Education</a></li>
-        <li><a href="#contact" class="hover:text-accent transition-colors">Contact</a></li>
-      </ul>
-    </div>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-darkbg bg-opacity-90">
-        <ul class="flex flex-col items-center space-y-4 py-4">
-            <li><a href="#hero" class="mobile-nav-link hover:text-accent">Home</a></li>
-            <li><a href="#about" class="mobile-nav-link hover:text-accent">About</a></li>
-            <li><a href="#projects" class="mobile-nav-link hover:text-accent">Projects</a></li>
-            <li><a href="#skills" class="mobile-nav-link hover:text-accent">Skills</a></li>
-            <li><a href="#education" class="mobile-nav-link hover:text-accent">Education</a></li>
-            <li><a href="#contact" class="mobile-nav-link hover:text-accent">Contact</a></li>
-        </ul>
-    </div>
-  </nav>
-
-  <!-- HERO SECTION -->
-  <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-6">
-    <div class="fade-in max-w-2xl">
-      <h1 class="text-5xl md:text-7xl font-extrabold mb-4">Ganesh Makkina</h1>
-      <p class="text-2xl md:text-3xl mb-6 text-accent">Data Engineer & Cloud Architect</p>
-      <p class="mb-8 text-lg text-gray-300">Building scalable, automated data pipelines & platforms that unlock insights and drive business growth.</p>
-      <div class="space-x-4">
-        <a href="#projects" class="px-6 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:brightness-110 transition">View Work</a>
-        <a href="Ganesh_Makkina_Resume.pdf" download class="px-6 py-3 border border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition">Download Resume</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT SECTION - REDESIGNED -->
-  <section id="about" class="py-24 sm:py-32 bg-slate-light/50 backdrop-blur-md">
-    <div class="container mx-auto px-6">
-      <div class="text-center fade-in">
-        <h2 class="text-4xl font-bold mb-4">About Me</h2>
-        <p class="text-lg text-accent">An Introduction</p>
-      </div>
-      <div class="mt-16 grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
-        <!-- Image & Stats Column -->
-        <div class="lg:col-span-2 fade-in">
-          <div class="flex justify-center">
-            <div class="relative w-64 h-64 rounded-full p-2 bg-gradient-to-tr from-accent to-transparent shadow-lg transition-transform duration-300 hover:scale-105">
-              <img src="pic.JPG" alt="Ganesh Makkina" class="w-full h-full rounded-full object-cover bg-darkbg" />
-            </div>
-          </div>
-          <div class="mt-8 flex justify-center gap-6 text-center">
-            <div class="p-4 rounded-lg">
-              <p class="text-3xl font-bold text-accent">2+</p>
-              <p class="text-sm text-gray-300">Years Experience</p>
-            </div>
-            <div class="p-4 rounded-lg">
-              <p class="text-3xl font-bold text-accent">10+</p>
-              <p class="text-sm text-gray-300">Projects Completed</p>
-            </div>
-            <div class="p-4 rounded-lg">
-              <p class="text-3xl font-bold text-accent">2</p>
-              <p class="text-sm text-gray-300">Pro Certifications</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Text Content Column -->
-        <div class="lg:col-span-3 space-y-6 text-lg text-gray-300 fade-in">
-          <p>
-            Hello! I’m Ganesh Makkina, a dedicated Data Engineer who builds scalable, cloud-native data platforms. I thrive on turning complex, raw datasets into clear, actionable insights that drive strategic decisions. With hands-on experience across AWS, GCP, and Databricks, I blend technical expertise with a passion for innovation to solve challenging analytics problems.
-          </p>
-          <p>
-            Previously at <strong class="text-gray-100">Quantiphi</strong>, I architected large-scale data lakes on <strong class="text-gray-100">AWS</strong>, built efficient streaming pipelines, and optimized complex ETL workflows on platforms like <strong class="text-gray-100">Databricks</strong> and <strong class="text-gray-100">GCP</strong>. I then completed my Master’s in Data Science at Rutgers University, and continue advancing my expertise in cloud-native analytics and data engineering best practices.
-          </p>
-          <p>
-            I believe in designing data systems that not only meet today’s requirements but are also scalable, maintainable, and cost-efficient to support tomorrow’s growth.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+<body>
+  <div id="spotlight"></div>
+  <canvas id="hero-canvas"></canvas>
   
-  <!-- PROJECTS SECTION -->
-  <section id="projects" class="py-20 bg-darkbg">
-    <h2 class="text-4xl font-bold text-center mb-12 fade-in">Key Projects</h2>
-    <div class="container mx-auto px-6 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-
-      <!-- Enterprise Data Lake -->
-      <div class="bg-slate-light rounded-xl overflow-hidden shadow-lg fade-in transition-transform duration-300 hover:-translate-y-2">
-        <img src="enterprise_migration.png" alt="Data Lake Migration" class="w-full aspect-[3/2] object-contain bg-slate-800 p-2" />
-        <div class="p-6">
-          <h3 class="text-xl font-semibold mb-2">Enterprise Data Lake Migration</h3>
-          <p class="text-sm text-gray-300">Migrated Elasticsearch to AWS S3 data lake & Redshift warehouse, boosting query performance by 20% and slashing costs by 30%.</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Redshift</span>
-              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Spark ETL</span>
-              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Airflow</span>
-          </div>
-          <div class="flex space-x-4 mt-4">
-            <a href="project-1.html" target="_blank" rel="noopener noreferrer" class="inline-block px-5 py-2 bg-accent text-darkbg rounded-lg font-semibold hover:brightness-110 transition">View Case Study</a>
-          </div>
+  <div id="page-container">
+    <section id="hero-center">
+        <h1 class="text-5xl md:text-7xl font-extrabold text-white">Ganesh Makkina</h1>
+        <p class="mt-4 text-xl md:text-2xl text-accent-light">Data Engineer & Cloud Architect</p>
+        <p class="mt-6 max-w-2xl text-lg text-slate-400">Building scalable, automated data pipelines & platforms that unlock insights and drive business growth.</p>
+        <div class="buttons mt-10 flex flex-wrap justify-center gap-4">
+            <a href="#projects" class="px-8 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:bg-accent-light transition-colors duration-300">View Work</a>
+            <a href="Ganesh_Makkina_Resume.pdf" download class="px-8 py-3 border-2 border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition-all duration-300">Download Resume</a>
         </div>
-      </div>
+    </section>
 
-      <!-- COVID Analytics -->
-      <div class="bg-slate-light rounded-xl overflow-hidden shadow-lg fade-in transition-transform duration-300 hover:-translate-y-2">
-        <img src="covid19.png" alt="COVID-19 Analytics" class="w-full aspect-[3/2] object-contain bg-slate-800 p-2" />
-        <div class="p-6">
-          <h3 class="text-xl font-semibold mb-2">COVID-19 Analytics Platform</h3>
-          <p class="text-sm text-gray-300">Engineered ingestion & analytics for 10M+ daily records with AWS Lambda, Glue, and QuickSight dashboards to empower public health insights.</p>
-           <div class="mt-4 flex flex-wrap gap-2">
-              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">AWS Lambda</span>
-              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">AWS Glue</span>
-              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">QuickSight</span>
-          </div>
-          <div class="flex space-x-4 mt-4">
-            <a href="project-2.html" target="_blank" rel="noopener noreferrer" class="inline-block px-5 py-2 bg-accent text-darkbg rounded-lg font-semibold hover:brightness-110 transition">View Case Study</a>
-          </div>
+    <header id="sidebar">
+        <div class="flex h-full flex-col justify-between">
+            <div class="flex flex-col gap-12">
+              <div>
+                <h1 class="text-5xl font-bold text-white">Ganesh Makkina</h1>
+                <p class="text-xl mt-3 text-slate-300">Data Engineer & Cloud Architect</p>
+                <p class="mt-4 max-w-xs text-slate-400">I build intelligent data platforms that transform raw data into strategic assets.</p>
+              </div>
+              <nav>
+                <ul class="space-y-2 text-lg">
+                    <li><a href="#about" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>About</a></li>
+                    <li><a href="#projects" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Projects</a></li>
+                    <li><a href="#skills" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Skills</a></li>
+                    <li><a href="#education" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Education</a></li>
+                    <li><a href="#contact" class="nav-link block p-3 rounded-md hover:bg-accent/10 hover:text-white transition-all duration-300 group"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600 inline-block transition-all duration-300 group-hover:w-16 group-hover:bg-white"></span>Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="flex items-center space-x-6">
+              <a href="https://github.com/makkinaganesh25" target="_blank" rel="noopener noreferrer"><i data-lucide="github" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
+              <a href="https://www.linkedin.com/in/ganesh-makkina/" target="_blank" rel="noopener noreferrer"><i data-lucide="linkedin" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
+              <a href="#" target="_blank" rel="noopener noreferrer"><i data-lucide="twitter" class="w-7 h-7 text-slate-400 hover:text-accent"></i></a>
+            </div>
         </div>
-      </div>
+    </header>
 
-      <!-- CSO Scheduling App -->
-      <div class="bg-slate-light rounded-xl overflow-hidden shadow-lg fade-in transition-transform duration-300 hover:-translate-y-2">
-        <img src="cso.png" alt="CSO Shift Scheduling" class="w-full aspect-[3/2] object-contain bg-slate-800 p-2" />
-        <div class="p-6">
-          <h3 class="text-xl font-semibold mb-2">CSO Shift Scheduling App</h3>
-          <p class="text-sm text-gray-300">Built with React, Node.js, and MySQL to automate shift postings, conflict detection, and notifications for Rutgers CSOs.</p>
-           <div class="mt-4 flex flex-wrap gap-2">
-              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">React</span>
-              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Node.js</span>
-              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded-full">Vertex AI</span>
+    <main id="main-content">
+        <section id="about" class="pt-24 sm:pt-32 px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+              <div class="lg:col-span-2 space-y-6 text-lg text-slate-300 fade-in">
+                  <h2 class="text-3xl font-bold text-white mb-4">About Me</h2>
+                  <p>Hello! I’m Ganesh Makkina, a dedicated Data Engineer who builds scalable, cloud-native data platforms. I thrive on turning complex, raw datasets into clear, actionable insights that drive strategic decisions. With hands-on experience across <strong class="text-accent-light">AWS</strong>, <strong class="text-accent-light">GCP</strong>, and <strong class="text-accent-light">Databricks</strong>, I blend technical expertise with a passion for innovation to solve challenging analytics problems.</p>
+                  <p>Previously at <strong class="text-white">Quantiphi</strong>, I architected large-scale data lakes, built efficient streaming pipelines, and optimized complex ETL workflows. My academic foundation in Data Science from <strong class="text-white">Rutgers University</strong> underpins my practical skills, allowing me to design systems that are not only powerful but also maintainable, scalable, and cost-efficient for the future.</p>
+              </div>
+              <div class="lg:col-span-1 fade-in">
+                <div class="glass-effect rounded-2xl p-6">
+                  <div class="flex justify-center mb-6">
+                      <img src="https://i.ibb.co/6P6g8qj/pic.jpg" alt="Ganesh Makkina" class="w-32 h-32 rounded-full object-cover border-4 border-slate-mid shadow-lg" />
+                  </div>
+                  <div class="text-center space-y-4">
+                      <div>
+                          <p class="stat-value text-4xl font-bold text-accent" data-target="2">0</p>
+                          <p class="text-sm text-slate-400">Years Experience</p>
+                      </div>
+                      <div>
+                          <p class="stat-value text-4xl font-bold text-accent" data-target="10">0</p>
+                          <p class="text-sm text-slate-400">Projects Completed</p>
+                      </div>
+                      <div>
+                          <p class="stat-value text-4xl font-bold text-accent" data-target="2">0</p>
+                          <p class="text-sm text-slate-400">Pro Certifications</p>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+        <section id="projects" class="py-20 px-6 lg:px-12">
+          <h2 class="text-3xl font-bold text-white mb-12 fade-in">Key Projects</h2>
+          <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2"></div>
+        </section>
+        <section id="skills" class="py-24 px-6 lg:px-12">
+          <h2 class="text-3xl font-bold text-white mb-16 text-center fade-in">Core Competencies</h2>
+          <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 fade-in"></div>
+        </section>
+        <section id="education" class="py-20 px-6 lg:px-12">
+          <h2 class="text-3xl font-bold text-white mb-12 fade-in">Education & Certifications</h2>
+          <div class="space-y-8 fade-in"></div>
+        </section>
+        <section id="contact" class="py-20 px-6 lg:px-12">
+          <div class="max-w-xl mx-auto text-center fade-in">
+              <h2 class="text-3xl font-bold text-white">Let's Build the Future of Data</h2>
+              <p class="mt-4 text-lg text-slate-400">Have a project, an idea, or just want to connect? I'd love to hear from you.</p>
           </div>
-          <div class="flex space-x-4 mt-4">
-            <a href="project-3.html" target="_blank" rel="noopener noreferrer" class="inline-block px-5 py-2 bg-accent text-darkbg rounded-lg font-semibold hover:brightness-110 transition">View Case Study</a>
-            <a href="er_diagram.pdf" target="_blank" rel="noopener noreferrer" class="inline-block px-5 py-2 border border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-darkbg transition">View Schema</a>
+          <form action="https://api.web3forms.com/submit" method="POST" class="mt-12 max-w-xl mx-auto space-y-6 fade-in">
+              <input type="hidden" name="access_key" value="95f8e9dd-d29e-4b40-811a-27fefb9c4b3a">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <input name="name" type="text" placeholder="Your Name" required class="w-full px-4 py-3 rounded-lg bg-slate-light border border-slate-mid focus:ring-accent focus:outline-none focus:ring-2 transition" />
+                  <input name="email" type="email" placeholder="Your Email" required class="w-full px-4 py-3 rounded-lg bg-slate-light border border-slate-mid focus:ring-accent focus:outline-none focus:ring-2 transition" />
+              </div>
+              <textarea name="message" rows="5" placeholder="Your message..." required class="w-full px-4 py-3 rounded-lg bg-slate-light border border-slate-mid focus:ring-accent focus:outline-none focus:ring-2 transition"></textarea>
+              <button type="submit" class="w-full px-4 py-3 bg-accent text-darkbg rounded-lg font-semibold hover:bg-accent-light transition-all">Send Message</button>
+          </form>
+        </section>
+        <footer class="py-10 text-center text-sm text-slate-500 fade-in">
+          <p>Designed & Built by Ganesh Makkina &copy; <span id="year"></span></p>
+        </footer>
+    </main>
+
+    <div id="project-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4 opacity-0 invisible">
+      <div class="modal-content w-full max-w-4xl max-h-[90vh] glass-effect rounded-2xl overflow-hidden transform scale-95">
+          <div class="flex justify-between items-center p-4 border-b border-slate-mid">
+              <h3 id="modal-title" class="text-2xl font-bold text-white">Project Title</h3>
+              <button id="modal-close" class="text-slate-400 hover:text-accent text-4xl leading-none">&times;</button>
           </div>
-        </div>
+          <div class="p-6 md:p-8 overflow-y-auto max-h-[calc(90vh-65px)]">
+              <img id="modal-image" src="" alt="Project Image" class="w-full h-auto max-h-80 object-contain rounded-lg mb-6 bg-slate-dark p-2" onerror="this.onerror=null;this.src='https://placehold.co/1536x1024/0f172a/2dd4bf?text=Image+Not+Found';" />
+              <div id="modal-tags" class="flex flex-wrap gap-2 mb-4"></div>
+              <div id="modal-description" class="text-slate-300 space-y-4"></div>
+          </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- SKILLS SECTION -->
-  <section id="skills" class="py-20 container mx-auto px-6 fade-in">
-    <h2 class="text-4xl font-bold text-center mb-12">Core Skills</h2>
-    <div class="flex flex-wrap justify-center gap-8 text-center text-sm">
-      <div class="flex flex-col items-center space-y-2 p-4 transition-transform hover:scale-110">
-        <i data-lucide="code-2" class="w-12 h-12 text-accent"></i>
-        <p>Python & Spark</p>
-      </div>
-      <div class="flex flex-col items-center space-y-2 p-4 transition-transform hover:scale-110">
-        <i data-lucide="database" class="w-12 h-12 text-accent"></i>
-        <p>SQL & NoSQL</p>
-      </div>
-      <div class="flex flex-col items-center space-y-2 p-4 transition-transform hover:scale-110">
-        <i data-lucide="cloud" class="w-12 h-12 text-accent"></i>
-        <p>AWS & GCP</p>
-      </div>
-      <div class="flex flex-col items-center space-y-2 p-4 transition-transform hover:scale-110">
-        <i data-lucide="git-branch-plus" class="w-12 h-12 text-accent"></i>
-        <p>Airflow & Glue</p>
-      </div>
-      <div class="flex flex-col items-center space-y-2 p-4 transition-transform hover:scale-110">
-        <i data-lucide="network" class="w-12 h-12 text-accent"></i>
-        <p>Data Modeling</p>
-      </div>
-      <div class="flex flex-col items-center space-y-2 p-4 transition-transform hover:scale-110">
-        <i data-lucide="bar-chart-3" class="w-12 h-12 text-accent"></i>
-        <p>Visualization & BI</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- EDUCATION & CERTIFICATIONS -->
-  <section id="education" class="py-20 bg-darkbg fade-in">
-    <h2 class="text-4xl font-semibold text-center mb-8">Education & Certifications</h2>
-    <div class="container mx-auto px-6 grid gap-10 md:grid-cols-2 text-sm">
-      <!-- Rutgers -->
-      <div class="bg-slate-light p-6 rounded-lg shadow-lg">
-        <h3 class="text-xl font-semibold mb-2">Rutgers University</h3>
-        <p class="italic text-accent">MS in Statistics - Data Science</p>
-        <p class="mb-2 text-gray-400">New Brunswick, NJ | Sep 2023 - May 2025</p>
-        <p class="text-gray-300"><strong>Relevant Coursework:</strong> Regression & Time Series, Probability & Statistics, Advanced Database Management, Financial Data Mining, Data Wrangling</p>
-      </div>
-      <!-- Army Institute -->
-      <div class="bg-slate-light p-6 rounded-lg shadow-lg">
-        <h3 class="text-xl font-semibold mb-2">Army Institute of Technology</h3>
-        <p class="italic text-accent">BE in Computer Science</p>
-        <p class="mb-2 text-gray-400">Pune, MH | Jul 2017 - Jul 2021</p>
-        <p class="text-gray-300"><strong>Key Modules:</strong> Data Structures, Algorithms, Operating Systems, Database Systems, Computer Networks</p>
-      </div>
-      <!-- Certifications -->
-      <div class="md:col-span-2 bg-slate-light p-6 rounded-lg shadow-lg">
-        <h3 class="text-xl font-semibold mb-2">Certifications</h3>
-        <ul class="list-disc list-inside text-accent">
-          <li><span class="text-gray-100">AWS Certified Data Engineer – Associate</span></li>
-          <li><span class="text-gray-100">Google Professional Data Engineer</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT SECTION -->
-  <section id="contact" class="py-20 container mx-auto px-6 fade-in">
-    <h2 class="text-4xl font-bold text-center mb-8">Contact Me</h2>
-    <div class="max-w-lg mx-auto">
-      <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4 text-sm">
-        <!-- === WEB3FORMS ACCESS KEY === -->
-        <input type="hidden" name="access_key" value="95f8e9dd-d29e-4b40-811a-27fefb9c4b3a">
-
-        <div>
-            <label for="name" class="block mb-1 font-semibold">Name</label>
-            <input id="name" name="name" type="text" placeholder="Your Name" class="w-full px-4 py-2 rounded bg-slate-700 focus:ring-accent focus:outline-none focus:ring-2" required />
-        </div>
-        <div>
-            <label for="email" class="block mb-1 font-semibold">Email</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com" class="w-full px-4 py-2 rounded bg-slate-700 focus:ring-accent focus:outline-none focus:ring-2" required />
-        </div>
-        <div>
-            <label for="message" class="block mb-1 font-semibold">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Your message..." class="w-full px-4 py-2 rounded bg-slate-700 focus:ring-accent focus:outline-none focus:ring-2" required></textarea>
-        </div>
-        <button type="submit" class="w-full px-4 py-3 bg-accent text-darkbg rounded font-semibold hover:brightness-110 transition-all">Send Message</button>
-      </form>
-      <div class="text-center mt-6 flex justify-center space-x-6">
-        <a href="https://github.com/makkinaganesh25" target="_blank" rel="noopener noreferrer" aria-label="View my GitHub profile" class="text-gray-400 hover:text-accent transition-colors"><i data-lucide="github" class="w-6 h-6"></i></a>
-        <a href="https://www.linkedin.com/in/ganesh-makkina/" target="_blank" rel="noopener noreferrer" aria-label="View my LinkedIn profile" class="text-gray-400 hover:text-accent transition-colors"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
-        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View my Twitter profile" class="text-gray-400 hover:text-accent transition-colors"><i data-lucide="twitter" class="w-6 h-6"></i></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="py-6 text-center text-sm fade-in text-gray-400">
-    <p>&copy; <span id="year"></span> Ganesh Makkina. All rights reserved.</p>
-  </footer>
-
-  <!-- SCRIPTS -->
   <script>
-    // tsParticles configuration
-    tsParticles.load('tsparticles', {
-      background: { color: { value: 'transparent' } },
-      fpsLimit: 60,
-      particles: {
-        number: { value: 60, density: { enable: true, area: 800 } },
-        color: { value: ['#2dd4bf', '#ffffff'] },
-        shape: { type: 'circle' },
-        opacity: { value: { min: 0.1, max: 0.5 }, random: true },
-        size: { value: { min: 1, max: 3 }, random: true },
-        links: { enable: true, distance: 150, color: '#2dd4bf', opacity: 0.4, width: 1 },
-        move: { enable: true, speed: 1, outModes: { default: 'bounce' } }
+    // --- DATA ---
+    const projectsData = [
+      {
+        title: "Enterprise Data Lake Migration",
+        image: "https://i.ibb.co/qN9gH4x/enterprise-migration.png",
+        tags: ["Redshift", "Spark ETL", "Airflow", "AWS S3"],
+        short_description: "Migrated Elasticsearch to AWS S3 data lake & Redshift warehouse, boosting query performance by 20% and slashing costs by 30%.",
+        description: `<p>Successfully migrated a legacy Elasticsearch-based data store to a modern, scalable AWS data lake architecture. This involved designing and implementing a robust ingestion pipeline to land data in S3, followed by complex Spark ETL jobs orchestrated with Airflow to transform and load data into a Redshift data warehouse.</p><p><strong>Key Achievements:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li>Reduced data query and retrieval times by over 20%, enabling faster business intelligence and analytics.</li><li>Cut operational and storage costs by 30% by leveraging cost-effective S3 storage and optimized Redshift clusters.</li><li>Established a single source of truth, improving data consistency and reliability across the enterprise.</li></ul>`,
+        schema_link: null
       },
-      interactivity: {
-        events: {
-          onHover: { enable: true, mode: 'grab' },
-          onClick: { enable: true, mode: 'push' }
-        },
-        modes: { grab: { distance: 140, links: { opacity: 0.7 } }, push: { quantity: 4 } }
+      {
+        title: "COVID-19 Analytics Platform",
+        image: "https://i.ibb.co/3kXyQJg/covid19.png",
+        tags: ["AWS Lambda", "AWS Glue", "QuickSight", "Serverless"],
+        short_description: "Engineered ingestion & analytics for 10M+ daily records with AWS Lambda, Glue, and QuickSight dashboards to empower public health insights.",
+        description: `<p>Engineered a serverless, real-time data ingestion and analytics platform on AWS to process over 10 million COVID-19 related records daily. The architecture utilized AWS Lambda for event-driven data ingestion, AWS Glue for serverless ETL transformations, and Amazon S3 for durable storage.</p><p><strong>Key Achievements:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li>Provided public health officials with near real-time, interactive dashboards built with Amazon QuickSight for critical decision-making.</li><li>Designed a highly scalable and resilient pipeline capable of handling massive spikes in data volume without manual intervention.</li><li>Automated the entire data lifecycle, from ingestion to visualization, minimizing operational overhead.</li></ul>`,
+        schema_link: null
       },
-      detectRetina: true
-    });
+      {
+        title: "CSO Shift Scheduling App",
+        image: "https://i.ibb.co/k2Vqg7G/cso.png",
+        tags: ["React", "Node.js", "MySQL", "Vertex AI"],
+        short_description: "Built with React, Node.js, and MySQL to automate shift postings, conflict detection, and notifications for Rutgers CSOs.",
+        description: `<p>Developed a full-stack web application to streamline and automate the shift scheduling process for Rutgers University's Community Service Officers (CSOs). The application features a user-friendly React frontend and a robust Node.js backend connected to a MySQL database.</p><p><strong>Key Achievements:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li>Automated shift postings, sign-ups, and conflict detection, saving significant administrative hours.</li><li>Implemented a notification system for shift changes and reminders, improving operational efficiency and communication.</li><li>Designed and normalized the database schema to ensure data integrity and efficient querying.</li></ul>`,
+        schema_link: "er_diagram.pdf"
+      }
+    ];
+    const skillsData = [
+        { name: "Python & PySpark", icon: "code-2", text: "Core language for scripting, automation, and large-scale data processing with Spark." },
+        { name: "SQL & NoSQL", icon: "database", text: "Expert in relational (PostgreSQL, MySQL) and non-relational (MongoDB, DynamoDB) databases." },
+        { name: "AWS & GCP", icon: "cloud", text: "Architecting and deploying data solutions on AWS (S3, Redshift, Glue) and GCP (BigQuery, Dataflow)." },
+        { name: "Orchestration", icon: "git-branch-plus", text: "Building, scheduling, and monitoring complex data workflows with Airflow and AWS Glue." },
+        { name: "Data Modeling", icon: "network", text: "Designing efficient, scalable, and reliable data models for warehouses and data lakes." },
+        { name: "Streaming Data", icon: "zap", text: "Processing real-time data streams with Kafka, Kinesis, and Spark Streaming." },
+        { name: "CI/CD & DevOps", icon: "terminal-square", text: "Automating deployment and testing of data pipelines using tools like Git, Docker, and Jenkins." },
+        { name: "BI & Visualization", icon: "bar-chart-3", text: "Creating insightful dashboards and reports with tools like QuickSight, Tableau, and Looker." },
+    ];
+    const educationData = [
+        { school: "Rutgers University", degree: "MS in Statistics - Data Science", location: "New Brunswick, NJ | Sep 2023 - May 2025", courses: "Regression & Time Series, Probability & Statistics, Advanced Database Management, Financial Data Mining, Data Wrangling" },
+        { school: "Army Institute of Technology", degree: "BE in Computer Science", location: "Pune, MH | Jul 2017 - Jul 2021", courses: "Data Structures, Algorithms, Operating Systems, Database Systems, Computer Networks" },
+    ];
+    const certificationsData = [
+      "AWS Certified Data Engineer – Associate",
+      "Google Professional Data Engineer"
+    ];
 
-    // Lucide icons replacement
-    lucide.createIcons();
-
-    // Fade-in on scroll
-    const fadeInObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                fadeInObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-in').forEach(el => {
-        fadeInObserver.observe(el);
-    });
-
-    // Mobile nav toggle
-    const navToggle = document.getElementById('nav-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    navToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        navToggle.innerHTML = mobileMenu.classList.contains('hidden') ? `<i data-lucide="menu" class="w-6 h-6"></i>` : `<i data-lucide="x" class="w-6 h-6"></i>`;
+    // --- INITIALIZATION ---
+    document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
+        initHero3D();
+        initMouseSpotlight();
+        initScrollTransition();
+        document.getElementById('year').textContent = new Date().getFullYear();
+        populateProjects();
+        populateSkills();
+        populateEducation();
+        initScrollAnimations();
+        initActiveNavLinkOnScroll();
+        initProjectModal();
     });
 
-    // Close mobile menu on link click
-    document.querySelectorAll('.mobile-nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            navToggle.innerHTML = `<i data-lucide="menu" class="w-6 h-6"></i>`;
-            lucide.createIcons();
+    // --- CORE LOGIC ---
+    function initScrollTransition() {
+        const handleScroll = () => {
+            if (window.matchMedia('(max-width: 1023px)').matches) {
+                if (!document.body.classList.contains('scrolled')) document.body.classList.add('scrolled');
+                return;
+            }
+            const scrollY = window.scrollY;
+            const threshold = window.innerHeight * 0.1;
+            if (scrollY > threshold) document.body.classList.add('scrolled');
+            else document.body.classList.remove('scrolled');
+        };
+        if (window.matchMedia('(max-width: 1023px)').matches) document.body.classList.add('scrolled');
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', handleScroll);
+    }
+
+    function initHero3D() {
+        const canvas = document.getElementById('hero-canvas');
+        if (!canvas) return;
+        let scene, camera, renderer, points, lines;
+        const mouse = new THREE.Vector2();
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+        camera.position.z = 250;
+        renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        const pointCount = 150;
+        const positions = new Float32Array(pointCount * 3);
+        const velocities = [];
+        for (let i = 0; i < pointCount; i++) {
+            const i3 = i * 3;
+            positions[i3] = (Math.random() - 0.5) * 500;
+            positions[i3 + 1] = (Math.random() - 0.5) * 500;
+            positions[i3 + 2] = (Math.random() - 0.5) * 500;
+            velocities.push(new THREE.Vector3((Math.random() - 0.5) * 0.2, (Math.random() - 0.5) * 0.2, (Math.random() - 0.5) * 0.2));
+        }
+        const pointGeo = new THREE.BufferGeometry();
+        pointGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const pointMat = new THREE.PointsMaterial({ color: '#2dd4bf', size: 2, transparent: true, opacity: 0.8 });
+        points = new THREE.Points(pointGeo, pointMat);
+        scene.add(points);
+        const lineMat = new THREE.LineBasicMaterial({ color: '#1e293b', transparent: true, opacity: 0.2 });
+        const lineGeo = new THREE.BufferGeometry();
+        lines = new THREE.LineSegments(lineGeo, lineMat);
+        scene.add(lines);
+        const animate = () => {
+            const positions = pointGeo.attributes.position.array;
+            const linePositions = [];
+            const connectionDistance = 80;
+            for (let i = 0; i < pointCount; i++) {
+                const i3 = i * 3;
+                positions[i3] += velocities[i].x;
+                positions[i3 + 1] += velocities[i].y;
+                positions[i3 + 2] += velocities[i].z;
+                if (Math.abs(positions[i3]) > 250) velocities[i].x *= -1;
+                if (Math.abs(positions[i3 + 1]) > 250) velocities[i].y *= -1;
+                if (Math.abs(positions[i3 + 2]) > 250) velocities[i].z *= -1;
+                for (let j = i + 1; j < pointCount; j++) {
+                    const j3 = j * 3;
+                    const dx = positions[i3] - positions[j3];
+                    const dy = positions[i3+1] - positions[j3+1];
+                    const dz = positions[i3+2] - positions[j3+2];
+                    const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+                    if (dist < connectionDistance) {
+                        linePositions.push(positions[i3], positions[i3+1], positions[i3+2]);
+                        linePositions.push(positions[j3], positions[j3+1], positions[j3+2]);
+                    }
+                }
+            }
+            lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+            pointGeo.attributes.position.needsUpdate = true;
+            camera.position.x += (mouse.x * 50 - camera.position.x) * 0.05;
+            camera.position.y += (-mouse.y * 50 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        };
+        window.addEventListener('mousemove', e => {
+            mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
         });
-    });
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        animate();
+    }
+    
+    // --- HELPER FUNCTIONS ---
+    function initMouseSpotlight() {
+        const spotlight = document.getElementById('spotlight');
+        if (!spotlight) return;
+        window.addEventListener('mousemove', (e) => {
+            spotlight.style.left = e.pageX + 'px';
+            spotlight.style.top = e.pageY + 'px';
+        });
+    }
 
+    function populateProjects() {
+      const container = document.querySelector('#projects .grid');
+      if (!container) return;
+      container.innerHTML = projectsData.map((project, index) => `<div class="project-card group glass-effect rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-2 fade-in" data-index="${index}"><div class="relative w-full aspect-video overflow-hidden"><img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"></div><div class="p-6 flex flex-col"><h3 class="text-xl font-bold text-white mb-2">${project.title}</h3><p class="text-slate-400 mb-4 text-sm leading-relaxed flex-grow">${project.short_description}</p><div class="flex flex-wrap gap-2 my-4">${project.tags.map(tag => `<span class="text-xs bg-accent/20 text-accent px-3 py-1 rounded-full font-medium">${tag}</span>`).join('')}</div><div class="flex items-center gap-4 mt-auto"><button class="view-case-study-btn inline-block text-accent font-semibold">View Case Study <span class="inline-block transition-transform group-hover:translate-x-1">&rarr;</span></button>${project.schema_link ? `<a href="${project.schema_link}" target="_blank" rel="noopener noreferrer" class="inline-block text-slate-400 font-semibold hover:text-accent transition-colors">View Schema</a>` : ''}</div></div></div>`).join('');
+    }
+    
+    function initProjectModal() {
+        const modal = document.getElementById('project-modal');
+        const closeBtn = document.getElementById('modal-close');
+        if (!modal || !closeBtn) return;
+        document.body.addEventListener('click', e => {
+            const caseStudyBtn = e.target.closest('.view-case-study-btn');
+            if (caseStudyBtn) {
+                e.preventDefault();
+                const card = caseStudyBtn.closest('.project-card');
+                const index = card.dataset.index;
+                const project = projectsData[index];
+                document.getElementById('modal-title').textContent = project.title;
+                document.getElementById('modal-image').src = project.image;
+                document.getElementById('modal-image').alt = project.title;
+                document.getElementById('modal-description').innerHTML = project.description;
+                document.getElementById('modal-tags').innerHTML = project.tags.map(tag => `<span class="text-xs bg-accent/20 text-accent px-3 py-1 rounded-full">${tag}</span>`).join('');
+                modal.classList.remove('opacity-0', 'invisible');
+                modal.querySelector('.modal-content').classList.remove('scale-95');
+            }
+        });
+        const closeModal = () => {
+            modal.classList.add('opacity-0', 'invisible');
+            modal.querySelector('.modal-content').classList.add('scale-95');
+        };
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
 
-    // Active nav link on scroll
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('nav ul a');
+    function populateSkills() {
+        const container = document.getElementById('skills-grid');
+        if (!container) return;
+        container.innerHTML = skillsData.map(skill => `<div class="group glass-effect p-6 rounded-2xl text-center transition-all duration-300 hover:-translate-y-2 hover:!bg-slate-mid/60 border border-transparent hover:!border-accent"><div class="flex justify-center mb-4"><div class="w-20 h-20 bg-slate-light rounded-full flex items-center justify-center border-2 border-slate-mid group-hover:border-accent transition-colors duration-300"><i data-lucide="${skill.icon}" class="w-9 h-9 text-accent"></i></div></div><h3 class="text-xl font-semibold text-white mb-2">${skill.name}</h3><p class="text-slate-400 text-sm leading-relaxed">${skill.text}</p></div>`).join('');
+        lucide.createIcons();
+    }
 
-    window.addEventListener('scroll', () => {
-        let current = '';
+    function populateEducation() {
+        const container = document.querySelector('#education .space-y-8');
+        if (!container) return;
+        const educationHtml = educationData.map(edu => `<div class="grid md:grid-cols-4 gap-4 glass-effect p-6 rounded-xl"><div class="md:col-span-1"><h3 class="text-lg font-bold text-white">${edu.school}</h3><p class="text-sm text-slate-400 mt-1">${edu.location}</p></div><div class="md:col-span-3"><h4 class="font-semibold text-accent">${edu.degree}</h4><p class="mt-2 text-sm text-slate-300"><strong>Relevant Coursework:</strong> ${edu.courses}</p></div></div>`).join('');
+        const certsHtml = `<div class="grid md:grid-cols-4 gap-4 glass-effect p-6 rounded-xl"><div class="md:col-span-1"><h3 class="text-lg font-bold text-white">Certifications</h3></div><div class="md:col-span-3"><ul class="space-y-2">${certificationsData.map(cert => `<li class="flex items-center"><i data-lucide="award" class="w-5 h-5 mr-3 text-accent"></i><span class="text-white font-semibold">${cert}</span></li>`).join('')}</ul></div></div>`;
+        container.innerHTML = educationHtml + certsHtml;
+        lucide.createIcons();
+    }
+    
+    function initScrollAnimations() {
+        const fadeInObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    fadeInObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => fadeInObserver.observe(el));
+        const statObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = +el.dataset.target;
+                    let current = 0;
+                    const duration = 1500;
+                    const stepTime = 20;
+                    const increment = target / (duration / stepTime);
+                    const interval = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            el.textContent = target;
+                            clearInterval(interval);
+                        } else {
+                            el.textContent = Math.ceil(current);
+                        }
+                    }, stepTime);
+                    statObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.8 });
+        document.querySelectorAll('.stat-value').forEach(el => statObserver.observe(el));
+    }
+
+    function initActiveNavLinkOnScroll() {
+        const sections = document.querySelectorAll('main section[id]');
+        const navLinks = document.querySelectorAll('#sidebar nav a.nav-link');
+        if(navLinks.length === 0) return;
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(a => {
+                        a.classList.remove('active-link');
+                        if (a.getAttribute('href') === `#${id}`) {
+                           a.classList.add('active-link');
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: '-30% 0px -60% 0px' });
         sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (pageYOffset >= sectionTop - 60) { // 60 is nav height offset
-                current = section.getAttribute('id');
-            }
+            if(section.id) observer.observe(section);
         });
-
-        navLinks.forEach(a => {
-            a.classList.remove('text-accent', 'font-semibold');
-            if (a.getAttribute('href') === `#${current}`) {
-                a.classList.add('text-accent', 'font-semibold');
-            }
-        });
-    });
-
-    // Update footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    }
   </script>
 </body>
 </html>
